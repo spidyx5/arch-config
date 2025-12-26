@@ -5,7 +5,7 @@
 description: Hyprland Wayland compositor with DankMaterialShell
 
 packages:
-  - dms-shell-git # DankMaterialShell (bar, notifications, launcher, lock)
+  #- dms-shell-git # DankMaterialShell (bar, notifications, launcher, lock)
   - quickshell # DMS dependency
   - noctalia-shell # A beautiful, minimal desktop shell for Wayland
 
