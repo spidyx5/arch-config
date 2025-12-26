@@ -4,21 +4,23 @@
 
 set -e  # Exit on any error
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 echo "=== Starting Master Setup Script ==="
 echo ""
 
 # System setup scripts
 echo "📦 Running system setup scripts..."
-bash ./scripts/apply_system_config.sh
-bash ./scripts/update_limine.sh
-bash ./scripts/setup_services.sh
-bash ./scripts/setup_keyd.sh
-bash ./scripts/optimize_makepkg.sh
-bash ./scripts/setup_hardware.sh
-bash ./scripts/setup_audio.sh
-bash ./scripts/setup_xdg.sh
-bash ./scripts/install_kernels.sh
-bash ./scripts/setup_wayland_config.sh  # Fixed: was "base" instead of "bash"
+bash "$SCRIPT_DIR/apply_system_config.sh"
+bash "$SCRIPT_DIR/update_limine.sh"
+bash "$SCRIPT_DIR/setup_services.sh"
+bash "$SCRIPT_DIR/setup_keyd.sh"
+bash "$SCRIPT_DIR/optimize_makepkg.sh"
+bash "$SCRIPT_DIR/setup_hardware.sh"
+bash "$SCRIPT_DIR/setup_audio.sh"
+bash "$SCRIPT_DIR/setup_xdg.sh"
+bash "$SCRIPT_DIR/install_kernels.sh"
+bash "$SCRIPT_DIR/setup_wayland_config.sh"  # Fixed: was "base" instead of "bash"
 
 # Programs setup scripts
 echo "📦 Running programs setup scripts..."
