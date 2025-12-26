@@ -19,7 +19,6 @@ packages:
   - limine-entry-tool
   - limine-snapper-sync
   - limine-dracut-support
-  - limine-booster
 
   # dcli dependencies
   - paru
@@ -38,7 +37,6 @@ packages:
   - wget
   - curl
   - unzip
-  - p7zip-full-bin
   - usbutils
   - nvtop
   - imv
@@ -91,7 +89,6 @@ packages:
   - gammastep
   - wlsunset
   - geoclue
-  - mkinitcpio-extras
   - mkinitcpio
   - mkinitcpio-firmware
   - mkinitcpio-busybox
@@ -106,7 +103,6 @@ packages:
 
   # System utilities & tools
   - ffmpeg
-  - glib
 
   # File system tools
   - btrfs-progs
@@ -114,19 +110,15 @@ packages:
   - btrfs-assistant
   - compsize
   - virtiofsd
-  - bdf
   - duperemove
-  - kernel-modules-hook-reflink
   - fuseiso
   - fuse3
   - fuse2
   - libappimage
   - gvfs
   - avfs
-  - ntfsprogs-plus
   - btrfs-heatmap
   - disorderfs
-  - t2sz
 
   # XanMod Edge Kernel
   - linux-xanmod-edge-linux-bin-x64v3
@@ -143,7 +135,6 @@ packages:
   - openssh
   - tpm2-tools
   - lynis
-  - stevenblack
 
   # Miscellaneous
   - seatd
@@ -201,7 +192,6 @@ packages:
   - vulkan-headers
   - vulkan-tools
   - plymouth
-  - wine-tkg-staging-wow64-bin
   - mesa-tkg-git
   - lib32-mesa-tkg-git
   # System shells
@@ -236,13 +226,11 @@ packages:
   - lib32-libva-intel-driver
 
   # XWayland
-  - xwaylandvideobridge
   - xorg-xwayland
   # Virtual camera and I2C tools
   - v4l2loopback-dkms
   - v4l2loopback-utils
   - i2c-tools
-  - clamav-gui
 exclude:
   - nano
   - linux-lts

@@ -130,7 +130,15 @@ aur_packages=(
     "obs-3d-effect"
     "cachyos-settings"  
     "bpftune-git"
-)
+    "libmaddy"
+    "libnick"
+    "clamav-gui"
+    "python-pywal16"
+    "libtorch-cxx11abi-cpu"
+    "openvino-models"
+    "python-apscheduler"
+    "python-netifaces-plus"
+    )
 
 # Install packages using paru with --noconfirm
 echo "Installing AUR packages using paru..."

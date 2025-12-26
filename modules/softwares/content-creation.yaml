@@ -6,47 +6,25 @@ description: Content Creation Packages
 # List of packages in this module
 packages:
   - obs-studio
-  - obs-plugin-input-overlay-bin
   - obs-backgroundremoval
-  - obs-composite-blur
-  - catppuccin-obs-theme-git
-  - obs-wayland-hotkeys-git
-  - obs-noise
-  - obs-shaderfilter-git
-  - obs-plugin-browser
-  - obs-move-transition
   - obs-3d-effect
-  - obs-source-switcher
-  - obs-text-pthread
-  - obs-source-dock
-  - obs-plugin-time-source
-  - obs-advanced-masks
-  - obs-plugin-vertical-canvas-git
-  - obs-pipewire-audio-capture-bin
-  - obs-plugin-aitum-multistream-git
   - obs-vkcapture
   - obs-vaapi                  # AUR: Hardware encoding
   # Art
   - krita-git
   - kseexpr-qt6-git
-  - krita-plugin-pythonplugindevelopertools-git
   # Audio Production
   - reaper
   - sws
   - reapack
-  - audacity-openvino-bin
   - tenacity
   # Video
-  - davinci-ffmpeg-encoder-plugin
-  - davinci-convert
   # Digital Art & Design
   - blender
-  - blender-launcher-v2-bin
   # Note-taking & Knowledge Management
   - obsidian
 
   # Tablet driver
-  - opentabletdriver-git
 
 # Modules that conflict with this one
 conflicts: []
