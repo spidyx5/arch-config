@@ -29,7 +29,6 @@ packages:
   # Art
   - krita-git
   - kseexpr-qt6-git
-  - krita-blender-layer
   - krita-plugin-pythonplugindevelopertools-git
   # Audio Production
   - reaper

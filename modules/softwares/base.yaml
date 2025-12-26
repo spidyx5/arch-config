@@ -52,7 +52,6 @@ packages:
   - brightnessctl
 
   # Utilities & compression
-  - zstd-git
   - bind-tools
   - tealdeer
   - xdg-utils
@@ -62,7 +61,6 @@ packages:
   - ueberzugpp
   - dosfstools
   - evtest
-  - zluda-git # CUDA support for AMD GPUs
    
   # System GUI applications
   - network-manager-applet
@@ -109,41 +107,26 @@ packages:
   # System utilities & tools
   - ffmpeg
   - glib
-  - appimagelauncher-git
 
   # File system tools
   - btrfs-progs
   - f2fs-tools
   - btrfs-assistant
-  - mimalloc
-  - bees-git
   - compsize
   - virtiofsd
-  - btrfs-desktop-notification
-  - btrfs-du
   - bdf
   - duperemove
-  - btrfs-compress
   - kernel-modules-hook-reflink
-  - btdu-bin
-  - btrfs-list
-  - ntfsprogs-plus
-  - btrfs-heatmap
-  - disorderfs
   - fuseiso
   - fuse3
   - fuse2
   - libappimage
   - gvfs
   - avfs
-  - archlinux-userland-fs-cmp
-  - btfs
-  - zarchive-git
+  - ntfsprogs-plus
+  - btrfs-heatmap
+  - disorderfs
   - t2sz
-  - unzip-zstd
-  - python-zstandard
-  - python-indexed-zstd
-  - libzstd-seek-git
 
   # XanMod Edge Kernel
   - linux-xanmod-edge-linux-bin-x64v3
@@ -164,11 +147,9 @@ packages:
 
   # Miscellaneous
   - seatd
-  - mods-bin
   - keyd
   - pciutils
   - gettext
-  - slibtool
   - kate
   # Audio & multimedia GUI
   - pavucontrol
@@ -182,19 +163,15 @@ packages:
   - firewalld
   - opensnitch
   # LLVM/Clang toolchain
-  - llvm-minimal-git
   - clang
   - mold
-  - flang
 
   # Rust toolchain
   - rustup
-  - cargo
 
   # Runtime environments
   - python
   - nodejs
-  - bun-git
 
   # Build systems
   - meson
@@ -219,20 +196,14 @@ packages:
   - dbus-broker-units
   - dbus-broker
   - zlib-ng
-  - libgl
-  - sdl2
   - libusb
   - vulkan-icd-loader
   - vulkan-headers
   - vulkan-tools
   - plymouth
-  - plymouth-theme-arch-logo-symbol
   - wine-tkg-staging-wow64-bin
-  - mesa-tkg-git
-  - lib32-mesa-tkg-git
-  - bottles
-  - heroic-games-launcher-git
-  - boxbuddy
+  - mesa-git
+  - lib32-mesa-git
   # System shells
   - nushell
   - zsh
@@ -243,13 +214,10 @@ packages:
   - noto-fonts
   - terminus-font
   - inter-font
-  - ttf-material-symbols-variable-git
-  - ttf-nerd-fonts-symbols-common
 
   # Vulkan graphics
   - vkd3d
   - vkbasalt
-  - vulkan-extensionlayer-git
 
   # Intel graphics
   - libva
@@ -268,18 +236,13 @@ packages:
   - lib32-libva-intel-driver
 
   # XWayland
-  - xwayland-run-git
   - xwaylandvideobridge
-  - xwayland-satellite-git
   - xorg-xwayland
   # Virtual camera and I2C tools
   - v4l2loopback-dkms
   - v4l2loopback-utils
   - i2c-tools
-  - cachyos-settings
   - clamav-gui
-  - aurscan-git
-  - bpftune-git
 exclude:
   - nano
   - linux-lts
