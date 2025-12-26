@@ -202,8 +202,8 @@ packages:
   - vulkan-tools
   - plymouth
   - wine-tkg-staging-wow64-bin
-  - mesa-git
-  - lib32-mesa-git
+  - mesa-tkg-git
+  - lib32-mesa-tkg-git
   # System shells
   - nushell
   - zsh
