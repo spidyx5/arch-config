@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "=== Installing Custom Kernels (XanMod Edge & TKG Bore LLVM) ==="
+echo "=== Installing Custom Kernel (TKG Bore LLVM) ==="
 
 # Function to check for commands
 check_cmd() {
@@ -16,17 +16,9 @@ check_cmd jaq
 check_cmd curl
 
 # ==============================================================================
-# 1. INSTALL XANMOD EDGE (AUR)
+# 1. INSTALL TKG BORE LLVM (GitHub Latest Release)
 # ==============================================================================
-echo "--- Step 1: Installing XanMod Edge (v3) from AUR ---"
-# We use --needed to skip if already up to date
-# We use --noconfirm to automate the process (be careful with this)
-paru -S --needed --noconfirm linux-xanmod-edge-linux-bin-x64v3 linux-xanmod-edge-linux-headers-bin-x64v3
-
-# ==============================================================================
-# 2. INSTALL TKG BORE LLVM (GitHub Latest Release)
-# ==============================================================================
-echo "--- Step 2: Finding latest Linux TKG (Bore Scheduler + LLVM) ---"
+echo "--- Step 1: Finding latest Linux TKG (Bore Scheduler + LLVM) ---"
 
 REPO="Frogging-Family/linux-tkg"
 API_URL="https://api.github.com/repos/$REPO/releases/latest"
@@ -66,14 +58,14 @@ cd ~
 rm -rf "$TEMP_DIR"
 
 # ==============================================================================
-# 3. UPDATE INITRAMFS & BOOTLOADER
+# 2. UPDATE INITRAMFS & BOOTLOADER
 # ==============================================================================
-echo "--- Step 3: Finalizing ---"
+echo "--- Step 2: Finalizing ---"
 
 # Arch kernels usually trigger mkinitcpio hooks automatically, but we ensure it here.
-# Note: TKG and Xanmod usually provide their own preset files.
+# Note: TKG usually provides its own preset files.
 sudo mkinitcpio -P
 
 echo "Kernel installation complete."
 echo "IMPORTANT: You must manually add these entries to /boot/limine.conf if Limine doesn't auto-detect them."
-echo "Look in /boot for vmlinuz-linux-xanmod-edge-linux-bin-x64v3 and vmlinuz-linux*-tkg-bore-llvm*"
+echo "Look in /boot for vmlinuz-linux*-tkg-bore-llvm*"

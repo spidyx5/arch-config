@@ -145,6 +145,10 @@ packages:
   - python-indexed-zstd
   - libzstd-seek-git
 
+  # XanMod Edge Kernel
+  - linux-xanmod-edge-linux-bin-x64v3
+  - linux-xanmod-edge-linux-headers-bin-x64v3
+
   # Screenshot & recording
   #- wl-screenrec
   - swappy

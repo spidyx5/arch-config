@@ -61,8 +61,6 @@ bash "$SCRIPT_DIR/setup_wayland_config.sh"
 # ==============================================================================
 echo "🐧 [3/5] Installing Kernels & Bootloader..."
 
-# 1. Install Kernels
-bash "$SCRIPT_DIR/install_kernels.sh"
 
 # 2. Update Bootloader (Must run AFTER kernels are installed)
 bash "$SCRIPT_DIR/update_limine.sh"
