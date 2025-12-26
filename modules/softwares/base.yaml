@@ -10,7 +10,7 @@ packages:
   - base-devel
 
   # Firmware
-  - linux-firmware-git
+  - linux-firmware
   - linux-firmware-intel
   - intel-ucode
   - xone-dongle-firmware
