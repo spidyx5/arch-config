@@ -20,10 +20,14 @@ packages:
   - mako # Notification daemon
   - waybar # Status bar
   - sway-audio-idle-inhibit-git # Prevent idle during audio
+  - niri-settings-git
+  - greetd-dms-greeter-git
+  - sunsetr-git
+  - wayvid-git
   - dms-shell-git
   - quickshell # DMS dependency
   - crystal-dock-bin # Application dock
 
 conflicts: []
 exclude:
-  - dms-shell-git
+  
