@@ -146,7 +146,7 @@ packages:
   - libzstd-seek-git
 
   # Screenshot & recording
-  - wl-screenrec
+  #- wl-screenrec
   - swappy
 
   # Network & security
