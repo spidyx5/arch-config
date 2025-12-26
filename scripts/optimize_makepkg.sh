@@ -10,8 +10,6 @@ echo "Configuring Makepkg for High Performance (Clang + Mold)..."
 
 # 1. Define Aggressive Flags
 # FIXED: Put on ONE LINE to absolutely prevent the "-Wp command not found" error.
-# -fstack-protector-strong: Good balance of security/speed
-# -march=native: Optimizes specifically for YOUR cpu
 AGGRESSIVE_CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions -Wformat -Werror=format-security -fstack-clash-protection -fcf-protection -fstack-protector-strong -flto=auto -fomit-frame-pointer -ffunction-sections -fdata-sections -fno-semantic-interposition"
 
 # 2. Append Settings
@@ -48,20 +46,22 @@ LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
 EOF
 fi
 
-# 4. Compression Settings & Compiler location
+# 4. Compression & Extension Settings (UPDATED)
 cat <<EOF | sudo tee -a $CONF > /dev/null
 
 # Compression
 # -T0 uses all cores. 
-# We removed '-15' because it makes packaging extremely slow.
-# Default level (usually 3) is fine for gaming.
-PKGEXT='.pkg.tar.zst'
 COMPRESSZSTD=(zstd -c -T0 -)
+
+# Package & Source Extensions
+# explicitly defining these fixes "valid package suffix" errors
+PKGEXT='.pkg.tar.zst'
+SRCEXT='.src.tar.gz'
 
 EOF
 
 # 5. Clang Configuration (With Safety Warning)
-# We only enable this if Clang is actually installed to prevent broken builds.
+# We only enable this if Clang is actually installed.
 if command -v clang &> /dev/null; then
     cat <<EOF | sudo tee -a $CONF > /dev/null
 
