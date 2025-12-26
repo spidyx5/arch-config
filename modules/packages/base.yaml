@@ -1,0 +1,295 @@
+description: Base system packages
+
+# Use the flat syntax as seen in your other files.
+# We point to the global 'scripts/' folder relative to where you run dcli (repo root).
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+  # Essential base system
+  - base
+  - base-devel
+
+  # Firmware
+  - linux-firmware-git
+  - linux-firmware-intel
+  - intel-ucode
+  - xone-dongle-firmware
+  - xone-dkms
+  - limine-mkinitcpio-hook
+  - limine-entry-tool
+  - limine-snapper-sync
+  - limine-dracut-support
+  - limine-booster
+
+  # dcli dependencies
+  - paru
+  - yay-bin
+  - fzf
+  - snapper
+
+
+  # File managers
+  - nemo
+
+  # Theming
+  - python-pywal
+
+  # Core CLI utilities
+  - wget
+  - curl
+  - unzip
+  - p7zip-full
+  - usbutils
+  - nvtop
+  - imv
+  - jaq
+  - matugen
+  - lvm2
+  - eza
+  - bat
+  - ripgrep
+  - fd
+  - brightnessctl
+
+  # Utilities & compression
+  - zstd-git
+  - bind-tools
+  - tldr
+  - xdg-utils
+  - xdg-user-dirs
+  - shared-mime-info
+  - perl-file-mimeinfo
+  - ueberzugpp
+  - dosfstools
+  - evtest
+  - zluda-git # CUDA support for AMD GPUs
+
+  # System GUI applications
+  - network-manager-applet
+  - networkmanager
+  - networkmanager-openvpn
+  - nftables
+
+  # Audio system packages
+  - pipewire
+  - wireplumber
+  - cava
+  - libsixel
+  - alsa-utils
+  - bluez-tools
+  - bluez
+  - bluez-utils
+  - pipewire-audio
+  - pipewire-alsa
+  - pipewire-pulse
+  - pipewire-jack
+  - rtkit
+  - blueman
+  - noise-suppression-for-voice
+  - rnnoise
+
+  # System monitoring & management
+  - lm_sensors
+  - ananicy-rules-cachyos-git
+  - gammastep
+  - wlsunset
+  - geoclue
+  - mkinitcpio-extras
+  - mkinitcpio
+  - mkinitcpio-firmware
+  - mkinitcpio-busybox
+
+  - busybox
+  - upower
+  - tuned
+  - thermald
+  - fwupd
+  - earlyoom
+
+  # System utilities & tools
+  - ffmpeg
+  - glib
+  - appimagelauncher
+
+  # File system tools
+  - btrfs-progs
+  - f2fs-tools
+  - btrfs-assistant
+  - mimalloc
+  - bees-git
+  - compsize
+  - virtiofsd
+  - btrfs-desktop-notification
+  - btrfs-du
+  - bdf
+  - duperemove
+  - btrfs-compress
+  - kernel-modules-hook-reflink
+  - btdu-bin
+  - btrfs-list
+  - ntfsprogs-plus
+  - btrfs-heatmap
+  - disorderfs
+  - fuseiso
+  - fuse3
+  - fuse2
+  - libappimage
+  - gvfs
+  - avfs
+  - archlinux-userland-fs-cmp
+  - btfs
+  - zarchive-git
+  - t2sz
+  - unzip-zstd
+  - python-zstandard
+  - python-indexed-zstd
+  - libzstd-seek-git
+
+  # Screenshot & recording
+  - wl-screenrec
+  - swappy
+
+  # Network & security
+  - nmap
+  - wireshark-qt
+  - apparmor
+  - openssh
+  - tpm2-tools
+  - lynis
+  - stevenblack
+
+  # Miscellaneous
+  - seatd
+  - mods
+  - keyd
+  - pciutils
+  - tinygettext
+  - slibtool
+  - kate
+  # Audio & multimedia GUI
+  - pavucontrol
+  - pwvucontrol
+  - easyeffects
+  - qpwgraph
+
+  # System monitoring & information
+  - btop
+
+  - firewalld
+  - opensnitch
+  # LLVM/Clang toolchain
+  - llvm-minimal-git
+  - clang
+  - mold
+  - flang
+
+  # Rust toolchain
+  - rustup
+  - cargo
+
+  # Runtime environments
+  - python
+  - nodejs
+  - bun-git
+
+  # Build systems
+  - meson
+  - cmake
+  - binutils
+  - samurai
+
+  # Shell enhancements
+  - zoxide
+  - carapace
+  - nodejs-inshellisense
+  - skim
+
+  # Wayland & display
+  - wayland
+  - wayland-utils
+  - wayland-protocols
+  - wtype
+  - wlr-randr
+  - wev
+  - wdisplays
+  - kanshi
+
+  # Miscellaneous system packages
+  - biome
+  - dbus-broker-units
+  - dbus-broker
+  - zlib-ng
+  - libgl
+  - sdl2
+  - libusb
+  - vulkan-icd-loader
+  - vulkan-headers
+  - vulkan-tools
+  - plymouth
+  - plymouth-theme-arch-logo-symbol
+  - proton-cachyos-auto-script
+  - wine-tkg-staging-wow64-bin
+  - mesa-tkg-git
+  - lib32-mesa-tkg-git
+  # System shells
+  - nushell
+  - zsh
+  - fish
+  - bash
+
+  # Fonts
+  - noto-fonts
+  - noto-fonts-cjk-sans
+  - noto-fonts-color-emoji
+  - dejavu-fonts
+  - liberation-fonts
+  - fira-code
+  - fira-code-symbols
+  - jetbrains-mono
+  - font-awesome
+  - material-icons
+  - terminus-font
+  - inter-font
+  - ttf-material-symbols-variable-git
+  - ttf-nerd-fonts-symbols-common
+
+  # Vulkan graphics
+  - vkd3d
+  - vkbasalt
+  - vulkan-extensionlayer-git
+
+  # Intel graphics
+  - libva
+  - libva-utils
+  - libvpl
+  - libvpl-tools
+  - intel-gpu-tools
+  - intel-media-driver      # Modern VA-API (Broadwell+)
+  - intel-compute-runtime   # OpenCL
+  - opencl-mesa
+  - opencl-headers
+  - ocl-icd                 # OpenCL Installable Client Driver loader
+  - vpl-gpu-rt              # Intel VPL
+  - libva-intel-driver      # Legacy VA-API (Haswell & older)
+  - intel-graphics-compiler # Compiler for OpenCL
+  - lib32-libva
+  - lib32-libva-intel-driver
+
+  # XWayland
+  - xwayland-run-git
+  - xwaylandvideobridge
+  - xwayland-satellite-git
+  - xorg-xwayland
+  # Virtual camera and I2C tools
+  - v4l2loopback-dkms
+  - v4l2loopback-utils
+  - i2c-tools
+  - cachyos-settings
+  - clamav-gui
+  - aurscan-git
+exclude:
+  - nano
+  - linux-lts
+  - cachyos-plymouth-bootanimation
+  - cat
+  - ufw

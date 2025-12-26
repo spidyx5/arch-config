@@ -1,0 +1,31 @@
+# Niri window manager
+# Scrollable-tiling Wayland compositor
+
+description: Niri scrollable-tiling Wayland compositor core packages
+
+packages:
+  - niri # Niri Wayland compositor
+  - xdg-desktop-portal-wlr # Desktop portal for GNOME
+  - xdg-desktop-portal-gtk
+  - xdg-desktop-portal
+  - wl-clipboard # Clipboard utilities
+  - wl-clip-persist # Persistent clipboard
+  - cliphist # Clipboard history
+  - grim # Screenshot tool
+  - slurp # Region selector
+  - satty # Screenshot annotation
+  - swaybg # Background manager
+  - brightnessctl # Brightness control
+  - fuzzel # Application launcher
+  - mako # Notification daemon
+  - waybar # Status bar
+  - sway-audio-idle-inhibit-git # Prevent idle during audio
+  - niri-settings-git
+  - dms-shell-niri-git
+  - greetd-dms-greeter-git
+  - sunsetr-git
+  - wayvid-git
+  - quickshell # DMS dependency
+  - crystal-dock-bin # Application dock
+
+conflicts: []

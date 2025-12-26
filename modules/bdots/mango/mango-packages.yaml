@@ -1,0 +1,22 @@
+# MangoWC window manager
+# Custom Wayland compositor configuration
+
+description: MangoWC window manager and related tools
+
+packages:
+  - bibata-cursor-theme-bin # Mouse cursor theme
+  - brightnessctl # Brightness control
+  - cliphist # Clipboard history
+  - crystal-dock-bin # Application dock
+  - grim # Screenshot tool
+  - mangowc-git # MangoWC Wayland compositor
+  - satty # Screenshot annotation
+  - slurp # Region selector
+  - sway-audio-idle-inhibit-git # Prevent idle during audio
+  - swaybg # Background manager
+  - wl-clip-persist # Persistent clipboard
+  - wl-clipboard # Clipboard utilities
+  - xdg-desktop-portal-wlr # Desktop portal for wlroots
+
+# Conflicts with other window managers
+conflicts: []

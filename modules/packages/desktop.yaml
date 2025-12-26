@@ -1,0 +1,72 @@
+# packages installed on all systems
+# These packages are included regardless of host or modules
+
+description: Desktop packages
+
+packages:
+  # Essential base system
+  - steam # Steam gaming platform
+  - gamescope # Gaming compositor
+  - mangohud # Performance overlay
+  - protonplus # Proton version manager
+  - mangojuice
+  - sunshine
+  - tailscale
+  # Messaging
+  - equibop-bin  # Discord client
+
+  # Virtualization
+  - virt-manager # Virtual machine manager
+
+  # Web browsers
+  - zen-browser-bin # Zen browser (AUR)
+  - helium-browser-bin
+  - qutebrowser
+  - python-adblock
+  # Security & Password Management
+  - bitwarden
+  - bitwarden-menu-git
+  - zen-browser-bitwarden
+  - fuzzel-rbw
+  - proton-vpn-gtk-app
+  - proton-mail
+  - proton-authenticator-bin
+  - protonmail-bridge
+
+  # VPN & Networking
+  - openvpn
+
+  # Utilities & Downloaders
+  - calibre-web
+  - yt-dlp
+  - parabolic
+  - qbittorrent
+
+  # Multimedia & Content
+  - calibre
+  - foliate
+  - libgen-cli-bin
+  - libgendesktop
+  - dopamine
+  - smplayer
+  - mpv
+  - spotify-dev
+  - spicetify-cli
+  - spicetify-marketplace-bin
+  - pywal-spicetify
+  - spicetify-themes-git
+  - spicetify-extensions-rxri-git
+  - spicetify-custom-apps-and-extensions-git
+  # Browsers & Web
+  - chromium-widevine
+  - gemini-cli
+  - qwen-code
+  - flatpak
+  - flatpak-builder
+  - flatseal
+  - cosmic-store
+
+  # Gaming overlays and tools
+  - jstest-gtk-git
+  - joyutils
+  - antimicrox

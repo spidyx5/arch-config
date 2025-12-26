@@ -1,0 +1,12 @@
+description: "Web app installer tools for creating desktop entries from URLs"
+
+# Optional: Modules that conflict with this one
+conflicts: []
+
+# Optional: Post-install hook script (relative to module directory)
+post_install_hook: "install-webapp-tools.sh"
+hooks_behavior: once # or "always", "skip", "once" (default)
+
+# Optional: Explicit list of package files to load (empty = auto-discover)
+package_files:
+  - packages.yaml

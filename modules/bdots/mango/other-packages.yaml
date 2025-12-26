@@ -1,0 +1,16 @@
+# MangoWC window manager
+# Custom Wayland compositor configuration
+
+description: MangoWC window manager and related tools
+
+packages:
+  - crystal-dock-bin # Application dock
+  - dms-shell-git # Shell component
+  - fastfetch # System information tool
+  - fish # Fish shell
+  - foot # Terminal emulator
+  - kitty # Terminal emulator
+
+# Conflicts with other window managers
+conflicts: []
+

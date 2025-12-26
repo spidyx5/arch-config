@@ -1,0 +1,89 @@
+description: "Development"
+
+packages:
+  - code
+  - code-marketplace
+  - code-features
+  - electron
+  - clang
+  - cmake
+  - ninja
+  - libstdc++5
+  - lib32-libstdc++5
+  - curl
+  - git
+  - unzip
+  - xz
+  - zip
+  - glu
+  - yazi
+  - ripgrep # Fast search tool for live grep
+  - fd # Fast file finder
+  - fzf # Fuzzy finder (>= 0.25.1)
+  - tree-sitter-cli # Tree-sitter parser generator
+  - cmake # Build system
+  - meson # Build system
+  - cpio # Archiving tool
+  - gcc # C and C++ compilers
+
+    # The Shell & Prompt
+  - starship
+  - carapace-bin        # AUR: Multi-shell completion
+  - ghostty             # AUR: The terminal
+  - ghostty-shell-integration
+  - kitty
+  - fastfetch
+  - rmpc
+    # CLI Tools (Replacements used in your aliases)
+  - bat                 # cat replacement
+  - eza                 # ls replacement
+  - ripgrep             # grep replacement
+  - fd                  # find replacement
+  - zoxide              # cd replacement
+  - fzf                 # Fuzzy finder
+  - skim                # Fuzzy finder (Nu plugin friendly)
+  - yazi                # File Manager (for 'fm' alias)
+  - wl-clipboard        # Wayland clipboard
+
+     # Virtualization
+  - virt-viewer
+  - looking-glass-git
+  - scream
+  - edk2-ovmf
+  - qemu-ovmf-secureboot-git
+  - swtpm
+  - libguestfs
+  - freerdp
+  - spice
+  - spice-gtk
+  - spice-protocol
+  - virglrenderer
+  - virtio-win
+  - spice-vdagent
+  - spice-autorandr
+  - libvirt-venus
+  - qemu-desktop       # The main emulator (includes KVM)
+  - virt-manager-git       # The GUI
+  - libvirt            # The daemon
+  - dnsmasq            # Network plumbing
+  - vde2               # Virtual Distributed Ethernet
+  - bridge-utils       # Network bridging
+  - dmidecode          # SMBIOS tools
+    # Container & Virtualization
+  - distrobox
+  - podman-compose-git
+  - podman
+  - podman-docker
+  - podman-desktop
+  - winboat-git
+  - cni-plugins        # Networking plugins for podman
+  - pcp-gui
+  # --- Waydroid (Android) ---
+  - waydroid
+  - python-pyclip      # Clipboard support for Waydroid
+  - waydroid-script-git
+  - waydroid-helper-git
+  - waydroidsu
+  - waydroid-launcher-git
+
+conflicts: []

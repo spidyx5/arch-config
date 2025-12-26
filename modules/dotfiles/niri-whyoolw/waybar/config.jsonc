@@ -1,0 +1,170 @@
+{
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+  "fixed-center": true,
+  "reload_style_on_change": true,
+  "modules-left": [
+    "custom/separator",
+    "niri/workspaces",
+    "custom/separator",
+    "niri/language",
+  ],
+  "modules-center": [
+	  "clock", "privacy"
+  ],
+  "modules-right": [
+    "group/tray-expander",
+    "custom/separator",
+    "pulseaudio",
+    "backlight",
+    "custom/separator",
+    "network",
+    "battery",
+    "custom/separator",
+    "custom/notification",
+    "custom/separator"
+  ],
+  // Modules configuration
+  "niri/language": {
+  	"format": "{}",
+	"format-en": "en",
+	"format-ru": "ru "
+	},
+  "custom/notification": {
+      "tooltip": false,
+      "format": "{icon} ",
+      "format-icons": {
+        "notification": "",
+        "none": "",
+        "dnd-notification": "",
+        "dnd-none": "",
+        "inhibited-notification": "",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "",
+        "dnd-inhibited-none": ""
+      },        "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "escape": true,
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw"
+  },
+  "group/tray-expander": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "tray-group-item"
+    },
+    "modules": [
+      "custom/expand-icon",
+      "tray"
+    ]
+  },
+  "custom/expand-icon": {
+    "format": "󰻋 ",
+    "tooltip": false
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 13
+  },
+  "clock": {
+    "format": "{:%H:%M:%S}",
+    "tooltip-format": "{:%OI:%M:%S}",
+    "format-alt": "{:%d/%m/%y}",
+    "timezone": "Europe/Riga",
+    "interval": 1,
+    "tooltip": true
+  },
+  "backlight": {
+    "format": "  {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"],
+    "scroll-step": 1,
+    "tooltip": false
+  },
+  "battery": {
+    "states": {
+        "warning": 15,
+        "critical": 8
+    },
+    "format": "{icon}",
+    "format-charging": " {icon}",
+    "format-plugged": " {icon}",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "interval": 3,
+ 		"format-time": "{H}h {M}m",
+		"tooltip-format": "{capacity} {power}w {time}",
+		"tooltip-format-charging": "{capacity}% (charging) {time}",
+  },
+
+  "network": {
+    "format": "{icon}",
+    "format-wifi": "{icon}",
+    "format-ethernet": " ",
+    "tooltip-format": " ",
+    "format-linked": " ",
+    "format-disconnected": "󰤮 ",
+    "tooltip": false,
+    "on-click": "kitty sh -c nmtui",
+    "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "]
+  },
+  "pulseaudio": {
+    "scroll-step": 5,
+    "format": "{icon}  {volume}%",
+    "format-muted": " 0%",
+    "format-source": " {volume}%",
+    "format-source-muted": " ",
+    "format-icons": {
+        "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol",
+    "tooltip-format": "{volume}%",
+    "tooltip": false
+  },
+  "custom/bluetooth": {
+    "format": "",
+    "on-click": "blueberry",
+    "tooltip": false
+  },
+  "custom/separator": {
+    "format": "|",
+    "tooltip": false
+  },
+  "cpu": {
+    "format": "  {usage}%",
+    "on-click": "kitty -c btop",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "  {}%",
+    "on-click": "kitty -c btop"
+  },
+	"privacy": {
+			"icon-spacing": 10,
+			"icon-size": 12,
+			"transition-duration": 250,
+			"modules": [
+				{
+					"type": "screenshare",
+					"tooltip": true,
+					"tooltip-icon-size": 24
+				},
+				{
+					"type": "audio-in",
+					"tooltip": true,
+					"tooltip-icon-size": 24
+				}
+			],
+			"ignore-monitor": true,
+			"ignore": [
+				{
+					//"type": "screenshare",
+					//"name": "obs"
+
+					"type": "audio-in",
+					"name": "cava"
+				}
+			]
+		},
+}

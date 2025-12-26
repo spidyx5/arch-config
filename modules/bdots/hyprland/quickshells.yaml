@@ -1,0 +1,13 @@
+# Hyprland Wayland compositor
+# Dynamic tiling Wayland compositor with smooth animations
+# Uses DankMaterialShell (DMS) for bar, notifications, launcher, and lock screen
+
+description: Hyprland Wayland compositor with DankMaterialShell
+
+packages:
+  - dms-shell-git # DankMaterialShell (bar, notifications, launcher, lock)
+  - quickshell # DMS dependency
+  - noctalia-shell # A beautiful, minimal desktop shell for Wayland
+
+# Conflicts with other window managers
+conflicts: []

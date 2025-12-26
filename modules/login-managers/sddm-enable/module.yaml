@@ -1,0 +1,11 @@
+description: "SDDM login manager with auto-enable service"
+
+conflicts:
+  - login-managers/gdm-enable
+  - login-managers/lightdm-enable
+
+post_install_hook: "scripts/enable-sddm.sh"
+hooks_behavior: once
+
+package_files:
+  - sddm.yaml

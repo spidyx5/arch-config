@@ -1,0 +1,4 @@
+description: "Sysc-greet login manager packages"
+
+packages:
+  - sysc-greet

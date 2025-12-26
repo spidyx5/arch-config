@@ -1,0 +1,17 @@
+# MangoWC window manager
+# Custom Wayland compositor configuration
+
+description: MangoWC Theming Packages
+
+packages:
+  - bibata-cursor-theme-bin # Mouse cursor theme
+  - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
+  - gtk3 # GTK 3 libraries
+  - gtk4 # GTK 4 libraries
+  - matugen-bin # Material color generation
+  - qt5ct # Qt5 configuration tool
+  - qt6ct # Qt6 configuration tool
+  - tela-icon-theme-purple-git # Tela purple icon theme
+
+# Conflicts with other window managers
+conflicts: []

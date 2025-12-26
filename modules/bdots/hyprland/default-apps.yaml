@@ -1,0 +1,15 @@
+# Hyprland Wayland compositor
+# Dynamic tiling Wayland compositor with smooth animations
+# Uses DankMaterialShell (DMS) for bar, notifications, launcher, and lock screen
+
+description: Hyprland Wayland compositor with DankMaterialShell
+
+packages:
+  - nemo
+  - kitty
+  - fastfetch
+  - zen-browser-bin
+  - zed
+  - fish
+# Conflicts with other window managers
+conflicts: []

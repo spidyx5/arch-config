@@ -1,0 +1,64 @@
+# hosts/spidy.yaml
+host: spidy
+description: Spidy host configuration
+import: []
+
+# Enabled modules
+enabled_modules:
+  #  Main packages module (includes post-install hooks)
+  - packages
+
+  #  Specific Tools
+  - controller-support
+  - cli-tools/webapp-tool
+  - cli-tools/cli-apps
+
+  #  Dotfiles / Theming
+  - bdots/niri
+  - helix-catppuccin-mocha
+
+packages: []
+exclude: []
+additional_packages: []
+# Configuration backup settings
+config_backups:
+  enabled: true
+  max_backups: 5
+
+# Settings
+flatpak_scope: system
+auto_prune: true
+backup_tool: snapper
+snapper_config: root
+
+# Services Configuration
+# (These ensure they start even if the scripts didn't trigger them)
+services:
+  enabled:
+    # Network
+    - NetworkManager
+    - NetworkManager-wait-online
+    - NetworkManager-dispatcher
+    - bluetooth
+
+    # Performance & Scheduler
+    - ananicy-cpp
+    - scx
+    - tuned
+    - thermald
+    - getty@
+
+    # Virtualization
+    - libvirtd
+    - podman.socket
+    - waydroid
+
+    # Audio (System level)
+    - rtkit-daemon
+    - apparmor
+    - greetd
+  disabled:
+    - ufw
+    - iptables
+editor: helix
+aur_helper: paru

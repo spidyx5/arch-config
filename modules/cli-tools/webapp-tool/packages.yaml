@@ -1,0 +1,8 @@
+description: Web app installer tools for creating desktop entries from URLs
+
+packages:
+  - gum # Interactive CLI tool for user input
+  - curl # Download tool for fetching icons
+  - gtk3 # GTK3 for icon cache updates
+
+conflicts: []

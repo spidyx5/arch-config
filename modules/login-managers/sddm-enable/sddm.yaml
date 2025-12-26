@@ -1,0 +1,4 @@
+description: "SDDM login manager packages"
+
+packages:
+  - sddm

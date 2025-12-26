@@ -1,0 +1,15 @@
+# Hyprland Wayland compositor
+# Dynamic tiling Wayland compositor with smooth animations
+# Uses DankMaterialShell (DMS) for bar, notifications, launcher, and lock screen
+
+description: Hyprland Wayland compositor with DankMaterialShell
+
+packages:
+  - cmake # Build system
+  - meson # Build system
+  - cpio # Archiving tool
+  - git # Version control
+  - gcc # C and C++ compilers
+
+# Conflicts with other window managers
+conflicts: []

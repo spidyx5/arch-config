@@ -1,0 +1,21 @@
+# System packages merged from host (auto-generated, host-specific)
+config.yaml
+
+# Auto-generated state files
+system-packages.yaml
+state/installed.yaml
+state/hooks-executed.yaml
+modules/declared-packages.yaml
+
+# Backup files
+*.backup.*
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Old JSON files (after YAML migration)
+# Exclude package.json, settings.json and other needed configs
+!dotfiles/**/settings.json
+!**/package.json

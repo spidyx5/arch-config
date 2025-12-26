@@ -1,0 +1,34 @@
+# KDE Plasma Desktop base packages
+# Core KDE desktop environment and essential applications
+
+description: KDE Plasma desktop base packages
+
+packages:
+  - plasma-desktop # KDE Plasma desktop environment
+  - plasma-wayland-session # Wayland session for Plasma
+  - kscreen # KDE screen management
+  - powerdevil # Power management for KDE
+  - plasma-nm # NetworkManager integration
+  - plasma-pa # PulseAudio integration
+  - bluedevil # Bluetooth integration
+  - kinfocenter # System information viewer
+  - systemsettings # KDE system settings
+  - dolphin # KDE file manager
+  - konsole # KDE terminal emulator
+  - kate # KDE advanced text editor
+  - spectacle # KDE screenshot utility
+  - ark # Archive manager
+  - gwenview # Image viewer
+  - okular # Document viewer
+  - kcalc # KDE calculator
+  - krunner # KDE application launcher
+  - kwalletmanager # KDE wallet manager
+  - kde-gtk-config # GTK configuration for KDE
+  - xdg-desktop-portal-kde # Desktop portal for KDE
+  - qt5-wayland # Qt5 Wayland support
+  - qt6-wayland # Qt6 Wayland support
+  - kvantum # Advanced Qt theme engine
+  - qt5ct # Qt5 configuration tool
+  - qt6ct # Qt6 configuration tool
+
+conflicts: []

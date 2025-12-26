@@ -1,0 +1,4 @@
+description: "Helix editor with Catppuccin Mocha theme"
+
+packages:
+  - helix

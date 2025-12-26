@@ -1,0 +1,12 @@
+description: "Catppuccin Mocha theme for Helix editor"
+
+conflicts:
+  - editors/helix-catppuccin-frappe
+  - editors/helix-catppuccin-latte
+  - editors/helix-catppuccin-macchiato
+
+post_install_hook: "scripts/install-helix-theme.sh"
+hooks_behavior: once
+
+package_files:
+  - helix-catppuccin-mocha.yaml

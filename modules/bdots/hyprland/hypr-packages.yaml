@@ -1,0 +1,22 @@
+# Hyprland Wayland compositor
+# Dynamic tiling Wayland compositor with smooth animations
+# Uses DankMaterialShell (DMS) for bar, notifications, launcher, and lock screen
+
+description: Hyprland Wayland compositor with DankMaterialShell
+
+packages:
+  - hyprland # Main compositor
+  - hyprpaper # Wallpaper utility
+  - xdg-desktop-portal-hyprland # Desktop portal
+  - wl-clipboard # Clipboard utilities
+  - grimblast-git # Screenshot tool
+  - grim # Screenshot tool
+  - slurp # Region selector
+  - nwg-displays # Display configuration
+  - brightnessctl # Brightness control
+  - pavucontrol # Audio control
+  - network-manager-applet # Network manager GUI
+  - pyprland # Python bindings for Hyprland
+
+# Conflicts with other window managers
+conflicts: []
