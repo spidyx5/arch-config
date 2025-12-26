@@ -5,7 +5,7 @@ conflicts:
 #validate_packages: true
 
 # Optional: Post-install hook script (relative to module directory)
-post_install_hook: "scripts/master-setup.sh"
+post_install_hook: "../../scripts/master-setup.sh"
 hooks_behavior: once # or "always", "skip", "once" (default)
 
 # Optional: Explicit list of package files to load (empty = auto-discover)
