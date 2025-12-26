@@ -1,86 +1,98 @@
 #!/bin/bash
-# Master setup script
+# Master Setup Script
+# Location: /arch-config/scripts/master_setup.sh
 
-set -e  # Exit on any error
+set -e  # Exit immediately if any script fails
 
-# 1. Check for Sudo
+# 1. Check if running as Root
 if [ "$EUID" -ne 0 ]; then
-    echo "Error: This script must be run with sudo"
-    echo "Usage: sudo $0"
+    echo "❌ Error: This script must be run with sudo."
+    echo "Usage: sudo ./master_setup.sh"
     exit 1
 fi
 
-# 2. Get the Real User (for non-root scripts)
+# 2. Detect the Real User (to run user-config scripts correctly)
 REAL_USER=${SUDO_USER:-$USER}
+USER_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
 
-# 3. Define Directories Correctly
+# 3. Set the Script Directory
+# This ensures it works no matter where you run the command from
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# Assuming the second batch of scripts is inside a 'scripts' subdirectory:
-SUB_DIR="$SCRIPT_DIR/scripts"
 
-echo "=== Starting Master Setup Script ==="
-echo "Running as root. User configurations will apply to: $REAL_USER"
+echo "=== 🚀 Starting Master Arch Setup ==="
+echo "📂 Script Directory: $SCRIPT_DIR"
+echo "👤 Configuring for User: $REAL_USER ($USER_HOME)"
 echo ""
 
 # ==============================================================================
-# PHASE 1: REPOSITORIES (Must be first so packages can be found)
+# PHASE 1: REPOSITORIES (CRITICAL FIRST STEP)
 # ==============================================================================
-echo "📦 Setting up Repositories..."
-# Using "$SUB_DIR" ensures it finds the file regardless of where you run the script from
-bash "$SUB_DIR/chaotic-repo.sh"
-bash "$SUB_DIR/cachy-repo.sh"
+echo "📦 [1/5] Setting up Repositories..."
+# We must do this first so subsequent scripts can find packages
+bash "$SCRIPT_DIR/chaotic-repo.sh"
+bash "$SCRIPT_DIR/cachy-repo.sh"
 
-# Update pacman databases after adding repos
+# Refresh pacman to see new packages
 pacman -Sy
 
 # ==============================================================================
-# PHASE 2: SYSTEM CONFIG (Root level)
+# PHASE 2: SYSTEM CONFIGURATION (ROOT)
 # ==============================================================================
-echo "📦 Running system setup scripts..."
+echo "⚙️ [2/5] Running System & Hardware Setup..."
+
+# Optimization first
+bash "$SCRIPT_DIR/optimize_makepkg.sh"
+
+# Hardware & Drivers
 bash "$SCRIPT_DIR/setup_hardware.sh"
 bash "$SCRIPT_DIR/setup_keyd.sh"
-bash "$SCRIPT_DIR/optimize_makepkg.sh"
+bash "$SCRIPT_DIR/setup_audio.sh"
+
+# Virtualization (needs to add groups)
+bash "$SCRIPT_DIR/setup_virt.sh"
+
+# General System Config & Services
 bash "$SCRIPT_DIR/apply_system_config.sh"
 bash "$SCRIPT_DIR/setup_services.sh"
-bash "$SCRIPT_DIR/setup_audio.sh"
 bash "$SCRIPT_DIR/setup_wayland_config.sh"
 
 # ==============================================================================
-# PHASE 3: KERNELS & BOOTLOADER (Order matters!)
+# PHASE 3: KERNEL & BOOTLOADER
 # ==============================================================================
-echo "📦 Installing Kernels..."
+echo "🐧 [3/5] Installing Kernels & Bootloader..."
+
+# 1. Install Kernels
 bash "$SCRIPT_DIR/install_kernels.sh"
 
-echo "📦 Updating Bootloader (Limine)..."
-# Must run AFTER kernels are installed
+# 2. Update Bootloader (Must run AFTER kernels are installed)
 bash "$SCRIPT_DIR/update_limine.sh"
 
 # ==============================================================================
-# PHASE 4: USER PROGRAMS (Drop privileges for these!)
+# PHASE 4: USER CONFIGURATIONS (RUN AS USER)
 # ==============================================================================
-echo "📦 Running user-level program setups..."
+echo "🎨 [4/5] Applying User Configurations..."
+echo "   (Dropping root privileges to run as $REAL_USER)"
 
-# We use 'sudo -u $REAL_USER' to run these as your actual user, not root.
-# This prevents permission issues in your home directory.
+# Helper function to run script as the real user
+run_as_user() {
+    sudo -u "$REAL_USER" bash "$1"
+}
 
-echo " -> Configuring XDG (User)..."
-sudo -u "$REAL_USER" bash "$SCRIPT_DIR/setup_xdg.sh"
+# XDG Dirs (Documents, Downloads, etc.)
+run_as_user "$SCRIPT_DIR/setup_xdg.sh"
 
-echo " -> Configuring Tablet Driver..."
-# Assuming this needs to access user config:
-sudo -u "$REAL_USER" bash "$SUB_DIR/opentabletdriver_setup.sh"
+# Browser Profiles
+run_as_user "$SCRIPT_DIR/browser_config.sh"
 
-echo " -> Configuring Browser..."
-sudo -u "$REAL_USER" bash "$SUB_DIR/browser_config.sh"
+# Terminal Configs
+run_as_user "$SCRIPT_DIR/setup_terminal.sh"
 
-echo " -> Configuring Terminal..."
-sudo -u "$REAL_USER" bash "$SUB_DIR/setup_terminal.sh"
+# Tablet Driver Config (creates user config files)
+run_as_user "$SCRIPT_DIR/opentabletdriver_setup.sh"
 
 # ==============================================================================
-# PHASE 5: VIRTUALIZATION & FINALIZATION
+# PHASE 5: COMPLETION
 # ==============================================================================
-echo "📦 Running virtualization setup..."
-bash "$SUB_DIR/setup_virt.sh"
-
 echo ""
-echo "✅ Master setup script completed successfully!"
+echo "✅ Master setup complete!"
+echo "   Please Reboot your system to apply all changes."
