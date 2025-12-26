@@ -47,7 +47,7 @@ packages:
   - foliate
   - libgen-cli-bin
   - libgendesktop
-  - dopamine
+  - dopamine-official
   - smplayer
   - mpv
   - spotify-dev

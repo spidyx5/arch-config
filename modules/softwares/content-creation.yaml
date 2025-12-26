@@ -22,7 +22,7 @@ packages:
   - obs-plugin-time-source
   - obs-advanced-masks
   - obs-plugin-vertical-canvas-git
-  - obs-pipewire-audio-capture
+  - obs-pipewire-audio-capture-bin
   - obs-plugin-aitum-multistream-git
   - obs-vkcapture
   - obs-vaapi                  # AUR: Hardware encoding

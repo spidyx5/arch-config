@@ -25,7 +25,10 @@ packages:
   - meson # Build system
   - cpio # Archiving tool
   - gcc # C and C++ compilers
-
+    # Shell enhancements
+  - zoxide
+  - nodejs-inshellisense
+  - skim
     # The Shell & Prompt
   - starship
   - carapace-bin        # AUR: Multi-shell completion
@@ -48,7 +51,7 @@ packages:
      # Virtualization
   - virt-viewer
   - looking-glass-git
-  - scream
+  - scream-git
   - edk2-ovmf
   - qemu-ovmf-secureboot-git
   - swtpm
@@ -60,7 +63,6 @@ packages:
   - virglrenderer
   - virtio-win
   - spice-vdagent
-  - spice-autorandr
   - libvirt-venus
   - qemu-desktop       # The main emulator (includes KVM)
   - virt-manager-git       # The GUI
@@ -76,7 +78,7 @@ packages:
   - podman
   - podman-docker
   - podman-desktop
-  - winboat-git
+  - winboat
   - cni-plugins        # Networking plugins for podman
   - pcp-gui
   # --- Waydroid (Android) ---

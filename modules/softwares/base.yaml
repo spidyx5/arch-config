@@ -90,7 +90,6 @@ packages:
 
   # System monitoring & management
   - lm_sensors
-  - ananicy-rules-cachyos-git
   - gammastep
   - wlsunset
   - geoclue
@@ -98,7 +97,8 @@ packages:
   - mkinitcpio
   - mkinitcpio-firmware
   - mkinitcpio-busybox
-
+  - cachyos-ananicy-rules
+  - ananicy-cpp
   - busybox
   - upower
   - tuned
@@ -109,7 +109,7 @@ packages:
   # System utilities & tools
   - ffmpeg
   - glib
-  - appimagelauncher
+  - appimagelauncher-git
 
   # File system tools
   - btrfs-progs
@@ -164,7 +164,7 @@ packages:
 
   # Miscellaneous
   - seatd
-  - mods
+  - mods-bin
   - keyd
   - pciutils
   - gettext
@@ -202,11 +202,7 @@ packages:
   - binutils
   - samurai
 
-  # Shell enhancements
-  - zoxide
-  - carapace
-  - nodejs-inshellisense
-  - skim
+
 
   # Wayland & display
   - wayland
@@ -231,10 +227,12 @@ packages:
   - vulkan-tools
   - plymouth
   - plymouth-theme-arch-logo-symbol
-  - proton-cachyos-auto-script
   - wine-tkg-staging-wow64-bin
   - mesa-tkg-git
   - lib32-mesa-tkg-git
+  - bottles
+  - heroic-games-launcher-git
+  - boxbuddy
   # System shells
   - nushell
   - zsh
@@ -243,15 +241,6 @@ packages:
 
   # Fonts
   - noto-fonts
-  - noto-fonts-cjk-sans
-  - noto-fonts-color-emoji
-  - dejavu-fonts
-  - liberation-fonts
-  - fira-code
-  - fira-code-symbols
-  - jetbrains-mono
-  - font-awesome
-  - material-icons
   - terminus-font
   - inter-font
   - ttf-material-symbols-variable-git
