@@ -10,7 +10,7 @@ echo "Configuring Makepkg for High Performance..."
 
 # 1. Define Aggressive Flags
 AGGRESSIVE_CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions \
--Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security \
+-Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security \
 -fstack-clash-protection -fcf-protection \
 -flto=auto -fomit-frame-pointer \
 -ffunction-sections -fdata-sections -fno-semantic-interposition"

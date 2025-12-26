@@ -12,9 +12,6 @@ packages:
   - mangojuice
   - sunshine
   - tailscale
-  # Messaging
-  - equibop-bin  # Discord client
-
 
   # Web browsers
   - zen-browser-bin # Zen browser (AUR)
