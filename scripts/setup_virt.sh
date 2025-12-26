@@ -1,51 +1,61 @@
 #!/bin/bash
 
-echo "=== Configuring Virtualization & Containers ==="
+# Ensure script is run as root
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root (sudo)"
+    exit 1
+fi
+
+# Detect the real user (since we are running as sudo)
+REAL_USER=${SUDO_USER:-$USER}
+USER_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
+
+echo "=== Configuring Virtualization for User: $REAL_USER ==="
 
 # ==============================================================================
-# 1. LIBVIRT CONFIGURATION (Root execution & Permissions)
+# 1. LIBVIRT CONFIGURATION
 # ==============================================================================
 echo "Configuring Libvirt..."
 
-# Enable the service
-sudo systemctl enable --now libvirtd
+# Enable the system-wide service
+systemctl enable --now libvirtd
 
-# Configure QEMU to run as ROOT (Matches your NixOS runAsRoot = true)
-# NOTE: Running as root is less secure but required for some GPU passthrough/anti-detection hacks.
+# Configure QEMU (Anti-detection / Root execution)
 QEMU_CONF="/etc/libvirt/qemu.conf"
 
 if [ -f "$QEMU_CONF" ]; then
-    # Set user/group to root
-    sudo sed -i 's/^#user = "root"/user = "root"/' "$QEMU_CONF"
-    sudo sed -i 's/^#group = "root"/group = "root"/' "$QEMU_CONF"
-
-    # Disable dynamic ownership (Matches dynamic_ownership = 0)
-    sudo sed -i 's/^#dynamic_ownership = 1/dynamic_ownership = 0/' "$QEMU_CONF"
-
-    # Allow simple namespaces (often fixes issues with /dev nodes)
-    sudo sed -i 's/^#namespaces = .*/namespaces = []/' "$QEMU_CONF"
+    # Set user/group to root (matches NixOS runAsRoot)
+    sed -i 's/^#user = "root"/user = "root"/' "$QEMU_CONF"
+    sed -i 's/^#group = "root"/group = "root"/' "$QEMU_CONF"
+    
+    # Disable dynamic ownership
+    sed -i 's/^#dynamic_ownership = 1/dynamic_ownership = 0/' "$QEMU_CONF"
+    
+    # Clear namespaces
+    sed -i 's/^#namespaces = .*/namespaces = []/' "$QEMU_CONF"
 fi
 
-# Add current user to libvirt group
-sudo usermod -aG libvirt "$USER"
-sudo usermod -aG kvm "$USER"
+# FIXED: Add the REAL_USER to the groups, not root
+usermod -aG libvirt "$REAL_USER"
+usermod -aG kvm "$REAL_USER"
 
-# Restart to apply changes
-sudo systemctl restart libvirtd
+# Restart libvirt to apply config changes
+systemctl restart libvirtd
 
 # ==============================================================================
 # 2. PODMAN CONFIGURATION
 # ==============================================================================
 echo "Configuring Podman..."
 
-# Enable the socket (required for 'docker' compatibility and some tools)
-systemctl --user enable --now podman.socket
-sudo touch /etc/containers/nodocker # Prevents Docker CLI warning
+# Prevent Docker CLI warning
+touch /etc/containers/nodocker
 
-# Enable Auto-Prune Timer (Matches your NixOS autoPrune)
-# We create a systemd user timer for this.
-mkdir -p ~/.config/systemd/user
-cat <<EOF > ~/.config/systemd/user/podman-prune.service
+# FIXED: Create systemd user files in the REAL USER'S home directory
+USER_SYSTEMD_DIR="$USER_HOME/.config/systemd/user"
+mkdir -p "$USER_SYSTEMD_DIR"
+
+# Create Prune Service
+cat <<EOF > "$USER_SYSTEMD_DIR/podman-prune.service"
 [Unit]
 Description=Podman Auto Prune
 
@@ -54,7 +64,8 @@ Type=oneshot
 ExecStart=/usr/bin/podman system prune --all -f
 EOF
 
-cat <<EOF > ~/.config/systemd/user/podman-prune.timer
+# Create Prune Timer
+cat <<EOF > "$USER_SYSTEMD_DIR/podman-prune.timer"
 [Unit]
 Description=Run Podman Prune Weekly
 
@@ -66,17 +77,26 @@ Persistent=true
 WantedBy=timers.target
 EOF
 
-systemctl --user daemon-reload
-systemctl --user enable --now podman-prune.timer
+# FIXED: Fix ownership so the user can actually use these files
+chown -R "$REAL_USER:$REAL_USER" "$USER_HOME/.config"
+
+echo " -> Podman auto-prune timer created."
 
 # ==============================================================================
 # 3. WAYDROID CONFIGURATION
 # ==============================================================================
 echo "Configuring Waydroid..."
-# Waydroid requires the binder/ashmem modules (present in linux-cachyos)
-# We enable the service, but 'waydroid init' must be run manually by the user
-# because it downloads large images.
-sudo systemctl enable --now waydroid-container
+# Waydroid container service is system-wide
+systemctl enable --now waydroid-container
 
-echo "Virtualization setup complete."
-echo "IMPORTANT: For Waydroid, run 'sudo waydroid init' manually."
+# ==============================================================================
+# 4. FINAL INSTRUCTIONS
+# ==============================================================================
+echo "=== Virtualization Setup Complete ==="
+echo "NOTE: Some actions require user permissions and cannot be run by sudo."
+echo "Please run the following commands manually as $REAL_USER (without sudo):"
+echo ""
+echo "  systemctl --user enable --now podman.socket"
+echo "  systemctl --user enable --now podman-prune.timer"
+echo "  sudo waydroid init"
+echo ""
