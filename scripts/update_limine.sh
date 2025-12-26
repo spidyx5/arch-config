@@ -12,6 +12,8 @@ WALLPAPER_SRC="$REPO_ROOT/wallpapers/6.png"
 WALLPAPER_DEST="/boot/wallpaper.png"
 # Limine Config Location
 LIMINE_CONF="/boot/limine.conf"
+# Limine Default Configuration
+LIMINE_DEFAULT="/etc/default/limine"
 # Kernel Parameters to use
 NEW_PARAMS="nvme_core.default_ps_max_latency_us=0 \
 zswap.enabled=1 mitigations=off rootflags=noatime \
@@ -28,6 +30,32 @@ udev.log_level=3"
 echo "=========================================="
 echo "   Limine Auto-Configurator"
 echo "=========================================="
+
+# ==============================================================================
+# 1.5. SET ESP_PATH IN /etc/default/limine
+# ==============================================================================
+echo "[*] Setting ESP_PATH in /etc/default/limine..."
+
+# Check if /etc/default/limine exists
+if [ ! -f "$LIMINE_DEFAULT" ]; then
+    echo "    -> Creating /etc/default/limine..."
+    sudo touch "$LIMINE_DEFAULT"
+fi
+
+# Check if ESP_PATH is already set
+if grep -q "^ESP_PATH=" "$LIMINE_DEFAULT"; then
+    echo "    -> ESP_PATH is already set in /etc/default/limine."
+else
+    echo "    -> Setting ESP_PATH in /etc/default/limine..."
+    # Detect the ESP path (common locations)
+    ESP_PATH="/boot"
+    if [ -d "/efi" ]; then
+        ESP_PATH="/efi"
+    elif [ -d "/boot/efi" ]; then
+        ESP_PATH="/boot/efi"
+    fi
+    echo "ESP_PATH=$ESP_PATH" | sudo tee -a "$LIMINE_DEFAULT" > /dev/null
+fi
 
 # ==============================================================================
 # 2. WALLPAPER INSTALLATION

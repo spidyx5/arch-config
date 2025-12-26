@@ -2,9 +2,9 @@ description: "Main Module to source other yaml files for bdots-mango"
 
 # Modules that conflict with this one
 conflicts:
-   - kde
-   - niri
-   - hyprland
+   - bdots/kde
+   - bdots/niri
+   - bdotshyprland
 # Post-install hook script (relative to module directory)
 post_install_hook: "scripts/install-mangowc-dotfiles.sh"
 hooks_behavior: once

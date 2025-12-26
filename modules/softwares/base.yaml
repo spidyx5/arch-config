@@ -38,7 +38,7 @@ packages:
   - wget
   - curl
   - unzip
-  - p7zip-full
+  - p7zip-full-bin
   - usbutils
   - nvtop
   - imv
@@ -163,7 +163,7 @@ packages:
   - mods
   - keyd
   - pciutils
-  - tinygettext
+  - gettext
   - slibtool
   - kate
   # Audio & multimedia GUI
@@ -229,8 +229,8 @@ packages:
   - plymouth-theme-arch-logo-symbol
   - proton-cachyos-auto-script
   - wine-tkg-staging-wow64-bin
-  - mesa-tkg-git
-  - lib32-mesa-tkg-git
+  - mesa-git
+  - lib32-mesa-git
   # System shells
   - nushell
   - zsh
