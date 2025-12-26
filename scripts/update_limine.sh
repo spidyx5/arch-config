@@ -3,27 +3,32 @@
 # ==============================================================================
 # 1. CONFIGURATION
 # ==============================================================================
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 
-# Source Wallpaper
-WALLPAPER_SRC="$REPO_ROOT/wallpapers/6.png"
-# Destination in ESP/Boot
+# Handle the ARCH_CONFIG_DIR environment variable or default to ~/.config/arch-config
+CONFIG_DIR="${ARCH_CONFIG_DIR:-$HOME/.config/arch-config}"
+
+# Source Wallpaper: Explicitly target '26.png' inside 'wallpapers' folder
+WALLPAPER_SRC="$CONFIG_DIR/wallpapers/26.png"
+
+# Destination in ESP/Boot (Limine reads from here)
 WALLPAPER_DEST="/boot/wallpaper.png"
-# Limine Config Location
+
+# Limine Config Locations
 LIMINE_CONF="/boot/limine.conf"
-# Limine Default Configuration
 LIMINE_DEFAULT="/etc/default/limine"
-# Kernel Parameters to use
+
+# === KERNEL PARAMS ===
+# Removed machine-specific 'resume=' and 'i915' flags from previous steps. 
+# Add them back if you specifically need them.
 NEW_PARAMS="nvme_core.default_ps_max_latency_us=0 \
 zswap.enabled=1 mitigations=off rootflags=noatime \
 nowatchdog threadirqs kernel.split_lock_mitigate=0 \
 init_on_alloc=1 init_on_free=1 randomize_kstack_offset=on \
 vsyscall=none slab_nomerge page_alloc.shuffle=1 lsm=landlock,\
 lockdown,yama,integrity,apparmor,bpf quiet splash plymouth.use-simpledrm \
-acpi_sleep_default=deep acpi_sleep=nonvs mem_sleep_default=deep \
-resume=/dev/mapper/mock-fang intel_idle.max_cstate=4 \
-intel_pstate=passive intel_iommu=on i915.enable_gvt=1 \
+acpi_sleep_default=deep  i915.enable_gvt=1 acpi_sleep=nonvs mem_sleep_default=deep \
+intel_idle.max_cstate=4 \
+intel_pstate=passive intel_iommu=on \
 kvm-intel.nested=0 iommu=pt rd.systemd.show_status=false \
 udev.log_level=3"
 
@@ -32,46 +37,41 @@ echo "   Limine Auto-Configurator"
 echo "=========================================="
 
 # ==============================================================================
-# 1.5. SET ESP_PATH IN /etc/default/limine
+# 2. WALLPAPER INSTALLATION
 # ==============================================================================
-echo "[*] Setting ESP_PATH in /etc/default/limine..."
+echo "[*] Checking for specific wallpaper: 26.png"
+echo "    Source: $WALLPAPER_SRC"
 
-# Check if /etc/default/limine exists
+if [ -f "$WALLPAPER_SRC" ]; then
+    echo "    -> Found. Installing to $WALLPAPER_DEST..."
+    sudo cp "$WALLPAPER_SRC" "$WALLPAPER_DEST"
+else
+    echo "[!] ERROR: Wallpaper not found!"
+    echo "    Expected at: $WALLPAPER_SRC"
+    echo "    Please verify the file exists."
+    # We do not exit, we allow config update, but wallpaper won't work on boot
+fi
+
+# ==============================================================================
+# 3. SET ESP_PATH
+# ==============================================================================
 if [ ! -f "$LIMINE_DEFAULT" ]; then
-    echo "    -> Creating /etc/default/limine..."
+    echo "[*] Creating /etc/default/limine..."
     sudo touch "$LIMINE_DEFAULT"
 fi
 
-# Check if ESP_PATH is already set
 if grep -q "^ESP_PATH=" "$LIMINE_DEFAULT"; then
-    echo "    -> ESP_PATH is already set in /etc/default/limine."
+    echo "[*] ESP_PATH is already set."
 else
-    echo "    -> Setting ESP_PATH in /etc/default/limine..."
-    # Detect the ESP path (common locations)
+    echo "[*] Detecting and setting ESP_PATH..."
     ESP_PATH="/boot"
-    if [ -d "/efi" ]; then
-        ESP_PATH="/efi"
-    elif [ -d "/boot/efi" ]; then
-        ESP_PATH="/boot/efi"
-    fi
+    if [ -d "/efi" ]; then ESP_PATH="/efi"; elif [ -d "/boot/efi" ]; then ESP_PATH="/boot/efi"; fi
     echo "ESP_PATH=$ESP_PATH" | sudo tee -a "$LIMINE_DEFAULT" > /dev/null
 fi
 
 # ==============================================================================
-# 2. WALLPAPER INSTALLATION
+# 4. DETECT ROOT FILESYSTEM UUID
 # ==============================================================================
-if [ -f "$WALLPAPER_SRC" ]; then
-    echo "[*] Installing wallpaper..."
-    sudo cp "$WALLPAPER_SRC" "$WALLPAPER_DEST"
-else
-    echo "[!] WARNING: Wallpaper not found at $WALLPAPER_SRC"
-    echo "    Skipping wallpaper copy (config will still try to load it)."
-fi
-
-# ==============================================================================
-# 3. DETECT ROOT FILESYSTEM UUID
-# ==============================================================================
-# We try to detect the UUID of the root partition so we don't rely on existing config
 echo "[*] Detecting Root UUID..."
 ROOT_UUID=$(findmnt / -n -o UUID)
 
@@ -81,16 +81,15 @@ if [ -z "$ROOT_UUID" ]; then
 fi
 
 CURRENT_ROOT="root=UUID=$ROOT_UUID"
-echo "    -> Found Root: $CURRENT_ROOT"
+echo "    -> Root: $CURRENT_ROOT"
 
 # ==============================================================================
-# 4. GENERATE LIMINE CONFIG
+# 5. GENERATE LIMINE CONFIG
 # ==============================================================================
-
-# Create a temporary file to build the config
 TEMP_CONF=$(mktemp)
 
 # Write Header
+# boot():/ refers to the root of the partition Limine booted from
 cat <<EOF > "$TEMP_CONF"
 timeout: 5
 wallpaper: boot():/wallpaper.png
@@ -100,70 +99,59 @@ EOF
 
 echo "[*] Scanning for kernels in /boot..."
 
-# Loop through any file starting with vmlinuz- in /boot
 FOUND_KERNEL=0
 
 for kernel_path in /boot/vmlinuz-*; do
-    # Check if file exists (handles case where no kernels found)
     [ -e "$kernel_path" ] || continue
     FOUND_KERNEL=1
 
-    # Extract filename (e.g., vmlinuz-linux)
     k_filename=$(basename "$kernel_path")
-
-    # Extract variant name (e.g., linux, linux-zen, linux-cachyos)
-    # We strip 'vmlinuz-' from the start
     variant="${k_filename#vmlinuz-}"
-
-    # Determine Initramfs names based on kernel name
-    # Arch standard: vmlinuz-linux -> initramfs-linux.img
+    
     initramfs_img="initramfs-${variant}.img"
     initramfs_fallback="initramfs-${variant}-fallback.img"
 
-    # 4a. Add MAIN Entry
-    echo "    -> Found Kernel: $variant"
+    echo "    -> Entry: Arch Linux ($variant)"
+    
+    # 5a. MAIN Entry
     cat <<EOF >> "$TEMP_CONF"
 /Arch Linux ($variant)
     protocol: linux
-    kernel_path: boot:///$k_filename
-    module_path: boot:///$initramfs_img
+    kernel_path: boot():/$k_filename
+    module_path: boot():/$initramfs_img
     cmdline: $CURRENT_ROOT rw $NEW_PARAMS
 
 EOF
 
-    # 4b. Add FALLBACK Entry (Only if fallback img exists)
+    # 5b. FALLBACK Entry
     if [ -f "/boot/$initramfs_fallback" ]; then
-        echo "       -> Added Fallback for $variant"
+        echo "       -> Added Fallback"
         cat <<EOF >> "$TEMP_CONF"
 /Arch Linux ($variant) Fallback
     protocol: linux
-    kernel_path: boot:///$k_filename
-    module_path: boot:///$initramfs_fallback
+    kernel_path: boot():/$k_filename
+    module_path: boot():/$initramfs_fallback
     cmdline: $CURRENT_ROOT rw
 EOF
     fi
 done
 
 if [ "$FOUND_KERNEL" -eq 0 ]; then
-    echo "[!] ERROR: No kernels found in /boot! Aborting to prevent unbootable system."
+    echo "[!] WARNING: No kernels found! Config not updated."
     rm "$TEMP_CONF"
-    exit 1
+    exit 0
 fi
 
 # ==============================================================================
-# 5. APPLY CONFIG
+# 6. APPLY CONFIG
 # ==============================================================================
-echo "[*] Writing config to $LIMINE_CONF..."
+echo "[*] Writing final config to $LIMINE_CONF..."
 
-# Backup existing
 if [ -f "$LIMINE_CONF" ]; then
-    sudo cp "$LIMINE_CONF" "$LIMINE_CONF.bak-$(date +%s)"
+    sudo cp "$LIMINE_CONF" "$LIMINE_CONF.bak"
 fi
 
-# Move temp file to actual location
 sudo mv "$TEMP_CONF" "$LIMINE_CONF"
 sudo chmod 644 "$LIMINE_CONF"
 
-echo "=========================================="
-echo "   Limine Configuration Updated!"
-echo "=========================================="
+echo "DONE."

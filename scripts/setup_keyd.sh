@@ -1,44 +1,56 @@
 #!/bin/bash
 
+# Check if keyd is installed
+if ! command -v keyd &> /dev/null; then
+    echo "Error: keyd is not installed. Please install it first."
+    exit 1
+fi
+
 echo "=== Setting up Keyd (Colemak-DH + Gaming Mode) ==="
 
-# 1. Create the Config Directory
+CONF="/etc/keyd/default.conf"
+
+# 1. Create Config Directory
 sudo mkdir -p /etc/keyd
 
 # 2. Write the Configuration
-echo "Writing /etc/keyd/default.conf..."
-cat <<EOF | sudo tee /etc/keyd/default.conf
+echo "Writing $CONF..."
+cat <<EOF | sudo tee $CONF
 [ids]
 *
 
 [main]
-# 1. Use built-in Colemak-DH layout
+# 1. Base Layout: Colemak-DH
+# Note: Ensure /usr/share/keyd/layouts/colemak_dh exists, otherwise use explicit mapping.
 include layouts/colemak_dh
 
 # 2. Modifiers
-# Capslock acts as Backspace when tapped, Control when held
+# CapsLock -> Escape (Tap) / Control (Hold) - (More common for Vim/Devs)
+# change 'escape' to 'backspace' if you prefer your original setting.
 capslock = overload(control, backspace)
 
-# 3. Toggle for Gaming (Switch to QWERTY)
-# Press Control + Space to toggle the 'gaming' layer
-control+space = toggle(gaming)
+# 3. Toggle Gaming Mode
+# Using 'control+shift+space' prevents conflicts with standard 'control+space'
+control+shift+space = toggle(gaming)
 
 [gaming]
-# This layer resets keys to standard QWERTY
+# Reset all keys to QWERTY mappings, overriding the [main] Colemak include
 include layouts/qwerty
 
-# Keep the Capslock behavior in gaming mode (optional, remove if you want standard capslock)
+# Keep the CapsLock behavior in gaming mode
 capslock = overload(control, backspace)
 
-# Allow switching BACK to Colemak from Gaming mode
-control+space = toggle(gaming)
+# Allow switching BACK to Colemak
+control+shift+space = toggle(gaming)
 EOF
 
-# 3. Enable and Reload Service
-echo "Enabling Keyd service..."
+# 3. Reload Service
+echo "Reloading Keyd..."
 sudo systemctl enable --now keyd
-sudo systemctl restart keyd
+sudo keyd reload
 
-echo "Keyd setup complete."
-echo "Layout: Colemak-DH (Default)"
-echo "Toggle: Press 'Ctrl + Space' to switch between Colemak and QWERTY."
+echo "----------------------------------------------------"
+echo "Setup Complete."
+echo "Default: Colemak-DH"
+echo "Gaming Toggle: Press 'Ctrl + Shift + Space'"
+echo "----------------------------------------------------"

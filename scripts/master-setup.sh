@@ -4,6 +4,13 @@
 
 set -e  # Exit on any error
 
+# Check if running with sudo
+if [ "$EUID" -ne 0 ]; then
+    echo "Error: This script must be run with sudo"
+    echo "Usage: sudo $0"
+    exit 1
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "=== Starting Master Setup Script ==="
