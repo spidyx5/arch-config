@@ -44,7 +44,7 @@ packages:
   - blender
   - blender-launcher-v2-bin
   # Note-taking & Knowledge Management
-  - obsidian-bin
+  - obsidian
 
   # Tablet driver
   - opentabletdriver-git
