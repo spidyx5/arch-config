@@ -6,7 +6,7 @@ import: []
 # Enabled modules
 enabled_modules:
   #  Main packages module (includes post-install hooks)
-  - packages
+  - softwares
 
   #  Specific Tools
   - controller-support
@@ -57,6 +57,7 @@ services:
     - rtkit-daemon
     - apparmor
     - greetd
+    - bpftune
   disabled:
     - ufw
     - iptables

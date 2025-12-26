@@ -1,0 +1,17 @@
+# dcli configuration pointer
+# This file points to the active host configuration
+# The full configuration lives in hosts/spidy.yaml
+
+# Active host
+host: spidy
+# List of enabled modules
+# Enable/disable modules with: dcli module enable/disable <name>
+#enabled_modules: []
+# Additional packages not in any module
+# Add one-off packages here without creating a module
+#additional_packages: []
+# Automatically remove unmanaged packages during sync
+# Set to true to enable automatic pruning with dcli sync
+#auto_prune: true
+# Flatpak installation scope: "user" (default) or "system"
+#flatpak_scope: system
