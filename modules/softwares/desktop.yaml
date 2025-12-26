@@ -15,8 +15,6 @@ packages:
   # Messaging
   - equibop-bin  # Discord client
 
-  # Virtualization
-  - virt-manager # Virtual machine manager
 
   # Web browsers
   - zen-browser-bin # Zen browser (AUR)
