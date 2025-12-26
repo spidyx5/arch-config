@@ -233,8 +233,8 @@ packages:
   - plymouth-theme-arch-logo-symbol
   - proton-cachyos-auto-script
   - wine-tkg-staging-wow64-bin
-  - mesa-git
-  - lib32-mesa-git
+  - mesa-tkg-git
+  - lib32-mesa-tkg-git
   # System shells
   - nushell
   - zsh
@@ -270,7 +270,6 @@ packages:
   - intel-gpu-tools
   - intel-media-driver      # Modern VA-API (Broadwell+)
   - intel-compute-runtime   # OpenCL
-  - opencl-mesa
   - opencl-headers
   - ocl-icd                 # OpenCL Installable Client Driver loader
   - vpl-gpu-rt              # Intel VPL

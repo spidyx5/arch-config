@@ -403,11 +403,6 @@ vimcmd_replace_symbol = '[❮](bold fg:color_purple)'
 vimcmd_visual_symbol = '[❮](bold fg:color_yellow)'
 EOF
 
-# ==============================================================================
-# 3. SET NUSHELL AS DEFAULT SHELL
-# ==============================================================================
-echo "Setting Nushell as default shell..."
-
 # Check if nushell is in /etc/shells
 if ! grep -q "/usr/bin/nu" /etc/shells; then
     echo "/usr/bin/nu" | sudo tee -a /etc/shells
