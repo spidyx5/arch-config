@@ -412,9 +412,3 @@ echo "Setting Nushell as default shell..."
 if ! grep -q "/usr/bin/nu" /etc/shells; then
     echo "/usr/bin/nu" | sudo tee -a /etc/shells
 fi
-
-# Change shell for current user
-sudo chsh -s /usr/bin/nu "$USER"
-
-echo "Terminal setup complete."
-echo "Restart your terminal or run 'nu' to start Nushell."

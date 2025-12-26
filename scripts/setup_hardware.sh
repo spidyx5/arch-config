@@ -1,33 +1,38 @@
 #!/bin/bash
 
+# Ensure the script is run with sudo
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root (sudo)"
+  exit
+fi
+
+# Detect the actual user who ran sudo (to avoid adding 'root' to groups)
+REAL_USER=${SUDO_USER:-$USER}
+
 echo "=== Configuring Hardware, Power & Time ==="
 
 # ==============================================================================
 # 1. ENVIRONMENT VARIABLES (Drivers)
-# Matches environment.sessionVariables.LIBVA_DRIVER_NAME
 # ==============================================================================
 echo "Setting Environment Variables..."
-# We use /etc/environment for global session variables
 if ! grep -q "LIBVA_DRIVER_NAME=iHD" /etc/environment; then
-    echo "LIBVA_DRIVER_NAME=iHD" | sudo tee -a /etc/environment
+    echo "LIBVA_DRIVER_NAME=iHD" | tee -a /etc/environment
+    echo " -> Added iHD driver. Ensure 'intel-media-driver' is installed via pacman."
 fi
 
 # ==============================================================================
 # 2. TIME SETTINGS
-# Matches time.hardwareClockInLocalTime = true
 # ==============================================================================
-echo "Setting RTC to Local Time..."
-# This fixes time sync issues when dual-booting Windows
+echo "Setting RTC to Local Time ..."
 timedatectl set-local-rtc 1
 
 # ==============================================================================
 # 3. POWER MANAGEMENT (Sleep & Logind)
-# Matches systemd.sleep.extraConfig & services.logind.settings
 # ==============================================================================
 echo "Configuring Sleep & Logind..."
 
-# Sleep Config (Hibernation support)
-cat <<EOF | sudo tee /etc/systemd/sleep.conf
+# Sleep Config
+cat <<EOF | tee /etc/systemd/sleep.conf
 [Sleep]
 AllowSuspend=yes
 AllowHibernation=yes
@@ -36,44 +41,47 @@ AllowSuspendThenHibernate=no
 AllowHybridSleep=yes
 EOF
 
-# Logind Config (Lid switch, Power key, Idle)
-# We use a drop-in file to avoid overwriting defaults
-sudo mkdir -p /etc/systemd/logind.conf.d
-cat <<EOF | sudo tee /etc/systemd/logind.conf.d/99-spidy-actions.conf
+# Logind Config
+# Using a drop-in file
+mkdir -p /etc/systemd/logind.conf.d
+cat <<EOF | tee /etc/systemd/logind.conf.d/99-spidy-actions.conf
 [Login]
 HandlePowerKey=poweroff
 HandleSuspendKey=suspend
-HandleHibernateKey=yes
+HandleHibernateKey=hibernate
 HandleLidSwitch=suspend
 HandleLidSwitchDocked=ignore
 IdleAction=ignore
 IdleActionSec=30min
 EOF
 
-# Restart logind to apply changes immediately
-sudo systemctl restart systemd-logind
+echo " -> Logind settings updated. They will apply on next reboot."
 
 # ==============================================================================
-# 4. BRIGHTNESS (Replaces Brillo)
-# Matches hardware.brillo
+# 4. BRIGHTNESS
 # ==============================================================================
-echo "Configuring Brightness Permissions..."
-# 'brillo' on NixOS sets up udev rules. On Arch, 'brightnessctl' + 'video' group is standard.
-# Ensure the current user is in the 'video' group to change brightness without sudo.
-sudo usermod -aG video "$USER"
+echo "Configuring Brightness Permissions for user: $REAL_USER"
+usermod -aG video "$REAL_USER"
 
 # ==============================================================================
-# 5. HARDWARE TUNING (Tuned & Thermald)
-# Matches services.tuned & services.thermald
+# 5. HARDWARE TUNING
 # ==============================================================================
 echo "Enabling Hardware Tuning Services..."
 
-# Intel Thermal Daemon (Prevents overheating/throttling on Intel CPUs)
-sudo systemctl enable --now thermald
+# Check if packages exist before enabling
+if pacman -Qi thermald &> /dev/null; then
+    systemctl enable --now thermald
+    echo " -> Thermald enabled."
+else
+    echo " -> WARNING: 'thermald' package not found. Skipping."
+fi
 
-# Tuned (Dynamic system tuning)
-sudo systemctl enable --now tuned
-# Set profile to 'balanced' or 'throughput-performance' as a baseline
-sudo tuned-adm profile balanced
+if pacman -Qi tuned &> /dev/null; then
+    systemctl enable --now tuned
+    tuned-adm profile throughput-performance
+    echo " -> Tuned enabled and set to throughput-performance."
+else
+    echo " -> WARNING: 'tuned' package not found. Skipping."
+fi
 
-echo "Hardware configuration complete."
+echo "=== Configuration Complete. Please Reboot. ==="
