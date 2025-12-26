@@ -64,6 +64,7 @@ packages:
   - libvirt-venus
   - qemu-desktop       # The main emulator (includes KVM)
   - virt-manager-git       # The GUI
+  - virt-install-git       # CLI VM installer
   - libvirt            # The daemon
   - dnsmasq            # Network plumbing
   - vde2               # Virtual Distributed Ethernet
