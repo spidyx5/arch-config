@@ -1,63 +1,55 @@
 #!/bin/bash
 
+echo "=== Fixing makepkg.conf Error ==="
+
+# 1. Restore the default Arch Linux makepkg.conf
+# We reinstall pacman to generate a fresh config file (makepkg.conf.pacnew)
+echo "Downloading default configuration..."
+sudo pacman -S --noconfirm pacman
+
+# 2. Overwrite the corrupt file with the fresh default
+if [ -f "/etc/makepkg.conf.pacnew" ]; then
+    echo "Restoring default makepkg.conf..."
+    sudo mv /etc/makepkg.conf.pacnew /etc/makepkg.conf
+else
+    echo "ERROR: Could not find default config. Please run 'sudo pacman -S pacman' manually."
+    exit 1
+fi
+
+# 3. Re-apply the SAFE Optimizations
+echo "Re-applying High Performance Settings..."
 CONF="/etc/makepkg.conf"
 CORES=$(nproc)
 
-echo "Backing up makepkg.conf..."
-sudo cp $CONF "$CONF.bak"
+# Aggressive flags (One line to prevent errors)
+FLAGS="-march=native -O3 -pipe -fno-plt -fexceptions -Wformat -Werror=format-security -fstack-clash-protection -fcf-protection -fstack-protector-strong -flto=auto -fomit-frame-pointer -ffunction-sections -fdata-sections -fno-semantic-interposition"
 
-echo "Configuring Makepkg for High Performance..."
-
-# 1. Define Aggressive Flags
-AGGRESSIVE_CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions \
--Wformat -Werror=format-security \
--fstack-clash-protection -fcf-protection \
--flto=auto -fomit-frame-pointer \
--ffunction-sections -fdata-sections -fno-semantic-interposition"
-
-# 2. Append Settings to the END of the file (Overrides defaults safely)
 cat <<EOF | sudo tee -a $CONF > /dev/null
 
 #############################################
-# OPTIMIZED PERFORMANCE SETTINGS (User Added)
+# OPTIMIZED PERFORMANCE SETTINGS
 #############################################
-
-# Compile Threads
 MAKEFLAGS="-j$CORES"
-
-# Compiler Flags
-CFLAGS="$AGGRESSIVE_CFLAGS"
-CXXFLAGS="$AGGRESSIVE_CFLAGS"
-
-# Linker Flags (Mold + GC)
-EOF
-
-# 3. Handle Linker Logic
-if command -v mold &> /dev/null; then
-    echo "Mold linker detected. Appending mold config..."
-    
-    NEW_LDFLAGS="-Wl,-O2,--sort-common,--as-needed,-z,relro,-z,now -Wl,--gc-sections -fuse-ld=mold"
-    
-    cat <<EOF | sudo tee -a $CONF > /dev/null
-LDFLAGS="$NEW_LDFLAGS"
-RUSTFLAGS="-C link-arg=-fuse-ld=mold"
-EOF
-
-else
-    echo "WARNING: Mold not found. Skipping linker flags."
-fi
-
-# 4. Compression Settings & Compiler location
-# It is better to append these as well to avoid regex issues
-cat <<EOF | sudo tee -a $CONF > /dev/null
-
-# Compression
+CFLAGS="$FLAGS"
+CXXFLAGS="$FLAGS"
 PKGEXT='.pkg.tar.zst'
 COMPRESSZSTD=(zstd -c -T0 -)
+EOF
 
-# Force Clang
+# Linker settings (Only if mold is present)
+if command -v mold &> /dev/null; then
+    cat <<EOF | sudo tee -a $CONF > /dev/null
+LDFLAGS="-Wl,-O2,--sort-common,--as-needed,-z,relro,-z,now -Wl,--gc-sections -fuse-ld=mold"
+RUSTFLAGS="-C link-arg=-fuse-ld=mold"
+EOF
+fi
+
+# Clang settings (Only if clang is installed)
+if command -v clang &> /dev/null; then
+    cat <<EOF | sudo tee -a $CONF > /dev/null
 export CC=clang
 export CXX=clang++
 EOF
+fi
 
-echo "Makepkg optimized successfully."
+echo "✅ Repair complete! Try running paru again."
