@@ -54,7 +54,7 @@ packages:
   # Utilities & compression
   - zstd-git
   - bind-tools
-  - tldr
+  - tealdeer
   - xdg-utils
   - xdg-user-dirs
   - shared-mime-info
