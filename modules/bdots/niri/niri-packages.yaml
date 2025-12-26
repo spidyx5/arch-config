@@ -29,3 +29,5 @@ packages:
   - crystal-dock-bin # Application dock
 
 conflicts: []
+exclude:
+  - dms-shell-git
