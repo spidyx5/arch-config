@@ -18,7 +18,6 @@ packages:
   - limine-mkinitcpio-hook
   - limine-entry-tool
   - limine-snapper-sync
-  - limine-dracut-support
 
   # dcli dependencies
   - paru
@@ -199,6 +198,8 @@ packages:
   - zsh
   - fish
   - bash
+  - ccache
+  - sccache
 
   # Fonts
   - noto-fonts

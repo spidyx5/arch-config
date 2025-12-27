@@ -42,7 +42,6 @@ aur_packages=(
     "vulkan-extensionlayer-git"
     "mimalloc"
     "blender-launcher-v2-bin"
-    "bind-tools"
     "xwayland-satellite-git"
     "btrfs-list"
     "obs-source-dock"
@@ -71,7 +70,6 @@ aur_packages=(
     "nodejs-inshellisense"
     "obs-noise"
     "mkinitcpio-extras"
-    "limine-dracut-support"
     "pywal-spicetify"
     "kernel-modules-hook-reflink"
     "crystal-dock-bin"
@@ -138,6 +136,6 @@ aur_packages=(
 
 # Install packages using paru with --noconfirm
 echo "Installing AUR packages using paru..."
-paru -S --noconfirm "${aur_packages[@]}"
+paru -S "${aur_packages[@]}"
 
 echo "AUR package installation complete."

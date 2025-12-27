@@ -102,7 +102,7 @@ mkdir -p "$WALLPAPER_DIR"
 
 # Create symlink to default wallpaper if it exists
 if [ -f "$DEFAULT_WALLPAPER" ]; then
-  ln -sf "$DEFAULT_WALLPAPER" "${WALLPAPER_DIR}/wallpaper.png"
+  ln -sf "$DEFAULT_WALLPAPER" "${WALLPAPER_DIR}/1.png"
   if [ "$EUID" -eq 0 ]; then
     chown -h "$TARGET_USER:$TARGET_USER" "${WALLPAPER_DIR}/wallpaper.png"
     chown "$TARGET_USER:$TARGET_USER" "$WALLPAPER_DIR"

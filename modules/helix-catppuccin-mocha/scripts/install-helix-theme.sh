@@ -30,7 +30,7 @@ HELIX_THEMES_DIR="${HELIX_CONFIG_DIR}/themes"
 HELIX_CONFIG_FILE="${HELIX_CONFIG_DIR}/config.toml"
 
 # Module theme location
-MODULE_DIR="${ARCH_CONFIG_DIR:-/home/${ACTUAL_USER}/.config/arch-config}/modules/editors/helix-catppuccin-mocha"
+MODULE_DIR="${ARCH_CONFIG_DIR:-/home/${ACTUAL_USER}/.config/arch-config}/modules/helix-catppuccin-mocha"
 THEME_SOURCE="${MODULE_DIR}/themes/catppuccin_mocha.toml"
 
 # Check if theme source exists
