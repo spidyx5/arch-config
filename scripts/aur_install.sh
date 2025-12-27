@@ -45,7 +45,6 @@ aur_packages=(
     "xwayland-satellite-git"
     "btrfs-list"
     "obs-source-dock"
-    "wine-tkg-staging-wow64-bin"
     "libzstd-seek-git"
     "libvirt-venus"
     "fresh-editor-bin"
