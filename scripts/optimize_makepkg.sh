@@ -8,7 +8,6 @@
 #   - Global LTO enabled
 #   - PGO helpers for use with makepkg-optimize
 #
-#
 # Creates a drop-in config: /etc/makepkg.conf.d/99-performance.conf
 #
 # Run as root (e.g. via sudo).
@@ -23,6 +22,27 @@ CORES=$(nproc)
 echo "[*] Optimizing makepkg for high performance (Clang + LLVM + Mold + PGO helpers)"
 echo "    Detected CPU cores: ${CORES}"
 
+# 0) Sanity check: makepkg.conf must exist
+if [[ ! -f "${CONF_MAIN}" ]]; then
+  echo "ERROR: ${CONF_MAIN} not found."
+  echo ""
+  echo "This usually means one of the following:"
+  echo "  1) pacman/makepkg is not installed."
+  echo "  2) You are in a container / environment without pacman's config files."
+  echo "  3) The file was deleted or moved."
+  echo ""
+  echo "Please:"
+  echo "  - Ensure you are on an Arch/Arch-based system with pacman installed:"
+  echo "      pacman -V"
+  echo "  - Or, if you are using a custom config, edit this script and set CONF_MAIN"
+  echo "    to that path (e.g. ~/.makepkg.conf)."
+  echo "  - If you really want to create a minimal ${CONF_MAIN} from scratch,"
+  echo "    install the 'pacman' package first."
+  echo ""
+  echo "Aborting."
+  exit 1
+fi
+
 # 1) Backup main makepkg.conf
 if [[ ! -f "${CONF_MAIN}.bak" ]]; then
   echo "[*] Backing up ${CONF_MAIN} to ${CONF_MAIN}.bak ..."
@@ -34,10 +54,7 @@ fi
 # 2) Ensure drop-in directory exists
 mkdir -p "${CONF_DIR}"
 
-# 3) Base CFLAGS / CXXFLAGS (Clang- and GCC-friendly)
-#    -march=native enables host-specific optimizations suitable for your i5-13600K.
-#    -O3 is more aggressive than Arch’s default -O2 but widely used by power users.
-#    Hardening flags are in line with Arch defaults and community configs.
+# 3) Base CFLAGS / CXXFLAGS
 BASE_CFLAGS=(
   -march=native
   -O3
@@ -57,7 +74,6 @@ BASE_CFLAGS=(
 AGGRESSIVE_CFLAGS="${BASE_CFLAGS[*]}"
 
 # 4) Linker flags (common part)
-#    These flags are compatible with both ld.bfd and mold, and follow common hardening practice.
 COMMON_LDFLAGS=(
   -Wl,-O2
   -Wl,--sort-common
@@ -72,7 +88,6 @@ if command -v mold &>/dev/null; then
   echo "[*] mold linker detected -> enabling in LDFLAGS and RUSTFLAGS"
   LDFLAGS="${COMMON_LDFLAGS[*]} -fuse-ld=mold"
 
-  # Rust: use mold for Rust packages via -fuse-ld=mold
   RUSTFLAGS=(
     -C target-cpu=native
     -C link-arg=-fuse-ld=mold
@@ -99,15 +114,12 @@ else
 fi
 
 # 6) Build environment and options
-#    We enable LTO globally and disable debug packages by default for speed.
-#    You can toggle !debug and lto here if desired.
 BUILDENV_OPTIONS=(
   !distcc
   color
   ccache
   check
   !sign
-  #pgo   # <-- see PGO section below (commented by default)
 )
 
 OPTIONS_ARRAY=(
@@ -123,8 +135,6 @@ OPTIONS_ARRAY=(
 )
 
 # 7) Compression and extensions
-#    zstd with all logical threads; slightly faster than default (-15)
-#    to keep build times reasonable while still having good compression.
 COMPRESSZST=(
   zstd
   -c
@@ -151,9 +161,6 @@ cat >"${CONF_DROPIN}" <<'EOF'
 # after /etc/makepkg.conf, so these settings can override or
 # extend the defaults. See makepkg.conf(5) and the Arch Wiki
 # "makepkg" page for details.
-#
-# To disable parts of this config, just comment out the relevant
-# section(s) instead of editing the main makepkg.conf.
 #####################################################################
 
 #############################################
@@ -161,19 +168,13 @@ cat >"${CONF_DROPIN}" <<'EOF'
 #############################################
 
 # Parallel builds for make (uses all CPU cores).
-# This is overridden from the script based on nproc.
 MAKEFLAGS="--jobs=@@CORES@@"
 
 # Build features:
 #   !debug   – do not produce debug packages by default (faster builds).
 #   lto      – enable Link-Time Optimization globally.
 #
-#   If you want to keep debug packages, change '!debug' to 'debug'.
-#
-# BUILDENV is extended here; we keep most defaults and just adjust
-# a few items. See the main makepkg.conf for the full list.
-#
-BUILDENV=(!distcc color ccache check !sign @@BUILDENV@@)
+BUILDENV=(!distcc color ccache check !sign)
 
 # Global package options:
 OPTIONS=(!debug docs emptydirs !libtool purge !staticlibs strip zipman lto)
@@ -182,28 +183,14 @@ OPTIONS=(!debug docs emptydirs !libtool purge !staticlibs strip zipman lto)
 # Compiler flags (C/C++/Rust)
 #############################################
 
-# C/C++ flags:
-#   -march=native : enable CPU-specific optimizations (good for your i5-13600K).
-#   -O3          : higher optimization than the default -O2 (slightly slower builds,
-#                  potentially faster runtime, but not universally better).
-#   Security/hardening flags match common Arch practice.
 CFLAGS="${CFLAGS} @@AGGRESSIVE_CFLAGS@@"
 CXXFLAGS="${CXXFLAGS} @@AGGRESSIVE_CFLAGS@@"
-
-# Rust flags:
-#   -C target-cpu=native : optimize Rust code for your host CPU.
 RUSTFLAGS="${RUSTFLAGS} @@RUSTFLAGS_STR@@"
 
 #############################################
 # Linker flags (mold if available)
 #############################################
 
-# Common hardening / optimization flags + mold (if installed):
-#   -Wl,-O2,--sort-common,--as-needed,-z,relro,-z,now,--gc-sections
-#   -fuse-ld=mold  (only added when mold is detected)
-#
-# Mold is a very fast modern linker and supports LTO via the compiler's
-# LTO plugin mechanism (works with both GCC and LLVM/Clang).
 LDFLAGS="${LDFLAGS} @@LDFLAGS@@"
 
 #############################################
@@ -211,45 +198,28 @@ LDFLAGS="${LDFLAGS} @@LDFLAGS@@"
 #############################################
 
 # If you install makepkg-optimize (AUR), you can use its 'pgo' buildenv
-# option to drive profile-guided optimization. The general workflow is:
-#
-# 1) Install makepkg-optimize and any backends you want.
-# 2) Create a PGO cache directory and bind-mount it if using clean chroot,
-#    as described on:
-#       https://wiki.archlinux.org/title/Makepkg-optimize
-# 3) Enable 'pgo' in BUILDENV and set PROFDEST to that directory.
-#
-# Example (uncomment and adjust paths if you actually use PGO):
+# option. Example (uncomment and adjust paths if you actually use PGO):
 #
 #   BUILDENV+=('pgo')
 #   PROFDEST="/mnt/pgo"
 #
-# Then:
-#   - Build the package once: instrumented binaries are built and profiles are
-#     generated when you run the program.
-#   - Rebuild the package: profiles are applied, producing PGO-optimized binaries.
+# Then build the package twice:
+#   - First build: instrumented binaries, run them to generate profiles.
+#   - Second build: profiles are applied for PGO-optimized binaries.
 #
-# For full details, see:
-#   - https://wiki.archlinux.org/title/Makepkg-optimize
-#   - https://aur.archlinux.org/packages/makepkg-optimize/
+# See https://wiki.archlinux.org/title/Makepkg-optimize
 
 #############################################
 # Compression & package extensions
 #############################################
 
-# zstd with all logical threads and a moderate level for good speed/compression.
-# -T0 + --auto-threads=logical uses all logical CPUs.
 COMPRESSZST=(zstd -c -z -q -T0 --auto-threads=logical -15 -)
-
-# Package and source extensions (zstd for packages is already default).
 PKGEXT=".pkg.tar.zst"
 SRCEXT=".src.tar.gz"
 EOF
 
-# 9) Fill in placeholders (we use @@...@@ markers above)
-#    This avoids quoting issues and lets us use the same 'cat' heredoc for most content.
+# 9) Fill in placeholders
 sed -i "s|@@CORES@@|${CORES}|g" "${CONF_DROPIN}"
-sed -i "s|@@BUILDENV@@|#pgo|g" "${CONF_DROPIN}"
 sed -i "s|@@AGGRESSIVE_CFLAGS@@|${AGGRESSIVE_CFLAGS}|g" "${CONF_DROPIN}"
 sed -i "s|@@RUSTFLAGS_STR@@|${RUSTFLAGS_STR}|g" "${CONF_DROPIN}"
 sed -i "s|@@LDFLAGS@@|${LDFLAGS}|g" "${CONF_DROPIN}"
@@ -262,14 +232,10 @@ if (( ENABLE_CLANG )); then
 # Clang as default compiler
 #############################################
 
-# Use Clang instead of GCC for building packages (generic setup from ArchWiki).【turn5fetch0】
-# If some packages fail to build with Clang (e.g. kernel modules, NVIDIA, etc.),
-# simply comment out the two 'export' lines below.
 export CC=clang
 export CXX=clang++
 
-# Optional: use libc++ instead of libstdc++.
-# If you want to try libc++, install the 'libc++' package and uncomment the line below:
+# Optional: use libc++ instead of libstdc++:
 # CXXFLAGS+=" -stdlib=libc++"
 
 EOF
@@ -285,8 +251,6 @@ else
 #
 #   export CC=clang
 #   export CXX=clang++
-#
-# See https://wiki.archlinux.org/title/Clang for more details.【turn5fetch0】
 
 EOF
 fi
@@ -316,16 +280,6 @@ if command -v mold &>/dev/null; then
 fi
 echo "  - COMPRESSZST: zstd with all logical threads, level 15"
 echo ""
-echo "PGO helpers:"
-echo "  - BUILDENV includes a commented 'pgo' entry."
-echo "  - There is a commented PROFDEST example in ${CONF_DROPIN}."
-echo "  - To actually use PGO, install 'makepkg-optimize' from AUR,"
-echo "    set up a PGO cache, and enable the 'pgo' buildenv option."
-echo "    See https://wiki.archlinux.org/title/Makepkg-optimize"
-echo ""
 echo "If some packages fail to build (especially NVIDIA / DKMS):"
 echo "  1) Open ${CONF_DROPIN}"
 echo "  2) Comment out 'export CC=clang' and 'export CXX=clang++'."
-echo ""
-echo "You can still use the original main config at ${CONF_MAIN}."
-echo "Backup of the original is at ${CONF_MAIN}.bak"
