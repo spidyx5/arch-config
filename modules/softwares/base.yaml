@@ -15,8 +15,8 @@ packages:
   - intel-ucode
   - xone-dongle-firmware
   - xone-dkms
-  - limine-mkinitcpio-hook
-  - limine-entry-tool
+  #- limine-mkinitcpio-hook
+  #- limine-entry-tool
   - limine-snapper-sync
 
   # dcli dependencies

@@ -25,7 +25,7 @@ packages:
   - sunsetr-git
   - wayvid-git
   - dms-shell-git
-  - quickshell # DMS dependency
+  - quickshell-git # DMS dependency
   - crystal-dock-bin # Application dock
 
 conflicts: []

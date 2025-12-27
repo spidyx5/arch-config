@@ -78,4 +78,6 @@ packages:
   - python-pyclip      # Clipboard support for Waydroid
   - waydroid-script-git
 
+  - google-breakpad
+
 conflicts: []
