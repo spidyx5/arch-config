@@ -40,7 +40,6 @@ packages:
   - nvtop
   - imv
   - jaq
-  - matugen
   - lvm2
   - eza
   - bat

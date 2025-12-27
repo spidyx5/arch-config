@@ -92,7 +92,6 @@ aur_packages=(
     "qwen-code"
     "bibata-cursor-theme-bin"
     "spotify-dev"
-    "limine-entry-tool"
     "obs-plugin-browser"
     "zen-browser-bitwarden"
     "zluda-git"
