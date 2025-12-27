@@ -91,27 +91,6 @@ fi
 echo -e "${GREEN}Xresources created${NC}"
 echo ""
 
-# Set up wallpaper directory and default wallpaper
-echo -e "${BLUE}Setting up wallpaper...${NC}"
-NIRI_CONFIG="${CONFIG_DIR}/niri"
-WALLPAPER_DIR="${NIRI_CONFIG}/wallpapers"
-DEFAULT_WALLPAPER="${ARCH_CONFIG_DIR}/wallpapers/37.png"
-
-# Create wallpapers directory if it doesn't exist
-mkdir -p "$WALLPAPER_DIR"
-
-# Create symlink to default wallpaper if it exists
-if [ -f "$DEFAULT_WALLPAPER" ]; then
-  ln -sf "$DEFAULT_WALLPAPER" "${WALLPAPER_DIR}/1.png"
-  if [ "$EUID" -eq 0 ]; then
-    chown -h "$TARGET_USER:$TARGET_USER" "${WALLPAPER_DIR}/wallpaper.png"
-    chown "$TARGET_USER:$TARGET_USER" "$WALLPAPER_DIR"
-  fi
-  echo -e "${GREEN}Wallpaper symlink created${NC}"
-else
-  echo -e "${YELLOW}Warning: Default wallpaper not found${NC}"
-fi
-echo ""
 
 echo -e "${GREEN}Niri-whyoolw environment configuration complete!${NC}"
 echo ""
