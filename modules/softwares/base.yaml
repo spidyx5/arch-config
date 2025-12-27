@@ -152,6 +152,7 @@ packages:
   - firewalld
   - opensnitch
   # LLVM/Clang toolchain
+  - llvm
   - clang
   - mold
 

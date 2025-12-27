@@ -70,6 +70,7 @@ packages:
   - podman
   - podman-docker
   - podman-desktop
+  - podman-compose
   - winboat
   - cni-plugins        # Networking plugins for podman
   - pcp-gui

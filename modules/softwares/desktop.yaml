@@ -42,7 +42,7 @@ packages:
   - chromium-widevine
   - gemini-cli
   - flatpak
-  - flatpak-builder
+  #- flatpak-builder
   - flatseal
   - cosmic-store
 
