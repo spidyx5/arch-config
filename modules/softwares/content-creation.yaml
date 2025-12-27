@@ -23,6 +23,7 @@ packages:
   - blender
   # Note-taking & Knowledge Management
   - obsidian
+  #- audacity-openvino-bin
 
   # Tablet driver
 
