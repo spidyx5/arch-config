@@ -285,6 +285,7 @@ packages:
   - t2sz
   - fuzzel-rbw
   - fresh-editor-bin
+  - thin-provisioning-tools
 exclude:
   - nano
   - linux-lts
