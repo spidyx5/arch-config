@@ -128,6 +128,6 @@ aur_packages=(
 
 # Install packages using paru with --noconfirm
 echo "Installing AUR packages using paru..."
-paru -S --noconfirm "${aur_packages[@]}"
+paru -S  "${aur_packages[@]}"
 
 echo "AUR package installation complete."
