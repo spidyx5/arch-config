@@ -10,8 +10,25 @@ packages:
   - obs-3d-effect
   - obs-vkcapture
   - obs-vaapi                  # AUR: Hardware encoding
+  - obs-advanced-masks
+  - obs-composite-blur
+  - obs-plugin-vertical-canvas-git
+  - obs-wayland-hotkeys-git
+  - obs-shaderfilter-git
+  - obs-source-dock
+  - obs-noise
+  - obs-text-pthread
+  - obs-plugin-aitum-multistream-git
+  - obs-plugin-browser
+  - obs-move-transition
+  - obs-plugin-time-source
+  - catppuccin-obs-theme-git
+  - obs-source-switcher
+  - obs-pipewire-audio-capture-bin
+  - obs-plugin-input-overlay-bin
   # Art
   - krita-git
+  - krita-plugin-pythonplugindevelopertools-git
   - kseexpr-qt6-git
   # Audio Production
   - reaper
@@ -21,8 +38,12 @@ packages:
   # Video
   # Digital Art & Design
   - blender
+  - blender-launcher-v2-bin
   # Note-taking & Knowledge Management
   - obsidian
+  - davinci-ffmpeg-encoder-plugin
+  - davinci-convert
+  - opentabletdriver-git
   #- audacity-openvino-bin
 
   # Tablet driver

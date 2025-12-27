@@ -80,5 +80,15 @@ packages:
   - waydroid-script-git
 
   - google-breakpad
+  - waydroidsu
+  - waydroid-helper-git
+  - waydroid-launcher-git
+  - carapace-bin
+  - nodejs-inshellisense
+  - qwen-code
+  - mods-bin
+  - flang
+  - cargo
+  - bun-bin
 
 conflicts: []

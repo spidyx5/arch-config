@@ -49,3 +49,24 @@ packages:
   # Gaming overlays and tools
   - joyutils
   - antimicrox
+  - appimagelauncher-git
+  - proton-mail
+  - cbonsai
+  - bitwarden-menu-git
+  - libgen-cli-bin
+  - pipes.sh
+  - scream-git
+  - matugen-bin
+  - bottles
+  - heroic-games-launcher-git
+  - boxbuddy
+  - proton-authenticator-bin
+  - equibop-bin
+  - parabolic
+  - calibre-web
+  - dopamine-official
+  - bibata-cursor-theme-bin
+  - spotify-dev
+  - spicetify-themes-git
+  - spicetify-extensions-rxri-git
+  - spicetify-custom-apps-and-extensions-git

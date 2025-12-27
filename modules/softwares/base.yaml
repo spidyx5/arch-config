@@ -105,7 +105,7 @@ packages:
   # File system tools
   - btrfs-progs
   - f2fs-tools
-  - btrfs-assistant
+  - btrfs-assistant-git
   - compsize
   - virtiofsd
   - duperemove
@@ -232,6 +232,59 @@ packages:
   - v4l2loopback-dkms
   - v4l2loopback-utils
   - i2c-tools
+  - slibtool
+  - unzip-zstd
+  - lib32-libstdc++5
+  - p7zip-full-bin
+  - limine-booster
+  - vulkan-extensionlayer-git
+  - mimalloc
+  - xwayland-satellite-git
+  - btrfs-list
+  - libzstd-seek-git
+  - libvirt-venus
+  - btrfs-desktop-notification
+  - python-anyqt
+  - xwayland-run-git
+  - archlinux-userland-fs-cmp
+  - python-zstandard
+  - virtio-win
+  - xwaylandvideobridge
+  - python-indexed-zstd
+  - tela-icon-theme-purple-git
+  - btrfs-du
+  - mkinitcpio-extras
+  - pywal-spicetify
+  - kernel-modules-hook-reflink
+  - btrfs-compress
+  - stevenblack
+  - aurscan-git
+  - qemu-ovmf-secureboot-git
+  - zarchive-git
+  - catppuccin-gtk-theme-mocha
+  - jstest-gtk-git
+  - cachyos-settings
+  - bpftune-git
+  - libmaddy
+  - libnick
+  - clamav-gui
+  - python-pywal16
+  - python-apscheduler
+  - python-netifaces-plus
+  - libstdc++5
+  - libgl
+  - bees-git
+  - btdu-bin
+  - plymouth-theme-arch-logo-symbol
+  - zstd-git
+  - sdl2
+  - bdf
+  - ntfsprogs-plus
+  - libgendesktop
+  - glib
+  - t2sz
+  - fuzzel-rbw
+  - fresh-editor-bin
 exclude:
   - nano
   - linux-lts
