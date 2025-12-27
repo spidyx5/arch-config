@@ -1,0 +1,15 @@
+description: "Main Module to source other yaml files for niri-whyoolw"
+
+# Optional: Modules that conflict with this one
+conflicts:
+   - bdots/kde
+   - bdots/hyprland
+   - bdots/mango
+
+# Optional: Post-install hook script (relative to module directory)
+post_install_hook: "scripts/install-niri-whyoolw-dotfiles.sh"
+hooks_behavior: once # or "always", "skip", "once" (default)
+
+# Optional: Explicit list of package files to load (empty = auto-discover)
+package_files:
+  - packages.yaml

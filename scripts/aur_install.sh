@@ -93,7 +93,6 @@ aur_packages=(
     "bibata-cursor-theme-bin"
     "spotify-dev"
     "obs-plugin-browser"
-    "zen-browser-bitwarden"
     "zluda-git"
     "glib"
     "t2sz"
