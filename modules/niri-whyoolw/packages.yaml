@@ -17,16 +17,18 @@ packages:
   - swaybg # Background manager
   - brightnessctl # Brightness control
   - fuzzel # Application launcher
-  - mako # Notification daemon
+  - swaync # Notification daemon
   - waybar # Status bar
   - sway-audio-idle-inhibit-git # Prevent idle during audio
   - niri-settings-git
   - greetd-dms-greeter-git
   - sunsetr-git
   - wayvid-git
-  - dms-shell-git
-  - quickshell # DMS dependency
-  - crystal-dock-bin # Application dock
+  - neovim
+  - ranger
+  #- dms-shell-git
+  #- quickshell # DMS dependency
+  #- crystal-dock-bin # Application dock
   - qt5ct # Qt5 configuration tool
   - qt6ct # Qt6 configuration tool
   - gtk3 # GTK 3 libraries
