@@ -2,9 +2,9 @@ description: "Main Module to source other yaml files for bdots-niri"
 
 # Optional: Modules that conflict with this one
 conflicts:
-   - bdots/kde
-   - bdots/hyprland
-   - bdots/mango
+   - kde
+   - hyprland
+   - mango
 
 # Optional: Post-install hook script (relative to module directory)
 post_install_hook: "scripts/install-niri-dotfiles.sh"

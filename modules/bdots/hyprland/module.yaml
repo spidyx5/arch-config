@@ -2,9 +2,9 @@ description: "Main Module to source other yaml files for hyprland"
 
 # Optional: Modules that conflict with this one
 conflicts:
-   - bdots/kde
-   - bdots/niri
-   - bdots/mango
+   - kde
+   - niri
+   - mango
 # Optional: Post-install hook script (relative to module directory)
 post_install_hook: "scripts/install-hyprland-dotfiles.sh"
 hooks_behavior: once # or "always", "skip", "once" (default)

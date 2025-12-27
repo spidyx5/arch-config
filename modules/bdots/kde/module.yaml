@@ -2,9 +2,9 @@ description: "KDE Plasma desktop with Catppuccin Mocha Mauve theme, Tela purple 
 
 # Modules that conflict with this one
 conflicts:
-   - bdots/hyprland
-   - bdots/niri
-   - bdots/mango
+   - hyprland
+   - niri
+   - mango
 
 # Post-install hook script (relative to module directory)
 post_install_hook: "scripts/install-kde-dotfiles.sh"
