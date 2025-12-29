@@ -50,7 +50,6 @@ packages:
   - joyutils
   - antimicrox
   - appimagelauncher
-  - proton-mail
   - cbonsai
   - libgen-cli-bin
   - pipes.sh

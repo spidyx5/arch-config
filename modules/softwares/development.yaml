@@ -5,21 +5,13 @@ packages:
   - code-marketplace
   - code-features
   - electron
-  - clang
-  - cmake
   - ninja
-  - curl
   - git
-  - unzip
   - xz
   - zip
   - glu
   - yazi
-  - ripgrep # Fast search tool for live grep
-  - fd # Fast file finder
-  - fzf # Fuzzy finder (>= 0.25.1)
   - tree-sitter-cli # Tree-sitter parser generator
-  - cmake # Build system
   - meson # Build system
   - cpio # Archiving tool
     # Shell enhancements
@@ -27,22 +19,12 @@ packages:
   - skim
     # The Shell & Prompt
   - starship
-  - carapace-bin        # AUR: Multi-shell completion
   - ghostty             # AUR: The terminal
   - ghostty-shell-integration
-  - kitty
   - fastfetch
   - rmpc
   #- zluda-git
     # CLI Tools (Replacements used in your aliases)
-  - bat                 # cat replacement
-  - eza                 # ls replacement
-  - ripgrep             # grep replacement
-  - fd                  # find replacement
-  - zoxide              # cd replacement
-  - fzf                 # Fuzzy finder
-  - skim                # Fuzzy finder (Nu plugin friendly)
-  - yazi                # File Manager (for 'fm' alias)
   - wl-clipboard        # Wayland clipboard
   - feh
      # Virtualization
@@ -83,7 +65,6 @@ packages:
   - waydroidsu
   - waydroid-helper-git
   - waydroid-launcher-git
-  - carapace-bin
   - qwen-code
   - mods-bin
   - flang
