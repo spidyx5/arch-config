@@ -52,7 +52,7 @@ packages:
   - appimagelauncher-git
   - proton-mail
   - cbonsai
-  - bitwarden-menu-git
+  #- bitwarden-menu-git
   - libgen-cli-bin
   - pipes.sh
   - scream-git
@@ -66,7 +66,7 @@ packages:
   - calibre-web
   - dopamine-official
   - bibata-cursor-theme-bin
-  - spotify-dev
+  - spotify
   - spicetify-themes-git
   - spicetify-extensions-rxri-git
   - spicetify-custom-apps-and-extensions-git

@@ -22,8 +22,8 @@ packages:
   - sway-audio-idle-inhibit-git # Prevent idle during audio
   - niri-settings-git
   - greetd-dms-greeter-git
-  - sunsetr-git
-  - wayvid-git
+  - sunsetr-bin
+  - wayvid
   - neovim
   - ranger
   #- dms-shell-git

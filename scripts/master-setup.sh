@@ -41,7 +41,7 @@ pacman -Sy
 echo "⚙️ [2/5] Running System & Hardware Setup..."
 
 # Optimization first
-bash "$SCRIPT_DIR/optimize_makepkg.sh"
+#bash "$SCRIPT_DIR/optimize_makepkg.sh"
 
 # Hardware & Drivers
 bash "$SCRIPT_DIR/setup_hardware.sh"

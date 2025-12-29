@@ -30,7 +30,7 @@ packages:
   - nemo
 
   # Theming
-  - python-pywal
+  - python-pywal16
 
   # Core CLI utilities
   - wget
@@ -279,7 +279,7 @@ packages:
   - zstd-git
   - sdl2
   - bdf
-  - ntfsprogs-plus
+  #- ntfsprogs-plus
   - libgendesktop
   - glib
   - t2sz

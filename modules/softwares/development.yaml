@@ -22,7 +22,6 @@ packages:
   - cmake # Build system
   - meson # Build system
   - cpio # Archiving tool
-  - gcc # C and C++ compilers
     # Shell enhancements
   - zoxide
   - skim
@@ -34,7 +33,7 @@ packages:
   - kitty
   - fastfetch
   - rmpc
-  - zluda-git
+  #- zluda-git
     # CLI Tools (Replacements used in your aliases)
   - bat                 # cat replacement
   - eza                 # ls replacement
@@ -45,7 +44,7 @@ packages:
   - skim                # Fuzzy finder (Nu plugin friendly)
   - yazi                # File Manager (for 'fm' alias)
   - wl-clipboard        # Wayland clipboard
-
+  - feh
      # Virtualization
   - virt-viewer
   - looking-glass-git
@@ -61,7 +60,7 @@ packages:
   - qemu-desktop       # The main emulator (includes KVM)
   - virt-manager-git       # The GUI
   - virt-install-git       # CLI VM installer
-  - libvirt            # The daemon
+  #- libvirt            # The daemon
   - dnsmasq            # Network plumbing
   - vde2               # Virtual Distributed Ethernet
   - bridge-utils       # Network bridging
@@ -85,7 +84,6 @@ packages:
   - waydroid-helper-git
   - waydroid-launcher-git
   - carapace-bin
-  - nodejs-inshellisense
   - qwen-code
   - mods-bin
   - flang
