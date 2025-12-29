@@ -49,10 +49,9 @@ packages:
   # Gaming overlays and tools
   - joyutils
   - antimicrox
-  - appimagelauncher-git
+  - appimagelauncher
   - proton-mail
   - cbonsai
-  #- bitwarden-menu-git
   - libgen-cli-bin
   - pipes.sh
   - scream-git
