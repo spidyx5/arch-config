@@ -70,5 +70,22 @@ packages:
   - flang
   - cargo
   - bun-bin
+    # LLVM/Clang toolchain
+  - llvm
+  - clang
+  - mold
+
+  # Rust toolchain
+  - rustup
+
+  # Runtime environments
+  - python
+  - nodejs
+
+  # Build systems
+  - meson
+  - cmake
+  - binutils
+  - samurai
 
 conflicts: []
