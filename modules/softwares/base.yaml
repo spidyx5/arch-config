@@ -13,6 +13,8 @@ packages:
   - linux-firmware
   - linux-firmware-intel
   - intel-ucode
+  - linux-cachyos
+  - linux-cachyos-headers
   - xone-dongle-firmware
   - xone-dkms
   #- limine-mkinitcpio-hook
@@ -286,6 +288,58 @@ packages:
   - fuzzel-rbw
   - fresh-editor-bin
   - thin-provisioning-tools
+  - cachyos-hello
+  - cachyos-kernel-manager
+  - cachyos-packageinstaller
+  - dhclient
+  - dnsutils
+  - ethtool
+  - iwd
+  - modemmanager
+  - nsss-mdnss
+  - usb_modeswitch
+  - wpa_supplicant
+  - wireless-regdb
+  - xl2tpd
+  - bluez-hid2hci
+  - bluez-libs
+  - pacman-contrib
+  - pkgfile
+  - rebuild-detector
+  - reflector
+  - octopi
+  - accountsservice
+  - bash-completion
+  - ffmpegthumbnailer
+  - gst-libav
+  - gst-plugin-pipewire
+  - gst-plugins-bad
+  - gst-plugins-ugly
+  - libvdcss
+  - libgsf
+  - libopenraw
+  - mlocate
+  - poppler-glib
+  - vlc-plugins-all
+  - efitools
+  - haveged
+  - ntp
+  - smartmontools
+  - unrar
+  - freetype2
+  - noto-fonts-emoji
+  - noto-fonts-cjk
+  - alsa-firmware
+  - alsa-plugins
+  - dmraid
+  - hdparm
+  - hwdetect
+  - lsscsi
+  - mtools
+  - sg3_utils
+  - sof-firmware
+  - cpupower
+  - power-profiles-daemon
 exclude:
   - nano
   - linux-lts
