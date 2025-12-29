@@ -15,3 +15,4 @@ package_files:
   - desktop.yaml
   - development.yaml
   - declared-packages.yaml
+  - utilities.yaml
