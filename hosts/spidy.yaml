@@ -6,7 +6,7 @@ import: []
 # Enabled modules
 enabled_modules:
   #  Main packages module (includes post-install hooks)
-  #- softwares
+  - softwares
 
   #  Specific Tools
   - controller-support
