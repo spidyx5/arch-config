@@ -12,7 +12,7 @@ packages:
   - mangojuice
   - sunshine
   - tailscale
-
+  - localsend
   # Web browsers
   - zen-browser-bin # Zen browser (AUR)
   - helium-browser-bin

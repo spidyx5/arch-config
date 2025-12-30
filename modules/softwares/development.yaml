@@ -67,7 +67,7 @@ packages:
   - waydroid-launcher-git
   - qwen-code
   - mods-bin
-  - flang
+  #- flang
   - cargo
   - bun-bin
     # LLVM/Clang toolchain

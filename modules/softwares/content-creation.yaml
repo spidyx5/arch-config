@@ -46,8 +46,6 @@ packages:
   - opentabletdriver-git
   #- audacity-openvino-bin
 
-  # Tablet driver
-
 # Modules that conflict with this one
 conflicts: []
 
