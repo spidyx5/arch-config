@@ -47,8 +47,6 @@ services:
     - scx
     - tuned
     - thermald
-    - getty@tty1
-
     # Virtualization
     - libvirtd
     - podman.socket
