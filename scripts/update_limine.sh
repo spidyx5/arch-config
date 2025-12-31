@@ -5,10 +5,10 @@
 # ==============================================================================
 
 # Handle the ARCH_CONFIG_DIR environment variable or default to ~/.config/arch-config
-CONFIG_DIR="${ARCH_CONFIG_DIR:-$HOME/.config/arch-config}"
+#CONFIG_DIR="${/home/spidy/.config/arch-config}"
 
 # Source Wallpaper: Explicitly target '26.png' inside 'wallpapers' folder
-WALLPAPER_SRC="$CONFIG_DIR/wallpapers/26.png"
+WALLPAPER_SRC="/home/spidy/.config/arch-config/wallpapers/26.png"
 
 # Destination in ESP/Boot (Limine reads from here)
 WALLPAPER_DEST="/boot/wallpaper.png"

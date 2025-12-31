@@ -99,7 +99,7 @@ packages:
   - ffmpeg
   # File system tools
   - avfs
-  - btrfs-assistant-git
+  - btrfs-assistant
   - btrfs-heatmap
   - btrfs-progs
   - compsize
