@@ -25,6 +25,8 @@ packages:
   - python-pywal16
   # Audio system packages
   - alsa-utils
+  - linux-xanmod-edge-x64v3
+  - linux-xanmod-edge-x64v3-headers
   - blueman
   - bluez
   - bluez-tools
@@ -51,6 +53,11 @@ packages:
   - rustup
   # Runtime environments
   - nodejs
+  - vulkan-utility-libraries
+  - python-installer
+  - python-build
+  - extra-cmake-modules
+  - blueprint-compiler
   - python
   # Build systems
   - binutils
