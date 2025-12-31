@@ -99,6 +99,10 @@ packages:
   - ffmpeg
   # File system tools
   - avfs
+  - limine
+  - limine-mkinitcpio-hook
+  - lld
+  - llvm-bolt
   - btrfs-assistant
   - btrfs-heatmap
   - btrfs-progs

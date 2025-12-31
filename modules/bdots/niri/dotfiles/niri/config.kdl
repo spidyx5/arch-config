@@ -24,7 +24,7 @@ input {
     touchpad {
     }
     /-mouse {
-        accel-profile "adaptive"  // or "flat" for no acceleration
+        accel-profile "flat"  // or "flat" for no acceleration
         accel-speed 1.0           // -1.0 to 1.0
     }
     trackpoint {

@@ -134,13 +134,13 @@
   "networkPreference": "auto",
   "vpnLastConnected": "",
   "iconTheme": "Bibata-Modern-Amber",
-  "launcherLogoMode": "custom",
+  "launcherLogoMode": "compositor",
   "launcherLogoCustomPath": "/home/don/.config/arch-config/logo/blackdontrans.png",
   "launcherLogoColorOverride": "primary",
   "launcherLogoColorInvertOnMode": false,
   "launcherLogoBrightness": 0.5,
   "launcherLogoContrast": 1,
-  "launcherLogoSizeOffset": 0,
+  "launcherLogoSizeOffset": -1,
   "fontFamily": "FiraCode Nerd Font",
   "monoFontFamily": "Noto Sans Mono CJK JP",
   "fontWeight": 600,
@@ -278,7 +278,7 @@
       "id": "default",
       "name": "Main Bar",
       "enabled": true,
-      "position": 2,
+      "position": 0,
       "screenPreferences": [
         "all"
       ],
@@ -323,11 +323,11 @@
           "enabled": true
         }
       ],
-      "spacing": 6,
-      "innerPadding": 3,
-      "bottomGap": -29,
+      "spacing": 3,
+      "innerPadding": 0,
+      "bottomGap": -10,
       "transparency": 0,
-      "widgetTransparency": 1,
+      "widgetTransparency": 0.93,
       "squareCorners": false,
       "noBackground": false,
       "gothCornersEnabled": true,
@@ -346,8 +346,9 @@
       "popupGapsManual": 4,
       "maximizeDetection": true,
       "widgetOutlineEnabled": true,
-      "widgetOutlineOpacity": 0.58,
-      "widgetOutlineThickness": 3
+      "widgetOutlineOpacity": 0.77,
+      "widgetOutlineThickness": 3,
+      "widgetOutlineColor": "primary"
     }
   ],
   "desktopClockEnabled": false,

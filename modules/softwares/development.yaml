@@ -23,6 +23,7 @@ packages:
   - ghostty-shell-integration
   - fastfetch
   - rmpc
+  - go
   #- zluda-git
     # CLI Tools (Replacements used in your aliases)
   - wl-clipboard        # Wayland clipboard

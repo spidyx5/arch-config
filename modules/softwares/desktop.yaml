@@ -30,7 +30,7 @@ packages:
   # Utilities & Downloaders
   - yt-dlp
   - qbittorrent
-
+  - proton-mail-bin
   # Multimedia & Content
   - calibre
   - foliate
