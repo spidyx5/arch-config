@@ -232,6 +232,7 @@ packages:
   - libgl
   - libmaddy
   - libnick
+  - volk
   - libstdc++5
   - libvirt-venus
   - mimalloc
