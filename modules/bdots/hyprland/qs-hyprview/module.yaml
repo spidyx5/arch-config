@@ -1,0 +1,8 @@
+description: "QS Hyprview - Beautiful workspace overview for Hyprland using Quickshell"
+
+conflicts: []
+
+post_install_hook: "../../../scripts/install-qs-hyprview.sh"
+
+package_files:
+  - qs-hyprview.yaml

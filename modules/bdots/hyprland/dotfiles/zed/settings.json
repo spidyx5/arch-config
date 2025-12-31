@@ -1,0 +1,51 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "helix_mode": true,
+  "title_bar": {
+    "show_menus": false,
+    "show_sign_in": false
+  },
+  "debugger": {
+    "button": false
+  },
+  "search": {
+    "button": false
+  },
+  "diagnostics": {
+    "button": true
+  },
+  "status_bar": {
+    "active_language_button": false
+  },
+  "project_panel": {
+    "button": true
+  },
+  "agent": {
+    "dock": "right",
+    "model_parameters": []
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "terminal": {
+    "dock": "right",
+    "shell": {
+      "program": "/usr/bin/fish"
+    }
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha"
+  }
+}
