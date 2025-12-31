@@ -1,9 +1,9 @@
 description: "Development"
 
 packages:
-  - code
-  - code-marketplace
-  - code-features
+  - vscodium
+  - vscodium-marketplace
+  - vscodium-features
   - electron
   - ninja
   - git

@@ -14,4 +14,4 @@ package_files:
   - content-creation.yaml
   - desktop.yaml
   - development.yaml
-  - declared-packages.yaml
+ 

@@ -12,16 +12,14 @@ packages:
   - obs-vaapi                  # AUR: Hardware encoding
   - obs-advanced-masks
   - obs-composite-blur
-  - obs-plugin-vertical-canvas-git
+  - obs-vertical-canvas-bin
   - obs-wayland-hotkeys-git
   - obs-shaderfilter-git
   - obs-source-dock
   - obs-noise
   - obs-text-pthread
-  - obs-plugin-aitum-multistream-git
   - obs-plugin-browser
   - obs-move-transition
-  - obs-plugin-time-source
   - catppuccin-obs-theme-git
   - obs-source-switcher
   - obs-pipewire-audio-capture-bin

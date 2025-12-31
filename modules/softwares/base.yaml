@@ -7,7 +7,7 @@ packages:
   - base-devel
   # Firmware
   - intel-ucode
-  - limine-entry-tool
+ # - limine-entry-tool
   - limine-snapper-sync
   - linux-cachyos
   - linux-cachyos-headers
@@ -202,7 +202,7 @@ packages:
   - lib32-libstdc++5
   - p7zip-full-bin
   - slibtool
-  - unzip-zstd
+ ## - unzip-zstd
   - v4l2loopback-dkms
   - v4l2loopback-utils
   # Extended System & AUR
@@ -215,7 +215,8 @@ packages:
   - btrfs-desktop-notification
   - btrfs-du
   - btrfs-list
-  - btrfs-zstd-seek-git
+ ## - libzstd-seek
+  - python-indexed-zstd
   - cachyos-hooks
   - cachyos-settings
   - catppuccin-gtk-theme-mocha
@@ -243,8 +244,7 @@ packages:
   - stevenblack
   - t2sz
   - tela-icon-theme-purple-git
-  - virtio-win
-  - vulkan-extensionlayer-git
+#  - virtio-win
   - xwayland-run-git
   - xwayland-satellite-git
   - xwaylandvideobridge
@@ -260,7 +260,6 @@ packages:
   - ethtool
   - iwd
   - modemmanager
-  - nsss-mdnss
   - usb_modeswitch
   - wireless-regdb
   - wpa_supplicant
@@ -283,7 +282,6 @@ packages:
   - gst-plugins-ugly
   - libgsf
   - libopenraw
-  - libvdcss
   - mlocate
   - poppler-glib
   - vlc-plugins-all

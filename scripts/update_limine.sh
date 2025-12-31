@@ -23,7 +23,7 @@ LIMINE_DEFAULT="/etc/default/limine"
 NEW_PARAMS="nvme_core.default_ps_max_latency_us=0 \
 zswap.enabled=1 mitigations=off rootflags=noatime \
 nowatchdog threadirqs kernel.split_lock_mitigate=0 \
-init_on_alloc=1 init_on_free=1 randomize_kstack_offset=on \
+init_on_alloc=0 init_on_free=0 resume=/dev/mapper/mock-spring randomize_kstack_offset=on \
 vsyscall=none slab_nomerge page_alloc.shuffle=1 lsm=landlock,\
 lockdown,yama,integrity,apparmor,bpf quiet splash plymouth.use-simpledrm \
 acpi_sleep_default=deep  i915.enable_gvt=1 acpi_sleep=nonvs mem_sleep_default=deep \
@@ -119,7 +119,7 @@ for kernel_path in /boot/vmlinuz-*; do
     protocol: linux
     kernel_path: boot():/$k_filename
     module_path: boot():/$initramfs_img
-    cmdline: $CURRENT_ROOT rw $NEW_PARAMS
+    cmdline: $CURRENT_ROOT rw rootflags=subvol=/@ $NEW_PARAMS
 
 EOF
 
@@ -131,7 +131,7 @@ EOF
     protocol: linux
     kernel_path: boot():/$k_filename
     module_path: boot():/$initramfs_fallback
-    cmdline: $CURRENT_ROOT rw
+    cmdline: $CURRENT_ROOT rw rootflags=subvol=/@
 EOF
     fi
 done
