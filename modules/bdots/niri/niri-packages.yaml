@@ -27,7 +27,7 @@ packages:
   - dms-shell-git
   - quickshell # DMS dependency
   - crystal-dock-bin # Application dock
-
+  - niri-autoname-workspaces-git
 conflicts: []
 exclude:
   

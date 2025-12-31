@@ -6,8 +6,10 @@ description: Hyprland Wayland compositor with DankMaterialShell
 
 packages:
   - hyprland # Main compositor
+  - hypridle # Idle management daemon
   - hyprpaper # Wallpaper utility
   - xdg-desktop-portal-hyprland # Desktop portal
+  - xdg-desktop-portal-gtk # GTK file picker portal
   - wl-clipboard # Clipboard utilities
   - grimblast-git # Screenshot tool
   - grim # Screenshot tool

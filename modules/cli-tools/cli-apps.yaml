@@ -7,14 +7,11 @@ description: Example module - customize or delete this
 packages:
   - cava
   - cmatrix
-  - tty-clock
-  - cowsay
   - figlet
   - zoxide
   - cool-retro-term
   - fresh-editor-bin
   - lolcat
-  - micro-git
   - pipes.sh
 
 # Modules that conflict with this one
