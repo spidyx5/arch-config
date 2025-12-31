@@ -1,64 +1,53 @@
-# hosts/spidy.yaml
 host: spidy
 description: Spidy host configuration
 import: []
-
-# Enabled modules
 enabled_modules:
-  #  Main packages module (includes post-install hooks)
-  - softwares
-
-  #  Specific Tools
-  - controller-support
-  - cli-tools/webapp-tool
-  - cli-tools/cli-apps
-
-  #  Dotfiles / Theming
-  - bdots/niri
-  #- niri-whyoolw
-  - helix-catppuccin-mocha
-
+- softwares
+- controller-support
+- cli-tools/webapp-tool
+- cli-tools/cli-apps
+- bdots/niri
+- helix-catppuccin-mocha
 packages: []
 exclude: []
 additional_packages: []
-# Configuration backup settings
+backup_tool: snapper
+snapper_config: root
+flatpak_scope: system
+auto_prune: true
 config_backups:
   enabled: true
   max_backups: 5
-
-# Settings
-flatpak_scope: system
-auto_prune: true
-backup_tool: snapper
-snapper_config: root
-
-# Services Configuration
-# (These ensure they start even if the scripts didn't trigger them)
 services:
   enabled:
-    # Network
-    - NetworkManager
-    - NetworkManager-wait-online
-    - NetworkManager-dispatcher
-    - bluetooth
-
-    # Performance & Scheduler
-    - ananicy-cpp
-    - scx
-    - tuned
-    - thermald
-    # Virtualization
-    - libvirtd
-    - podman.socket
-    - waydroid
-
-    # Audio (System level)
-    - rtkit-daemon
-    - apparmor
-    - greetd
-    - bpftune
+  - NetworkManager
+  - NetworkManager-dispatcher
+  - NetworkManager-wait-online
+  - ananicy-cpp
+  - apparmor
+  - bluetooth
+  - bpftune
+  - earlyoom
+  - getty@
+  - greetd
+  - iwd
+  - keyd
+  - libvirtd
+  - nftables
+  - podman.socket
+  - proton.VPN
+  - rtkit-daemon
+  - scx
+  - sshd
+  - systemd-network-generator
+  - systemd-networkd-wait-online
+  - thermald
+  - tuned
+  - upower
+  - waydroid
+  - waydroid-container
   disabled:
-    - ufw
-    - iptables
+  - iptables
+  - ufw
 editor: helix
 aur_helper: paru

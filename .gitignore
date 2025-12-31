@@ -2,7 +2,7 @@
 #config.yaml
 
 # Auto-generated state files
-system-packages.yaml
+system-packages-spidy.yaml
 state/installed.yaml
 state/hooks-executed.yaml
 modules/declared-packages.yaml
