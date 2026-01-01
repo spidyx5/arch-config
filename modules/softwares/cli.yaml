@@ -33,7 +33,7 @@ packages:
   - perl-file-mimeinfo # Determine file type, includes mimeopen and mimetype (file type detection)
   - shared-mime-info # Freedesktop.org Shared MIME Info (standard MIME type database)
   - tealdeer # A fast tldr client in Rust (simplified man pages)
-  
+  - trash-cli # file deletion support (trash-put) 
   # Terminal image and display utilities
   - ueberzugpp # Command line utility which allows to display images in the terminal, written in C++
   - ghostty # Fast, native, feature-rich terminal emulator pushing modern features

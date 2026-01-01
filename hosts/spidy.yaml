@@ -33,6 +33,7 @@ services:
   - keyd
   - libvirtd
   - nftables
+  - pdns-recursor
   - proton.VPN
   - sshd
   - systemd-network-generator
@@ -40,6 +41,7 @@ services:
   - thermald
   - tuned
   - upower
+  - virtlogd
   - waydroid-container
   disabled:
   - iptables

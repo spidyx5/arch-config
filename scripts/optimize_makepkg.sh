@@ -40,10 +40,6 @@ fi
 mkdir -p "${CONF_DIR}"
 
 # 3. Write the Configuration
-# We use 'cat' to completely define the file.
-# Note: We do NOT use ${CFLAGS} inside the string to avoid duplication.
-# We define the flags from scratch.
-
 cat >"${CONF_DROPIN}" <<EOF
 #########################################################################
 # SPIDY HIGH-PERFORMANCE CONFIG (Clang + Mold)
@@ -54,8 +50,8 @@ cat >"${CONF_DROPIN}" <<EOF
 MAKEFLAGS="-j${CORES}"
 NINJAFLAGS="-j${CORES}"
 
-# 2. Toolchain Exports (Uncommented as requested)
-# We force Clang and LLVM utilities.
+# 2. Toolchain Exports
+# We force Clang and LLVM utilities explicitly.
 export CC=clang
 export CXX=clang++
 export CPP="clang -E"
@@ -70,10 +66,9 @@ export OBJDUMP=llvm-objdump
 export READELF=llvm-readelf
 
 # 3. Compiler Flags (C/C++)
-# -march=native: Optimize for YOUR cpu
-# -O3: Maximum speed
-# -flto=thin: Clang's preferred LTO (Faster build, great performance)
-# -fno-plt: Direct calls (Speed)
+# -O3: Maximum speed optimization
+# -flto=thin: Multi-threaded LTO (Fast build, Low RAM, High Perf)
+# -fno-plt: Direct function calls (Performance)
 CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions \
         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security \
         -fstack-clash-protection -fcf-protection \
@@ -82,29 +77,29 @@ CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions \
 # Map CXX to C flags + C++ specific assertions
 CXXFLAGS="\$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
 
-# 4. Linker Flags
-# -fuse-ld=mold: Use the Mold linker (Fastest)
-# -Wl,-O2: Linker optimization level 2 (Best balance)
-# -Wl,--as-needed: Drop unused deps
-LDFLAGS="-fuse-ld=mold -Wl,-O3 -Wl,--sort-common -Wl,--as-needed \
+# 4. Linker Flags (Mold)
+# -fuse-ld=mold: Force the Mold linker
+# -Wl,-O2: Enable Linker optimizations (O2 is safer/better than O3 for linking)
+# -Wl,--as-needed: Don't link libraries that aren't actually used
+LDFLAGS="-fuse-ld=mold -Wl,-O2 -Wl,--sort-common -Wl,--as-needed \
          -Wl,-z,relro -Wl,-z,now -Wl,--gc-sections"
 
 # 5. Rust Flags
-# Target native cpu and force mold for Rust too
+# Optimize Rust builds for native CPU and use Mold linker
 RUSTFLAGS="-C target-cpu=native -C link-arg=-fuse-ld=mold"
 
 # 6. LTO Flags
-# Since we define -flto=thin in CFLAGS, we match it here
+# Must match CFLAGS (-flto=thin is best for Clang)
 LTOFLAGS="-flto=thin"
 
 # 7. Global Options
-# !debug: Save space/time
+# !debug: Disable debug symbols (Saves disk space/time)
 # lto: Enable LTO handling
 OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)
 
 # 8. Compression (ZSTD Ultra)
-# -19: High compression (slower packing, smaller size, fast unpacking)
-# --threads=0: Use all cores
+# -19: Maximum compression (Good for archiving)
+# -T0: Use all CPU threads
 COMPRESSZST=(zstd -c -z -q -19 -T0 -)
 
 # 9. Extensions
@@ -115,8 +110,3 @@ EOF
 echo "[+] Success! Configuration written to:"
 echo "    ${CONF_DROPIN}"
 echo ""
-echo "=== Summary ==="
-echo "Compiler: Clang/LLVM (Exported)"
-echo "Linker:   Mold (-fuse-ld=mold, -Wl,-O2)"
-echo "Flags:    -march=native -O3 -flto=thin (No duplicates)"
-echo "Rust:     Optimized for Native + Mold"

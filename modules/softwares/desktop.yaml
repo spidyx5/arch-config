@@ -28,7 +28,6 @@ packages:
   # Password management and security
   - bitwarden # A secure and free password manager for all of your devices (password vault)
   - proton-vpn-gtk-app # ProtonVPN GTK app, Maintained by Community (VPN client)
-  - proton-mail # Proton official desktop application for Proton Mail and Proton Calendar (secure email)
   - protonmail-bridge # Integrate ProtonMail paid account with any program that supports IMAP and SMTP (Qt desktop application) (email integration)
   - proton-authenticator-bin # 2FA app from Proton to securely sync and backup 2FA codes (two-factor authentication)
   
@@ -96,7 +95,6 @@ packages:
   - clamav-gui # Graphical user interface for clamav and freshclam with an integrated service menu for Konqueror/Dolphin to scan files directly from your file manager (antivirus GUI)
   - clamav # Command-line virus scanner (antivirus engine)
   - clamav-unofficial-sigs # Unofficial virus signature updates for ClamAV (virus definitions)
-  - clamav-desktop-bin # Graphical user interface for ClamAV (GUI antivirus client)
   - download-guardian # User-level lightweight service that watches ~/Downloads and prompts to scan new files/folders with Download Guardian (powered by ClamAV)
     
   # ============================================================================

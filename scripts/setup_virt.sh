@@ -36,7 +36,7 @@ echo "[-] Configuring Libvirt & QEMU..."
 # - virt-manager: GUI
 # - swtpm: TPM 2.0 emulator (REQUIRED for Windows 11)
 # - ovmf: UEFI BIOS
-pacman -S --needed --noconfirm qemu-desktop libvirt edk2-ovmf swtpm virt-manager dnsmasq iptables-nft
+pacman -S --needed --noconfirm qemu-desktop libvirt-venus edk2-ovmf swtpm virt-manager dnsmasq iptables-nft
 
 # Enable Services
 systemctl enable --now libvirtd
