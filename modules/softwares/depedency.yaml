@@ -81,7 +81,7 @@ packages:
   # ============================================================================
   
   # GPU programming and acceleration
-  - zluda-git # A drop-in replacement for CUDA on non-NVIDIA GPUs (git version) (GPU acceleration for AMD/Intel)
+  #- zluda-git # A drop-in replacement for CUDA on non-NVIDIA GPUs (git version) (GPU acceleration for AMD/Intel)
   - flang # Ground-up implementation of a Fortran front end written in modern C++ (Fortran compiler)
   
   # ============================================================================
