@@ -24,7 +24,6 @@ packages:
   - greetd-dms-greeter-git
   - sunsetr-bin
   - wayvid
-  - neovim
   - ranger
   #- dms-shell-git
   #- quickshell # DMS dependency

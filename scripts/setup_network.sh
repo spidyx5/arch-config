@@ -19,7 +19,7 @@ sudo pacman -S --needed --noconfirm powerdns-recursor nftables bind-tools
 echo "[-] Configuring PowerDNS Recursor..."
 
 # Stop systemd-resolved to free port 53
-#udo systemctl stop systemd-resolved
+#sudo systemctl stop systemd-resolved
 #sudo systemctl disable systemd-resolved
 
 # Backup existing config

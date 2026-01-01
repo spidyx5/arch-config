@@ -8,7 +8,6 @@ packages:
   - looking-glass-git # A client application for accessing the LookingGlass IVSHMEM device of a VM (high-performance VM display)
   - edk2-ovmf # Firmware for Virtual Machines (x86_64, i686) (UEFI firmware for VMs)
   - swtpm # Libtpms-based TPM emulator with socket, character device, and Linux CUSE interface (virtual TPM)
-  - libguestfs # Access and modify virtual machine disk images (VM disk management)
   - freerdp # Free implementation of the Remote Desktop Protocol (RDP) (RDP client)
   
 
