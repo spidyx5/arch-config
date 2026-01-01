@@ -59,7 +59,7 @@ packages:
   
   # OpenGL graphics library
   - libgl # OpenGL library (OpenGL graphics library)
-  
+  - libglvnd #
   # ============================================================================
   # MESA PACKAGES
   # ============================================================================

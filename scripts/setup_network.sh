@@ -19,8 +19,8 @@ sudo pacman -S --needed --noconfirm powerdns-recursor nftables bind-tools
 echo "[-] Configuring PowerDNS Recursor..."
 
 # Stop systemd-resolved to free port 53
-sudo systemctl stop systemd-resolved
-sudo systemctl disable systemd-resolved
+#udo systemctl stop systemd-resolved
+#sudo systemctl disable systemd-resolved
 
 # Backup existing config
 sudo mv /etc/powerdns/recursor.conf /etc/powerdns/recursor.conf.bak 2>/dev/null || true
@@ -60,8 +60,6 @@ nameserver 127.0.0.1
 options edns0 trust-ad
 EOF
 
-# Lock resolv.conf so NetworkManager can't break it
-sudo chattr +i /etc/resolv.conf
 
 echo "[-] Configuring NetworkManager to ignore DNS..."
 sudo mkdir -p /etc/NetworkManager/conf.d

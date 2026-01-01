@@ -101,8 +101,6 @@ input {
         track-layout "window"
         numlock
         xkb {
-            layout "us"
-            variant "colemak_dh"
             options "caps:backspace"
         }
         repeat-delay 600
