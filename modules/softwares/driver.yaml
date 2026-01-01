@@ -3,45 +3,38 @@ post_install_hook: ""
 hooks_behavior: skip
 packages:
   # Firmware packages
-  - intel-ucode
-  - linux-firmware
-  - linux-firmware-intel
-  - xone-dkms
-  - xone-dongle-firmware
-
+  - intel-ucode # Microcode update files for Intel CPUs
+  - linux-firmware # Firmware files for Linux - Default set
+  - linux-firmware-intel # Firmware files for Linux - Firmware for Intel devices
+  - xone-dkms # Modern Linux driver for Xbox One and Xbox Series X|S controllers
+  - xone-dongle-firmware # Xbox Wireless Controller Adapter firmware
   # Intel graphics and compute packages
-  - intel-compute-runtime
-  - intel-graphics-compiler
-  - intel-gpu-tools
-  - intel-media-driver
-
+  - intel-compute-runtime # Intel(R) Graphics Compute Runtime for oneAPI Level Zero and OpenCL(TM) Driver
+  - intel-graphics-compiler # Intel Graphics Compiler for OpenCL
+  - intel-gpu-tools # Tools for development and testing of the Intel DRM driver
+  - intel-media-driver # Intel Media Driver for VAAPI — Broadwell+ iGPUs
   # VA-API packages
-  - lib32-libva
-  - lib32-libva-intel-driver
-  - libva
-  - libva-intel-driver
-  - libva-utils
-
+  - lib32-libva # Video Acceleration (VA) API for Linux (32-bit)
+  - lib32-libva-intel-driver # VA-API implementation for Intel G45 and HD Graphics family (32-bit)
+  - libva # Video Acceleration (VA) API for Linux
+  - libva-intel-driver # VA-API implementation for Intel G45 and HD Graphics family
+  - libva-utils # Intel VA-API Media Applications and Scripts for libva
   # VPL packages
-  - libvpl
-  - libvpl-tools
-  - vpl-gpu-rt
-
+  - libvpl # Intel Video Processing Library
+  - libvpl-tools # Tools for Intel Video Processing Library
+  - vpl-gpu-rt # Intel VPL runtime implementation for Intel GPUs (Tiger Lake and newer)
   # OpenCL packages
-  - ocl-icd
-  - opencl-headers
-
+  - ocl-icd # OpenCL ICD Bindings
+  - opencl-headers # OpenCL (Open Computing Language) header files
   # OpenGL packages
-  - libgl
-
+  - libgl # OpenGL library
   # Mesa packages
-  - lib32-mesa-tkg-git
-  - mesa-tkg-git
-
+  - lib32-mesa-tkg-git # an open-source implementation of the OpenGL specification, git version
+  - mesa-tkg-git # an open-source implementation of the OpenGL specification, git version
   # Vulkan packages
-  - vulkan-headers
-  - vulkan-icd-loader
-  - vulkan-tools
-  - vulkan-utility-libraries
-  - vkbasalt
-  - vkd3d
+  - vulkan-headers # Vulkan header files and API registry
+  - vulkan-icd-loader # Vulkan Installable Client Driver (ICD) Loader
+  - vulkan-tools # Vulkan tools and utilities
+  - vulkan-utility-libraries # Vulkan Utility Libraries
+  - vkbasalt # A Vulkan post-processing layer. Some of the effects are CAS, FXAA, SMAA, deband.
+  - vkd3d # Direct3D 12 to Vulkan translation library By WineHQ

@@ -3,53 +3,51 @@ post_install_hook: ""
 hooks_behavior: skip
 packages:
   # Kernel packages
-  - linux-cachyos
-  - linux-cachyos-headers
-  - linux-xanmod-edge-x64v3
-  - linux-xanmod-edge-x64v3-headers
+  - linux-cachyos # The Linux EEVDF + LTO + AutoFDO + Propeller Cachy Sauce Kernel by CachyOS with other patches and improvements. kernel and modules
+  - linux-cachyos-headers # Headers and scripts for building modules for the Linux EEVDF + LTO + AutoFDO + Propeller Cachy Sauce Kernel by CachyOS with other patches and improvements. kernel
+  - linux-xanmod-edge-x64v3 # The Linux kernel and modules with Xanmod patches
+  - linux-xanmod-edge-x64v3-headers # Headers and scripts for building modules for the Linux Xanmod - Rolling Release [EDGE] kernel
   # Audio system packages
-  - noise-suppression-for-voice
-  - rnnoise
-  - rtkit
-  - mkinitcpio
-  - mkinitcpio-busybox
-  - mkinitcpio-firmware
-  - busybox
-  - cachyos-ananicy-rules
-  - earlyoom
-  - fwupd
-  - blueprint-compiler
-
+  - noise-suppression-for-voice # A real-time noise suppression plugin for voice
+  - rnnoise # A noise suppression library based on a recurrent neural network
+  - rtkit # Realtime Policy and Watchdog Daemon
+  - mkinitcpio # Modular initramfs image creation utility
+  - mkinitcpio-busybox # Base initramfs tools
+  - mkinitcpio-firmware # Optional firmware for the default linux kernel to get rid of the annoying 'WARNING: Possibly missing firmware for module:' messages
+  - busybox # Utilities for rescue and embedded systems
+  - cachyos-ananicy-rules # CachyOS - ananicy-rules
+  - earlyoom # Early OOM Daemon for Linux
+  - fwupd # Simple daemon to allow session software to update firmware
+  - blueprint-compiler # Markup language and compiler for GTK 4 user interfaces
   # Hardware monitoring and tools
-  - lm_sensors
-  - cpupower
-  - efitools
-  - haveged
-  - hdparm
-  - hwdetect
-  - lsscsi
-  - power-profiles-daemon
-  - smartmontools
-  - sof-firmware
+  - lm_sensors # Collection of user space tools for general SMBus access and hardware monitoring
+  - cpupower # Linux kernel tool to examine and tune power saving related features of your processor
+  - efitools # Tools for manipulating UEFI secure boot platforms
+  - haveged # Entropy harvesting daemon using CPU timings
+  - hdparm # A shell utility for manipulating Linux IDE drive/driver parameters
+  - hwdetect # Hardware detection script with loading modules and mkinitcpio.conf
+  - lsscsi # A tool that lists devices connected via SCSI and its transports
+  - power-profiles-daemon # Makes power profiles handling available over D-Bus
+  - smartmontools # Control and monitor S.M.A.R.T. enabled ATA and SCSI Hard Drives
+  - sof-firmware # Sound Open Firmware
   # Network hardware packages
-  - dhclient
-  - dnsutils
-  - ethtool
-  - modemmanager
-  - usb_modeswitch
-  - wireless-regdb
-  - wpa_supplicant
-  - xl2tpd
+  - dhclient # A standalone DHCP client from the dhcp package
+  - dnsutils # DNS utilities
+  - ethtool # Utility for controlling network drivers and hardware
+  - modemmanager # Mobile broadband modem management service
+  - usb_modeswitch # Activating switchable USB devices on Linux.
+  - wireless-regdb # Central Regulatory Domain Database
+  - wpa_supplicant # A utility providing key negotiation for WPA wireless networks
+  - xl2tpd # an open source implementation of the L2TP maintained by Xelerance Corporation
   # Virtual camera and I2C tools
-  - i2c-tools
-  - v4l2loopback-dkms
+  - i2c-tools # Heterogeneous set of I2C tools for Linux that used to be part of lm-sensors
+  - v4l2loopback-dkms # v4l2-loopback device – module sources
   # Additional hardware support
-  - lib32-libstdc++5
-  - libstdc++5
-  - pciutils
-  - libusb
-
+  - lib32-libstdc++5 # Legacy GNU Standard C++ library version 3 (32 bit)
+  - libstdc++5 # GNU Standard C++ library version 3
+  - pciutils # PCI bus configuration space access library and tools
+  - libusb # Library that provides generic access to USB devices
   # Utility packages
-  - sg3_utils
-  - usbutils
-  - v4l2loopback-utils  
+  - sg3_utils # Generic SCSI utilities
+  - usbutils # A collection of USB tools to query connected USB devices
+  - v4l2loopback-utils # v4l2-loopback device – utilities only

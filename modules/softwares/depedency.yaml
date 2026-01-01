@@ -3,51 +3,44 @@ post_install_hook: ""
 hooks_behavior: skip
 packages:
   # Build systems
-  - binutils
-  - cmake
-  - meson
-  - samurai
-  - ninja
-   
-  # Version control
-  
+  - binutils # A set of programs to assemble and manipulate binary and object files
+  - cmake # A cross-platform open-source make system
+  - meson # High productivity build system
+  - samurai # ninja-compatible build tool written in C
+  - ninja # Small build system with a focus on speed
   # Development tools
-  - cpio
-  - skim
-  - go
-  
-  - cni-plugins
-  - mods-bin
-  - cargo
-  - bun-bin
-  - wget
-   
+  - cpio # A tool to copy files into or out of a cpio or tar archive
+  - skim # Fuzzy Finder in Rust!
+  - go # Core compiler tools for the Go programming language
+  - jdk # Oracle Java Development Kit
+  - cni-plugins # Some standard networking plugins, maintained by the CNI team
+  - mods-bin # AI on the command line
+  - cargo # Rust package manager
+  - bun-bin # All-in-one JavaScript runtime built for speed, with bundler, transpiler, test runner, and package manager. Includes bunx, shell completions and support for baseline CPUs
+  - wget # Network utility to retrieve files from the web
+  - perl-file-mimeinfo # Determine file type, includes mimeopen and mimetype
   # LLVM/Clang toolchain
-  - llvm
-  - clang
-  - mold
-  - lld
-  - llvm-bolt
-   
+  - llvm # Compiler infrastructure
+  - clang # C language family frontend for LLVM
+  - mold # A Modern Linker
+  - lld # Linker from the LLVM project
+  - llvm-bolt # a post-link optimizer developed to speed up large applications
+  - jdk-openjdk # OpenJDK Java 25 development kit
   # Rust toolchain
-  - rustup
-   
+  - rustup # The Rust toolchain installer
   # Runtime environments
-  - python
-  - python-installer
-  - python-build
-  - nodejs
-  - python-zstandard
-  - python-netifaces-plus
-  - python-apscheduler
-  - python-anyqt
-   
+  - python # The Python programming language
+  - python-installer # Low-level library for installing a Python package from a wheel distribution
+  - python-build # A simple, correct Python build frontend
+  - nodejs # Evented I/O for V8 javascript ("Current" release)
+  - python-zstandard # Python bindings to the Zstandard (zstd) compression library
+  - python-netifaces-plus # Fork of al45tair/netifaces, portable module to access network interface information.
+  - python-apscheduler # In-process task scheduler with Cron-like capabilities
+  - python-anyqt # PyQt/PySide compatibility layer (PyQt4/PyQt5/PyQt6/PySide/PySide2)
   # Build caching
-  - sccache
-  - ccache
-   
+  - sccache # Shared compilation cache
+  - ccache # Compiler cache that speeds up recompilation by caching previous compilations
   # GPU tools
-  - zluda-git
-  - flang
-   
+  - zluda-git # A drop-in replacement for CUDA on non-NVIDIA GPUs (git version)
+  - flang # ground-up implementation of a Fortran front end written in modern C++
   # Container tools

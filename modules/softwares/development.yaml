@@ -1,18 +1,21 @@
 description: "Development"
 
 packages:
-  - vscodium
-  - vscodium-marketplace
-  - vscodium-features
-  - electron
-  - boxbuddy
-  - distrobox
-  - winboat
-  - pcp-gui
-  - podman
-  - podman-docker
-  - podman-desktop  
-  - podman-compose 
-  - git
+  # Code editors and IDEs
+  - vscodium # Free/Libre Open Source Software Binaries of VSCode (git build from latest release).
+  - vscodium-marketplace # Enable vscode marketplace in vscodium
+  - vscodium-features # Unblock some features in VSCodium
+  - electron # Meta package providing the latest available stable Electron build
+  # Containerization tools
+  - boxbuddy # A Graphical Interface for Distrobox
+  - distrobox # Use any linux distribution inside your terminal.
+  - winboat # Run Windows apps on Linux with seamless integration
+  - pcp-gui # Visualization tools for the Performance Co-Pilot toolkit
+  - podman # Tool and library for running OCI-based containers in pods
+  - podman-docker # Emulate Docker CLI using podman
+  - podman-desktop # Manage Podman and other container engines from a single UI and tray.
+  - podman-compose # A script to run docker-compose.yml using podman
+  # Version control
+  - git # the fast distributed version control system
 
 conflicts: []

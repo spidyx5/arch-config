@@ -3,40 +3,41 @@ post_install_hook: ""
 hooks_behavior: skip
 packages:
   # Network-related packages
-  - powerdns-recursor
-  - nftables
-  - opensnitch
-  - openvpn
-  - firewalld
-  - wireshark-qt
-  - alsa-utils
-  - blueman
-  - bluez
-  - bluez-tools
-  - bluez-utils
-  - pipewire
-  - pipewire-alsa
-  - pipewire-audio
-  - pipewire-jack
-  - pipewire-pulse
-  - wireplumber
-  - alsa-firmware
-  - alsa-plugins
-  - networkmanager
-  - networkmanager-openvpn
- 
+  - powerdns-recursor # Resolving DNS server
+  - nftables # Netfilter tables userspace tools
+  - opensnitch # A GNU/Linux application firewall
+  - openvpn # An easy-to-use, robust and highly configurable VPN (Virtual Private Network)
+  - firewalld # Firewall daemon with D-Bus interface
+  - wireshark-qt # Network traffic and protocol analyzer/sniffer - Qt GUI
+  # Bluetooth and audio
+  - alsa-utils # Advanced Linux Sound Architecture - Utilities
+  - blueman # GTK+ Bluetooth Manager
+  - bluez # Daemons for the bluetooth protocol stack
+  - bluez-tools # A set of tools to manage Bluetooth devices for Linux
+  - bluez-utils # Development and debugging utilities for the bluetooth protocol stack
+  - pipewire # Low-latency audio/video router and processor
+  - pipewire-alsa # Low-latency audio/video router and processor - ALSA configuration
+  - pipewire-audio # Low-latency audio/video router and processor - Audio support
+  - pipewire-jack # Low-latency audio/video router and processor - JACK replacement
+  - pipewire-pulse # Low-latency audio/video router and processor - PulseAudio replacement
+  - wireplumber # Session / policy manager implementation for PipeWire
+  - alsa-firmware # Firmware binaries for loader programs in alsa-tools and hotplug firmware loader
+  - alsa-plugins # Additional ALSA plugins
+  - networkmanager # Network connection manager and user applications
+  - networkmanager-openvpn # NetworkManager VPN plugin for OpenVPN (with GUI)
   # Sound-related packages
-  - python-indexed-zstd
-  - easyeffects
-  - pavucontrol
-  - pwvucontrol
-  - qpwgraph
-  - iwd
-  - btdu-bin
-  - btrfs-compress
-  - btrfs-desktop-notification
-  - btrfs-du
-  - btrfs-list
-  - btrfs-heatmap
-  - btrfs-assistant
-  - python-pyclip
+  - python-indexed-zstd # A bridge for libzstd-seek to python
+  - easyeffects # Audio Effects for Pipewire applications
+  - pavucontrol # PulseAudio Volume Control
+  - pwvucontrol # Pipewire volume control for GNOME
+  - qpwgraph # PipeWire Graph Qt GUI Interface
+  - iwd # Internet Wireless Daemon
+  - btdu-bin # Sampling disk usage profiler for btrfs
+  # Btrfs utilities
+  - btrfs-compress # btrfs tool that makes it possible to change +c flags recursively on existing files
+  - btrfs-desktop-notification # Notifies you on the desktop when booting into a read-only system or when BTRFS warning/error messages appear in the dmesg log.
+  - btrfs-du # Easily print BTRFS subvolume/snapshot disk usage
+  - btrfs-list # Get a nice tree-style view of your btrfs subvolumes/snapshots, including their size, a la 'zfs list'
+  - btrfs-heatmap # Visualize the layout of data on your btrfs filesystem over time
+  - btrfs-assistant # An application for managing BTRFS subvolumes and Snapper snapshots
+  - python-pyclip # Cross-platform clipboard utilities supporting both binary and text data

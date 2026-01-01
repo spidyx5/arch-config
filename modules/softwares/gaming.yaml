@@ -3,29 +3,26 @@ post_install_hook: ""
 hooks_behavior: skip
 packages:
   # Gaming platforms
-  - steam
-  - heroic-games-launcher-git
-  
+  - steam # Valve's digital software delivery system
+  - heroic-games-launcher-git # Native GOG, Epic Games and Amazon games launcher for Linux
   # Gaming tools
-  - gamescope
-  - mangohud
-  - protonplus
-  - mangojuice
-  - bottles
-  - sunshine
-  - tailscale
-  
+  - gamescope # SteamOS session compositing window manager
+  - mangohud # A Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more.
+  - protonplus # A simple Wine and Proton-based compatiblity tools manager for GNOME
+  - mangojuice # A convenient alternative to GOverlay for configuring MangoHud
+  - bottles # Easily manage wine and proton prefix
+  - sunshine # Self-hosted game stream host for Moonlight
+  - tailscale # A mesh VPN that makes it easy to connect your devices, wherever they are.
   # Controller support
-  - joyutils
-  - antimicrox
-  - jstest-gtk-git
-   
+  - joyutils # jscal, jstest, and jsattach utilities for the Linux joystick driver
+  - antimicrox # Graphical program used to map keyboard buttons & mouse controls to a gamepad
+  - jstest-gtk-git # A simple GTK2-based joystick tester and calibrator
   # Android gaming
-  - waydroid
-  - waydroid-launcher-git
-  - waydroidsu
-  - waydroid-script-git  
-  - waydroid-helper-git
+  - waydroid # A container-based approach to boot a full Android system on a regular Linux system
+  - waydroid-launcher-git # For better launching Waydroid. Sources from Bazzite.
+  - waydroidsu # CLI Magisk manager and installer for Waydroid written in Rust
+  - waydroid-script-git # Python Script to add OpenGapps, Magisk, libhoudini translation library and libndk translation library to waydroid
+  - waydroid-helper-git # A GUI application for Waydroid configuration and extension installation
   - game-devices-udev # udev rules for game controllers
   - sc-controller # Steam Controller configuration
   - xboxdrv # Xbox controller driver

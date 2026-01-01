@@ -3,60 +3,52 @@ post_install_hook: ""
 hooks_behavior: skip
 packages:
   # Essential base system
-  - base
-  - base-devel
-  # dcli dependencies
-  - irqbalance
-  - paru
-  - snapper
-  - yay-bin
-  # Security & Network Base
-  
-  - pacman-contrib
-  - pkgfile
-  - rebuild-detector
-  - reflector
-  - extra-cmake-modules
-  # Utilities & compression
-  # System GUI applications
-  # Network management
-  # Audio & multimedia GUI
-  # System monitoring & information
-    # System Maintenance
- 
+  - base # Minimal package set to define a basic Arch Linux installation
+  - base-devel # Basic tools to build Arch Linux packages
+  # Package management tools
+  - irqbalance # IRQ balancing daemon for SMP systems
+  - paru # Feature packed AUR helper
+  - snapper # A tool for managing BTRFS and LVM snapshots
+  - yay-bin # Yet another yogurt. Pacman wrapper and AUR helper written in go. Pre-compiled.
+  # Package management utilities
+  - pacman-contrib # Contributed scripts and tools for pacman systems
+  - pkgfile # A tool to search for files in official repository packages
+  - rebuild-detector # Detects which packages need to be rebuilt
+  - reflector # A Python 3 module and script to retrieve and filter the latest Pacman mirror list.
+  - extra-cmake-modules # Extra modules and scripts for CMake
   # Multimedia Support
-  - ffmpegthumbnailer
-  - libgsf
-  - libopenraw
-  - mlocate
-  - poppler-glib
-  - vlc-plugins-all
-  - limine
-  - limine-mkinitcpio-hook
-  - btrfs-progs
-  - f2fs-tools
-  - fuse2
-  - fuse3
-  - fuseiso
-  - gvfs
-  - libappimage
-  - ananicy-cpp
- 
-  - scx-scheds
-  - thermald
-  - tuned
-  - upower
-  - cachyos-hello
-  - cachyos-kernel-manager
-  - cachyos-packageinstaller
-  - unzip
-  # Utilities & compression
-  - bind-tools
-  - dosfstools
-  - evtest
-  # System utilities & tools
-  # File system tools
-  - avfs
+  - ffmpegthumbnailer # Lightweight video thumbnailer that can be used by file managers
+  - libgsf # Extensible I/O abstraction library for dealing with structured file formats
+  - libopenraw # Library for decoding RAW files
+  - mlocate # Merging locate/updatedb implementation
+  - poppler-glib # Poppler glib bindings
+  - vlc-plugins-all # Free and open source cross-platform multimedia player and framework - all plugins
+  # Bootloader and filesystem tools
+  - limine # An advanced, portable, multiprotocol bootloader
+  - limine-mkinitcpio-hook # Install kernel for the Limine bootloader.
+  - btrfs-progs # Btrfs filesystem utilities
+  - f2fs-tools # Tools for Flash-Friendly File System (F2FS)
+  - fuse2 # Interface for userspace programs to export a filesystem to the Linux kernel
+  - fuse3 # Interface for userspace programs to export a filesystem to the Linux kernel
+  - fuseiso # FUSE module to mount ISO filesystem images
+  - gvfs # Virtual filesystem implementation for GIO
+  - libappimage # Reference implementation of the AppImage specification
+  - ananicy-cpp # Ananicy Cpp is a full rewrite of Ananicy in C++, featuring lower CPU and RAM usage.
+  # System performance and power management
+  - scx-scheds # sched_ext schedulers and tools
+  - thermald # The Linux Thermal Daemon program from 01.org
+  - tuned # Daemon that performs monitoring and adaptive configuration of devices in the system
+  - upower # Abstraction for enumerating power devices, listening to device events and querying history and statistics
+  # CachyOS specific tools
+  - cachyos-hello # Welcome screen for CachyOS
+  - cachyos-kernel-manager # Simple kernel manager
+  - cachyos-packageinstaller # Simple Software Application Package Installer for CachyOS which helps setting up & installing applications
+  # Compression and archiving tools
+  - unzip # For extracting and viewing files in .zip archives
+  - bind-tools # DNS tools
+  - dosfstools # DOS filesystem utilities
+  - evtest # Input device event monitor and query tool
+  - avfs # Virtual filesystem that allows browsing compressed files
 exclude:
   - nano
   - linux-lts

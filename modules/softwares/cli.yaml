@@ -3,74 +3,72 @@ post_install_hook: ""
 hooks_behavior: skip
 packages:
   # Core CLI utilities
-  - bat
-  - brightnessctl
-  - curl
-  - eza
-  - fd
-  - imv
-  - jaq
-  - nvtop
-  - ripgrep
-  - cmatrix
-  - figlet
-  - cool-retro-term
-  - lolcat
-  
-  - perl-file-mimeinfo
-  - shared-mime-info
-  - tealdeer
-  - ueberzugpp
-  - ghostty
-  - ghostty-shell-integration
-  - fastfetch
-  - rmpc
-  - compsize
-  - disorderfs
-  - duperemove
-  
+  - bat # Cat clone with syntax highlighting and git integration
+  - brightnessctl # Lightweight brightness control tool
+  - curl # command line tool and library for transferring data with URLs
+  - eza # A modern replacement for ls (community fork of exa)
+  - fd # Simple, fast and user-friendly alternative to find
+  - imv # Image viewer for Wayland and X11
+  - jaq # A jq clone focussed on correctness, speed, and simplicity
+  - nvtop # GPUs process monitoring for AMD, Intel and NVIDIA
+  - ripgrep # A search tool that combines the usability of ag with the raw speed of grep
+  - cmatrix # A curses-based scrolling 'Matrix'-like screen
+  - figlet # A program for making large letters out of ordinary text
+  - cool-retro-term # A good looking terminal emulator which mimics the old cathode display
+  - lolcat # Okay, no unicorns. But rainbows!!
+  # File and system utilities
+  - perl-file-mimeinfo # Determine file type, includes mimeopen and mimetype
+  - shared-mime-info # Freedesktop.org Shared MIME Info
+  - tealdeer # A fast tldr client in Rust
+  - ueberzugpp # Command line utility which allows to display images in the terminal, written in C++
+  - ghostty # Fast, native, feature-rich terminal emulator pushing modern features
+  - ghostty-shell-integration # Shell integration scripts for ghostty
+  - fastfetch # A feature-rich and performance oriented neofetch like system information tool
+  - rmpc # A beautiful and configurable TUI client for MPD
+  - compsize # Calculate compression ratio of a set of files on Btrfs
+  - disorderfs # FUSE filesystem that introduces non-determinism
+  - duperemove # Btrfs extent deduplication utility
   # Network & security
-  - apparmor
-  - lynis
-  - nmap
-  - openssh
-  - tpm2-tools
-  # Miscellaneous
-  - gettext
-  - keyd
-  - seatd
-  - feh
-  
-  # System monitoring & management
-   
+  - apparmor # Mandatory Access Control (MAC) using Linux Security Module (LSM)
+  - lynis # Security and system auditing tool to harden Unix/Linux systems
+  - nmap # Utility for network discovery and security auditing
+  - openssh # SSH protocol implementation for remote login, command execution and file transfer
+  - tpm2-tools # Trusted Platform Module 2.0 tools based on tpm2-tss
+  # Miscellaneous utilities
+  - gettext # GNU internationalization library
+  - keyd # A key remapping daemon for linux
+  - seatd # A minimal seat management daemon, and a universal seat management library
+  - feh # Fast and light imlib2-based image viewer
   # System shells
-  - bash
-  - fish
-  - nushell
-  - zsh
+  - bash # The GNU Bourne Again shell
+  - fish # Smart and user friendly shell intended mostly for interactive use
+  - nushell # A new type of shell
+  - zsh # A very advanced and programmable command interpreter (shell) for UNIX
   # Browsers & Web
-  - chromium-widevine
-  # Extended System & AUR
-  - archlinux-userland-fs-cmp
-  - aurscan-git
-  - bees-git
-  - bpftune-git
-  - dmidecode
-
-  - zoxide
-  - yazi
-  - fresh-editor-bin
-  - fuzzel-rbw
-  - pipes.sh
-  - qwen-code
-  - tree-sitter-cli
-  - cava
-  - libsixel
-  - gemini-cli
-  - flatpak
-  - starship
-  - yt-dlp
-  - cbonsai
-  - libgen-cli-bin
+  - chromium-widevine # A browser plugin designed for the viewing of premium video content
+  # Extended System & AUR tools
+  - archlinux-userland-fs-cmp # Forensic tool to read all installed packages from a mounted Arch Linux drive and compare the filesystem to a trusted source
+  - aurscan-git # Automatically scan AUR packages with ClamAV before building them with Paru.
+  - bees-git # Best-Effort Extent-Same, a btrfs deduplicator daemon
+  - bpftune-git # BPF/tracing tools for auto-tuning Linux
+  - dmidecode # Desktop Management Interface table related utilities
+  # File management and navigation
+  - zoxide # A smarter cd command for your terminal
+  - yazi # Blazing fast terminal file manager written in Rust, based on async I/O
+  - fresh-editor-bin # A lightweight, fast terminal-based text editor with LSP support and TypeScript plugins
+  - fuzzel-rbw # A simple Bitwarden RBW frontend for Fuzzel
+  # Multimedia and entertainment
+  - pipes.sh # Animated pipes terminal screensaver
+  - qwen-code # cli coding agent (fork of gemini-cli)
+  - tree-sitter-cli # CLI tool for developing, testing, and using Tree-sitter parsers
+  - cava # Console-based Audio Visualizer with support for multiple backends
+  - libsixel # Provides a codec for DEC SIXEL graphics and some converter programs
+  - gemini-cli # Open-source AI agent that brings the power of Gemini directly into your terminal
+  # Package management
+  - flatpak # Linux application sandboxing and distribution framework (formerly xdg-app)
+  - starship # The cross-shell prompt for astronauts
+  - yt-dlp # A youtube-dl fork with additional features and fixes
+  - cbonsai # A bonsai tree generator, written in C using ncurses
+  - libgen-cli-bin # A CLI tool to access the Library Genesis dataset
 
   

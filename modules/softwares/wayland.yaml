@@ -3,59 +3,45 @@ post_install_hook: ""
 hooks_behavior: skip
 packages:
   # Core Wayland packages
-  - wayland
-  - wayland-protocols
-  - wayland-utils
-  
+  - wayland # A computer display server protocol
+  - wayland-protocols # Specifications of extended Wayland protocols
+  - wayland-utils # Wayland tools to display information about current compositor
   # Wayland utilities
-  - wl-clipboard
-  - wlsunset
-  - kanshi
-  - wdisplays
-  - wev
-  - wlr-randr
-  - wtype
-  
+  - wl-clipboard # Command-line copy/paste utilities for Wayland
+  - wlsunset # Day/night gamma adjustments for Wayland compositors
+  - kanshi # Dynamic output configuration for Wayland WMs
+  - wdisplays # GUI display configurator for wlroots compositors
+  - wev # A tool for debugging wayland events on a Wayland window, analagous to the X11 tool xev
+  - wlr-randr # Utility to manage outputs of a Wayland compositor
+  - wtype # xdotool type for wayland
   # Screenshot tool
-  - swappy
-  
+  - swappy # A Wayland native snapshot editing tool
   # File managers
-  - nemo
-  
+  - nemo # File manager for Cinnamon (Nautilus fork)
   # Audio tools
-  - python-pywal16
-  
+  - python-pywal16 # Generate and change color-schemes on the fly (fork that uses 16 colors)
   # Color temperature
-  - gammastep
-  
+  - gammastep # Adjust the color temperature of your screen according to your surroundings.
   # Fonts
-  - inter-font
-  - noto-fonts
-  - terminus-font
-  
-  - matugen-bin
-  
+  - inter-font # A typeface specially designed for user interfaces
+  - noto-fonts # Google Noto TTF fonts
+  - terminus-font # Monospace bitmap font (for X11 and console)
+  - matugen-bin # A material you color generation tool with templates
   # System tools
-  - cachyos-hooks
-  - cachyos-settings
-  
+  - cachyos-hooks # CachyOS libalpm hooks
+  - cachyos-settings # CachyOS - Settings
   # Location services
-  - geoclue
-  
+  - geoclue # Modular geoinformation service built on the D-Bus messaging system
   # Network management
-  
   # XWayland
-  - xorg-xwayland
-  
+  - xorg-xwayland # run X clients under wayland
   # XDG utilities
-  - xdg-user-dirs
-  - xdg-utils
-  
+  - xdg-user-dirs # Manage user directories like ~/Desktop and ~/Music
+  - xdg-utils # Command line tools that assist applications with a variety of desktop integration tasks
   # Account service
-  - accountsservice
-  
+  - accountsservice # D-Bus interface for user account query and manipulation
   # Multimedia support
-  - gst-libav
-  - gst-plugin-pipewire
-  - gst-plugins-bad
-  - gst-plugins-ugly
+  - gst-libav # Multimedia graph framework - libav plugin
+  - gst-plugin-pipewire # Multimedia graph framework - pipewire plugin
+  - gst-plugins-bad # Multimedia graph framework - bad plugins
+  - gst-plugins-ugly # Multimedia graph framework - ugly plugins
