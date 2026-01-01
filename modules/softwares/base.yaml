@@ -70,6 +70,9 @@ packages:
   - thermald # The Linux Thermal Daemon program from 01.org for thermal management
   - tuned # Daemon that performs monitoring and adaptive configuration of devices in the system
   - upower # Abstraction for enumerating power devices, listening to device events and querying history and statistics
+  # Desktop notifications
+  - fyi # A command line utility and notify-send alternative to send desktop notifications (desktop notification tool)
+  - notify-send.sh # notify-send drop-in replacement with more features (enhanced notification tool)
   
   # ============================================================================
   # CACHYOS SPECIFIC TOOLS

@@ -94,18 +94,15 @@ packages:
   
   # Antivirus and security
   - clamav-gui # Graphical user interface for clamav and freshclam with an integrated service menu for Konqueror/Dolphin to scan files directly from your file manager (antivirus GUI)
-  
+  - clamav # Command-line virus scanner (antivirus engine)
+  - clamav-unofficial-sigs # Unofficial virus signature updates for ClamAV (virus definitions)
+  - clamav-desktop-bin # Graphical user interface for ClamAV (GUI antivirus client)
+  - download-guardian # User-level lightweight service that watches ~/Downloads and prompts to scan new files/folders with Download Guardian (powered by ClamAV)
+    
   # ============================================================================
   # TEXT EDITOR
   # ============================================================================
   
   # Text editing
   - kate # Advanced text editor (Kate text editor)
-  
-  # ============================================================================
-  # GUI DEVELOPMENT TOOLS
-  # ============================================================================
-  
-  # GUI development support
 
- 
