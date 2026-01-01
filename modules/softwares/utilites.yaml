@@ -19,6 +19,7 @@ packages:
   # ============================================================================
   
   # Audio system utilities
+  - alsa-tools # Advanced tools for certain sound cards (ALSA advanced tools)
   - alsa-utils # Advanced Linux Sound Architecture - Utilities (ALSA command-line tools)
   - alsa-firmware # Firmware binaries for loader programs in alsa-tools and hotplug firmware loader (ALSA firmware)
   - alsa-plugins # Additional ALSA plugins (ALSA audio plugins)
@@ -36,7 +37,7 @@ packages:
   - pipewire-jack # Low-latency audio/video router and processor - JACK replacement (PipeWire JACK support)
   - pipewire-pulse # Low-latency audio/video router and processor - PulseAudio replacement (PipeWire PulseAudio)
   - wireplumber # Session / policy manager implementation for PipeWire (PipeWire session manager)
-  
+  - jack-utils # The JACK low-latency audio server (JACK audio server)
   # ============================================================================
   # SOUND-RELATED PACKAGES
   # ============================================================================

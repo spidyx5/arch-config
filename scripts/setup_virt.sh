@@ -6,97 +6,161 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-# Detect the real user (since we are running as sudo)
+# Detect Real User
 REAL_USER=${SUDO_USER:-$USER}
 USER_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
 
-echo "=== Configuring Virtualization for User: $REAL_USER ==="
+echo "=== 🕷️ Configuring Virtualization (Spidy Low-RAM Profile) ==="
 
 # ==============================================================================
-# 1. LIBVIRT CONFIGURATION
+# 1. KERNEL SAMEPAGE MERGING (KSM) - CRITICAL FOR 16GB RAM
 # ==============================================================================
-echo "Configuring Libvirt..."
-
-# Enable the system-wide service
-systemctl enable --now libvirtd
-
-# Configure QEMU (Anti-detection / Root execution)
-QEMU_CONF="/etc/libvirt/qemu.conf"
-
-if [ -f "$QEMU_CONF" ]; then
-    # Set user/group to root (matches NixOS runAsRoot)
-    sed -i 's/^#user = "root"/user = "root"/' "$QEMU_CONF"
-    sed -i 's/^#group = "root"/group = "root"/' "$QEMU_CONF"
-    
-    # Disable dynamic ownership
-    sed -i 's/^#dynamic_ownership = 1/dynamic_ownership = 0/' "$QEMU_CONF"
-    
-    # Clear namespaces
-    sed -i 's/^#namespaces = .*/namespaces = []/' "$QEMU_CONF"
+echo "[-] Enabling KSM (Kernel Samepage Merging)..."
+# KSM deduplicates memory. If Windows and Waydroid both load the same library,
+# KSM merges them into one RAM block. Saves GBs of RAM.
+if [ -f /sys/kernel/mm/ksm/run ]; then
+    echo 1 | tee /sys/kernel/mm/ksm/run
+    # Sleep 200ms between scans (Aggressive but low CPU usage)
+    echo 200 | tee /sys/kernel/mm/ksm/sleep_millisecs
+else
+    echo "    ! KSM not supported by kernel (Skipping)"
 fi
 
-# FIXED: Add the REAL_USER to the groups, not root
-usermod -aG libvirt "$REAL_USER"
-usermod -aG kvm "$REAL_USER"
+# ==============================================================================
+# 2. LIBVIRT & QEMU (Windows VM / GPU Passthrough)
+# ==============================================================================
+echo "[-] Configuring Libvirt & QEMU..."
 
-# Restart libvirt to apply config changes
+# Install packages:
+# - qemu-desktop: The emulator
+# - virt-manager: GUI
+# - swtpm: TPM 2.0 emulator (REQUIRED for Windows 11)
+# - ovmf: UEFI BIOS
+pacman -S --needed --noconfirm qemu-desktop libvirt edk2-ovmf swtpm virt-manager dnsmasq iptables-nft
+
+# Enable Services
+systemctl enable --now libvirtd
+systemctl enable --now virtlogd
+
+# Add user to groups (Crucial for access without 'sudo')
+usermod -aG libvirt,kvm,input,disk,audio,video "$REAL_USER"
+
+# Configure QEMU (Low Latency Audio & Permissions)
+QEMU_CONF="/etc/libvirt/qemu.conf"
+
+# Backup existing config
+[ ! -f "$QEMU_CONF.bak" ] && cp "$QEMU_CONF" "$QEMU_CONF.bak"
+
+cat <<EOF > "$QEMU_CONF"
+# === Spidy QEMU Config ===
+
+# 1. Audio: Use PulseAudio/Pipewire (Best for Gaming Latency)
+audio_driver = "pa"
+
+# 2. Security: Run as root is bad. Libvirt defaults to 'nobody:kvm' or dynamic.
+# We stick to dynamic ownership but allow specific device access.
+
+# 3. Device ACLs (Required for GPU/USB Passthrough)
+# Allows the VM to access the VFIO groups for your Intel Arc
+cgroup_device_acl = [
+    "/dev/null", "/dev/full", "/dev/zero",
+    "/dev/random", "/dev/urandom",
+    "/dev/ptmx", "/dev/kvm",
+    "/dev/vfio/vfio", 
+    "/dev/vfio/1", "/dev/vfio/2", "/dev/vfio/3", "/dev/vfio/4",
+    "/dev/dri/card0", "/dev/dri/renderD128"
+]
+
+# 4. NVMe Passthrough Fix
+namespaces = []
+EOF
+
+# Restart to apply
 systemctl restart libvirtd
 
 # ==============================================================================
-# 2. PODMAN CONFIGURATION
+# 3. PODMAN (High Perf / Low RAM)
 # ==============================================================================
-echo "Configuring Podman..."
+echo "[-] Configuring Podman with crun..."
+
+# Install 'crun'. It is written in C.
+# 'runc' (default) is written in Go and uses ~15MB more RAM per container.
+pacman -S --needed --noconfirm podman crun netavark aardvark-dns
+
+# Configure Podman to use crun by default
+mkdir -p /etc/containers
+cat <<EOF > /etc/containers/containers.conf
+[engine]
+runtime = "crun"
+# Use netavark for better network performance (Rust-based)
+network_cmd = "/usr/lib/podman/netavark"
+EOF
 
 # Prevent Docker CLI warning
 touch /etc/containers/nodocker
 
-# FIXED: Create systemd user files in the REAL USER'S home directory
+# Setup User Systemd Services (Auto-Prune)
 USER_SYSTEMD_DIR="$USER_HOME/.config/systemd/user"
 mkdir -p "$USER_SYSTEMD_DIR"
 
-# Create Prune Service
+# Service: Prune unused images/containers
 cat <<EOF > "$USER_SYSTEMD_DIR/podman-prune.service"
 [Unit]
 Description=Podman Auto Prune
-
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/podman system prune --all -f
 EOF
 
-# Create Prune Timer
+# Timer: Run weekly
 cat <<EOF > "$USER_SYSTEMD_DIR/podman-prune.timer"
 [Unit]
 Description=Run Podman Prune Weekly
-
 [Timer]
 OnCalendar=weekly
 Persistent=true
-
 [Install]
 WantedBy=timers.target
 EOF
 
-# FIXED: Fix ownership so the user can actually use these files
+# Fix Ownership
 chown -R "$REAL_USER:$REAL_USER" "$USER_HOME/.config"
 
-echo " -> Podman auto-prune timer created."
+echo " -> Podman configured to use 'crun' (Saves RAM)."
 
 # ==============================================================================
-# 3. WAYDROID CONFIGURATION
+# 4. WAYDROID (Gaming)
 # ==============================================================================
-echo "Configuring Waydroid..."
-# Waydroid container service is system-wide
+echo "[-] Configuring Waydroid..."
+
+pacman -S --needed --noconfirm waydroid
+
+# Enable Container Service
 systemctl enable --now waydroid-container
 
 # ==============================================================================
-# 4. FINAL INSTRUCTIONS
+# 5. PASSTHROUGH PREP (Intel Arc)
 # ==============================================================================
-echo "=== Virtualization Setup Complete ==="
-echo "NOTE: Some actions require user permissions and cannot be run by sudo."
-echo "Please run the following commands manually as $REAL_USER (without sudo):"
+echo "[-] Setting up VFIO modules..."
+
+# Create modprobe config to load VFIO drivers early
+cat <<EOF > /etc/modules-load.d/vfio.conf
+vfio
+vfio_pci
+vfio_iommu_type1
+EOF
+
+echo "=== ✅ Virtualization Optimization Complete ==="
+echo "MANUAL STEPS REQUIRED FOR $REAL_USER:"
+echo "--------------------------------------------------------"
+echo "1. Enable Podman Timer:"
+echo "   systemctl --user enable --now podman-prune.timer"
 echo ""
-echo "  systemctl --user enable --now podman.socket"
-echo "  systemctl --user enable --now podman-prune.timer"
-echo "  sudo waydroid init"
+echo "2. Initialize Waydroid (Downloads Android Image):"
+echo "   sudo waydroid init"
 echo ""
+echo "3. Waydroid Gaming (Essential for Intel):"
+echo "   Install libhoudini (ARM translation) or gaming won't work."
+echo "   Run: git clone https://github.com/waydroid-extras/waydroid-extras.git"
+echo "   Then: sudo python3 waydroid-extras/waydroid-extras.py -i libhoudini"
+echo "--------------------------------------------------------"

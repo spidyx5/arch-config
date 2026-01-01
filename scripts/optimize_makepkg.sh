@@ -1,285 +1,122 @@
-#!/usr/bin/bash
+#!/bin/bash
 #
-# optimize-makepkg.sh
+# optimize-makepkg-clang.sh
 #
-# High-performance makepkg configuration for Arch Linux / AUR:
-#   - Clang (if installed)
-#   - LLVM + mold linker (if installed)
-#   - Global LTO enabled
-#   - PGO helpers for use with makepkg-optimize
+# High-Performance Makepkg Config for Spidy
+# Toolchain: Clang + LLVM + Mold
+# Conflict Resolution: Overwrites flags to prevent duplication.
 #
-# Creates a drop-in config: /etc/makepkg.conf.d/99-performance.conf
-#
-# Run as root (e.g. via sudo).
 
 set -euo pipefail
 
-CONF_MAIN="/etc/makepkg.conf"
+# Check for Root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root (sudo)"
+  exit
+fi
+
 CONF_DIR="/etc/makepkg.conf.d"
-CONF_DROPIN="${CONF_DIR}/99-performance.conf"
+CONF_DROPIN="${CONF_DIR}/99-spidy-clang-mold.conf"
 CORES=$(nproc)
 
-echo "[*] Optimizing makepkg for high performance (Clang + LLVM + Mold + PGO helpers)"
-echo "    Detected CPU cores: ${CORES}"
+echo "=== 🕷️ Generating Clang/Mold Makepkg Config ==="
+echo "    Detected CPU Cores: ${CORES}"
 
-# 0) Sanity check: makepkg.conf must exist
-if [[ ! -f "${CONF_MAIN}" ]]; then
-  echo "ERROR: ${CONF_MAIN} not found."
-  echo ""
-  echo "This usually means one of the following:"
-  echo "  1) pacman/makepkg is not installed."
-  echo "  2) You are in a container / environment without pacman's config files."
-  echo "  3) The file was deleted or moved."
-  echo ""
-  echo "Please:"
-  echo "  - Ensure you are on an Arch/Arch-based system with pacman installed:"
-  echo "      pacman -V"
-  echo "  - Or, if you are using a custom config, edit this script and set CONF_MAIN"
-  echo "    to that path (e.g. ~/.makepkg.conf)."
-  echo "  - If you really want to create a minimal ${CONF_MAIN} from scratch,"
-  echo "    install the 'pacman' package first."
-  echo ""
-  echo "Aborting."
-  exit 1
+# 1. Check for Required Tools
+echo "[-] Checking toolchain..."
+MISSING_DEPS=()
+
+if ! command -v clang &>/dev/null; then MISSING_DEPS+=("clang"); fi
+if ! command -v mold &>/dev/null; then MISSING_DEPS+=("mold"); fi
+if ! command -v lld &>/dev/null; then MISSING_DEPS+=("lld"); fi
+
+if [ ${#MISSING_DEPS[@]} -ne 0 ]; then
+    echo "    [!] Missing packages: ${MISSING_DEPS[*]}"
+    echo "    Installing them now..."
+    pacman -S --noconfirm "${MISSING_DEPS[@]}"
 fi
 
-# 1) Backup main makepkg.conf
-if [[ ! -f "${CONF_MAIN}.bak" ]]; then
-  echo "[*] Backing up ${CONF_MAIN} to ${CONF_MAIN}.bak ..."
-  cp -a "${CONF_MAIN}" "${CONF_MAIN}.bak"
-else
-  echo "[*] Backup ${CONF_MAIN}.bak already exists, skipping."
-fi
-
-# 2) Ensure drop-in directory exists
+# 2. Ensure Directory Exists
 mkdir -p "${CONF_DIR}"
 
-# 3) Base CFLAGS / CXXFLAGS
-BASE_CFLAGS=(
-  -march=native
-  -O3
-  -pipe
-  -fno-plt
-  -fexceptions
-  -Wformat
-  -Werror=format-security
-  -fstack-clash-protection
-  -fcf-protection
-  -fstack-protector-strong
-  -fno-semantic-interposition
-  -ffunction-sections
-  -fdata-sections
-)
+# 3. Write the Configuration
+# We use 'cat' to completely define the file.
+# Note: We do NOT use ${CFLAGS} inside the string to avoid duplication.
+# We define the flags from scratch.
 
-AGGRESSIVE_CFLAGS="${BASE_CFLAGS[*]}"
+cat >"${CONF_DROPIN}" <<EOF
+#########################################################################
+# SPIDY HIGH-PERFORMANCE CONFIG (Clang + Mold)
+# Overrides /etc/makepkg.conf
+#########################################################################
 
-# 4) Linker flags (common part)
-COMMON_LDFLAGS=(
-  -Wl,-O2
-  -Wl,--sort-common
-  -Wl,--as-needed
-  -Wl,-z,relro
-  -Wl,-z,now
-  -Wl,--gc-sections
-)
+# 1. Parallel Compilation
+MAKEFLAGS="-j${CORES}"
+NINJAFLAGS="-j${CORES}"
 
-# Choose linker: mold if available, otherwise default
-if command -v mold &>/dev/null; then
-  echo "[*] mold linker detected -> enabling in LDFLAGS and RUSTFLAGS"
-  LDFLAGS="${COMMON_LDFLAGS[*]} -fuse-ld=mold"
-
-  RUSTFLAGS=(
-    -C target-cpu=native
-    -C link-arg=-fuse-ld=mold
-  )
-else
-  echo "[*] mold not found -> using standard linker flags"
-  LDFLAGS="${COMMON_LDFLAGS[*]}"
-  RUSTFLAGS=(
-    -C target-cpu=native
-  )
-fi
-
-RUSTFLAGS_STR="${RUSTFLAGS[*]}"
-
-# 5) Clang detection
-ENABLE_CLANG=0
-if command -v clang &>/dev/null && command -v clang++ &>/dev/null; then
-  ENABLE_CLANG=1
-  echo "[*] Clang and clang++ found -> will configure Clang as default compiler."
-  echo "[!] NOTE: some packages (kernel modules, NVIDIA, etc.) may not build with Clang."
-  echo "[!]      If that happens, comment out CC/CXX in ${CONF_DROPIN}."
-else
-  echo "[*] Clang not fully installed -> keeping system default compiler (usually GCC)."
-fi
-
-# 6) Build environment and options
-BUILDENV_OPTIONS=(
-  !distcc
-  color
-  ccache
-  check
-  !sign
-)
-
-OPTIONS_ARRAY=(
-  !debug
-  docs
-  emptydirs
-  !libtool
-  purge
-  !staticlibs
-  strip
-  zipman
-  lto
-)
-
-# 7) Compression and extensions
-COMPRESSZST=(
-  zstd
-  -c
-  -z
-  -q
-  -T0
-  '--auto-threads=logical'
-  '-15'
-  -
-)
-
-PKGEXT=".pkg.tar.zst"
-SRCEXT=".src.tar.gz"
-
-# 8) Write the drop-in configuration file
-echo "[*] Writing performance configuration to ${CONF_DROPIN} ..."
-
-cat >"${CONF_DROPIN}" <<'EOF'
-#####################################################################
-# High-performance makepkg settings (auto-generated by
-# optimize-makepkg.sh).
-#
-# This is a drop-in file: /etc/makepkg.conf.d/*.conf is sourced
-# after /etc/makepkg.conf, so these settings can override or
-# extend the defaults. See makepkg.conf(5) and the Arch Wiki
-# "makepkg" page for details.
-#####################################################################
-
-#############################################
-# Build environment
-#############################################
-
-# Parallel builds for make (uses all CPU cores).
-MAKEFLAGS="--jobs=@@CORES@@"
-
-# Build features:
-#   !debug   – do not produce debug packages by default (faster builds).
-#   lto      – enable Link-Time Optimization globally.
-#
-BUILDENV=(!distcc color ccache check !sign)
-
-# Global package options:
-OPTIONS=(!debug docs emptydirs !libtool purge !staticlibs strip zipman lto)
-
-#############################################
-# Compiler flags (C/C++/Rust)
-#############################################
-
-CFLAGS="${CFLAGS} @@AGGRESSIVE_CFLAGS@@"
-CXXFLAGS="${CXXFLAGS} @@AGGRESSIVE_CFLAGS@@"
-RUSTFLAGS="${RUSTFLAGS} @@RUSTFLAGS_STR@@"
-
-#############################################
-# Linker flags (mold if available)
-#############################################
-
-LDFLAGS="${LDFLAGS} @@LDFLAGS@@"
-
-#############################################
-# Optional: PGO (Profile-Guided Optimization) helpers
-#############################################
-
-# If you install makepkg-optimize (AUR), you can use its 'pgo' buildenv
-# option. Example (uncomment and adjust paths if you actually use PGO):
-#
-#   BUILDENV+=('pgo')
-#   PROFDEST="/mnt/pgo"
-#
-# Then build the package twice:
-#   - First build: instrumented binaries, run them to generate profiles.
-#   - Second build: profiles are applied for PGO-optimized binaries.
-#
-# See https://wiki.archlinux.org/title/Makepkg-optimize
-
-#############################################
-# Compression & package extensions
-#############################################
-
-COMPRESSZST=(zstd -c -z -q -T0 --auto-threads=logical -15 -)
-PKGEXT=".pkg.tar.zst"
-SRCEXT=".src.tar.gz"
-EOF
-
-# 9) Fill in placeholders
-sed -i "s|@@CORES@@|${CORES}|g" "${CONF_DROPIN}"
-sed -i "s|@@AGGRESSIVE_CFLAGS@@|${AGGRESSIVE_CFLAGS}|g" "${CONF_DROPIN}"
-sed -i "s|@@RUSTFLAGS_STR@@|${RUSTFLAGS_STR}|g" "${CONF_DROPIN}"
-sed -i "s|@@LDFLAGS@@|${LDFLAGS}|g" "${CONF_DROPIN}"
-
-# 10) Clang section
-if (( ENABLE_CLANG )); then
-  cat >>"${CONF_DROPIN}" <<EOF
-
-#############################################
-# Clang as default compiler
-#############################################
-
+# 2. Toolchain Exports (Uncommented as requested)
+# We force Clang and LLVM utilities.
 export CC=clang
 export CXX=clang++
+export CPP="clang -E"
+export LD=mold
+export AR=llvm-ar
+export NM=llvm-nm
+export RANLIB=llvm-ranlib
+export AS=llvm-as
+export STRIP=llvm-strip
+export OBJCOPY=llvm-objcopy
+export OBJDUMP=llvm-objdump
+export READELF=llvm-readelf
 
-# Optional: use libc++ instead of libstdc++:
-# CXXFLAGS+=" -stdlib=libc++"
+# 3. Compiler Flags (C/C++)
+# -march=native: Optimize for YOUR cpu
+# -O3: Maximum speed
+# -flto=thin: Clang's preferred LTO (Faster build, great performance)
+# -fno-plt: Direct calls (Speed)
+CFLAGS="-march=native -O3 -pipe -fno-plt -fexceptions \
+        -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security \
+        -fstack-clash-protection -fcf-protection \
+        -fno-semantic-interposition -flto=thin"
 
+# Map CXX to C flags + C++ specific assertions
+CXXFLAGS="\$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
+
+# 4. Linker Flags
+# -fuse-ld=mold: Use the Mold linker (Fastest)
+# -Wl,-O2: Linker optimization level 2 (Best balance)
+# -Wl,--as-needed: Drop unused deps
+LDFLAGS="-fuse-ld=mold -Wl,-O3 -Wl,--sort-common -Wl,--as-needed \
+         -Wl,-z,relro -Wl,-z,now -Wl,--gc-sections"
+
+# 5. Rust Flags
+# Target native cpu and force mold for Rust too
+RUSTFLAGS="-C target-cpu=native -C link-arg=-fuse-ld=mold"
+
+# 6. LTO Flags
+# Since we define -flto=thin in CFLAGS, we match it here
+LTOFLAGS="-flto=thin"
+
+# 7. Global Options
+# !debug: Save space/time
+# lto: Enable LTO handling
+OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)
+
+# 8. Compression (ZSTD Ultra)
+# -19: High compression (slower packing, smaller size, fast unpacking)
+# --threads=0: Use all cores
+COMPRESSZST=(zstd -c -z -q -19 -T0 -)
+
+# 9. Extensions
+PKGEXT='.pkg.tar.zst'
+SRCEXT='.src.tar.gz'
 EOF
-else
-  cat >>"${CONF_DROPIN}" <<EOF
 
-#############################################
-# Clang not configured
-#############################################
-
-# Clang is not installed on this system, so CC/CXX are not forced here.
-# If you install 'clang' later, you can uncomment the lines below manually:
-#
-#   export CC=clang
-#   export CXX=clang++
-
-EOF
-fi
-
-# 11) Done
-echo "[+] Done. Your optimized makepkg configuration is in:"
+echo "[+] Success! Configuration written to:"
 echo "    ${CONF_DROPIN}"
 echo ""
-echo "Summary of what was configured:"
-echo "  - MAKEFLAGS: parallel jobs = ${CORES}"
-echo "  - CFLAGS/CXXFLAGS: -march=native -O3 + hardening + section flags"
-echo "  - OPTIONS: !debug lto strip zipman ..."
-echo "  - LDFLAGS: hardened + optimization flags"
-if command -v mold &>/dev/null; then
-  echo "  - Linker: mold (via -fuse-ld=mold)"
-else
-  echo "  - Linker: system default (mold not installed)"
-fi
-if (( ENABLE_CLANG )); then
-  echo "  - C/C++ compiler: Clang (CC=clang, CXX=clang++)"
-else
-  echo "  - C/C++ compiler: system default (Clang not installed)"
-fi
-echo "  - RUSTFLAGS: -C target-cpu=native"
-if command -v mold &>/dev/null; then
-  echo "                -C link-arg=-fuse-ld=mold"
-fi
-echo "  - COMPRESSZST: zstd with all logical threads, level 15"
-echo ""
-echo "If some packages fail to build (especially NVIDIA / DKMS):"
-echo "  1) Open ${CONF_DROPIN}"
-echo "  2) Comment out 'export CC=clang' and 'export CXX=clang++'."
+echo "=== Summary ==="
+echo "Compiler: Clang/LLVM (Exported)"
+echo "Linker:   Mold (-fuse-ld=mold, -Wl,-O2)"
+echo "Flags:    -march=native -O3 -flto=thin (No duplicates)"
+echo "Rust:     Optimized for Native + Mold"

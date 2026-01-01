@@ -1,409 +1,287 @@
 #!/bin/bash
 
-echo "=== Configuring Terminal Environment (Nushell + Starship) ==="
+# Ensure sudo
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root (sudo)"
+  exit
+fi
+
+# Detect Real User
+REAL_USER=${SUDO_USER:-$USER}
+USER_HOME=$(getent passwd "$REAL_USER" | cut -d: -f6)
+
+echo "=== 🐚 Setting up Modern Shells (Fish & Nushell) ==="
 
 # ==============================================================================
-# 1. NUSHELL CONFIGURATION
+# 1. INSTALL DEPENDENCIES
 # ==============================================================================
-echo "Configuring Nushell..."
-
-# Create config directory
-NU_CONFIG_DIR="$HOME/.config/nushell"
-mkdir -p "$NU_CONFIG_DIR"
-
-# Write config.nu
-cat <<EOF > "$NU_CONFIG_DIR/config.nu"
-# ==============================================================================
-# Nushell Configuration (Migrated from NixOS)
-# ==============================================================================
-
-# Load environment
-source ~/.config/nushell/env.nu
-
-# Starship Prompt
-mkdir ~/.cache/starship
-starship init nu | save -f ~/.cache/starship/init.nu
-
-# Zoxide
-zoxide init nushell | save -f ~/.zoxide.nu
-
-# Carapace (Shell completion)
-carapace _carapace nushell | save -f ~/.cache/carapace/init.nu
-
-# Load all completions
-source ~/.cache/starship/init.nu
-source ~/.zoxide.nu
-source ~/.cache/carapace/init.nu
+echo "[-] Installing Shells & Modern Tools..."
+# carapace-bin is usually in AUR or chaotic-aur (CachyOS has it)
+# If carapace-bin fails, try carapace
+pacman -S --needed --noconfirm fish nushell starship zoxide eza bat ripgrep fd fzf helix
+# Try to install carapace (Shell completions)
+if ! pacman -Qi carapace-bin &>/dev/null && ! pacman -Qi carapace &>/dev/null; then
+    echo "    Attempting to install carapace..."
+    pacman -S --noconfirm carapace || echo "Warning: Carapace not found in repos."
+fi
 
 # ==============================================================================
-# ALIASES (From your NixOS shellAliases)
+# 2. SHARED STARSHIP CONFIGURATION
 # ==============================================================================
+echo "[-] Configuring Starship (Prompt)..."
+STARSHIP_DIR="$USER_HOME/.config"
+mkdir -p "$STARSHIP_DIR"
+
+cat <<EOF > "$STARSHIP_DIR/starship.toml"
+# Spidy Modern Starship Config
+
+add_newline = true
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = false
+style = "bold cyan"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+style = "bold red"
+
+[package]
+symbol = " "
+disabled = true
+
+[nodejs]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[cmd_duration]
+min_time = 2000
+style = "bold yellow"
+EOF
+
+chown -R "$REAL_USER:$REAL_USER" "$STARSHIP_DIR/starship.toml"
+
+# ==============================================================================
+# 3. FISH SHELL CONFIGURATION (Primary Focus)
+# ==============================================================================
+echo "[-] Configuring Fish Shell..."
+FISH_CONFIG_DIR="$USER_HOME/.config/fish"
+mkdir -p "$FISH_CONFIG_DIR/conf.d"
+mkdir -p "$FISH_CONFIG_DIR/functions"
+
+# --- Main Config ---
+cat <<EOF > "$FISH_CONFIG_DIR/config.fish"
+# === Spidy Fish Config ===
+
+# 1. Environment Variables
+set -gx EDITOR hx
+set -gx VISUAL hx
+set -gx PAGER bat
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -gx FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
+
+# Disable the "Welcome to Fish" message
+set -g fish_greeting
+
+# 2. Path (Add ~/.local/bin and Cargo)
+fish_add_path "$USER_HOME/.local/bin"
+fish_add_path "$USER_HOME/.cargo/bin"
+
+# 3. Interactive Session Initializations
+if status is-interactive
+    # Starship Prompt
+    starship init fish | source
+
+    # Zoxide (Smarter 'cd')
+    zoxide init fish | source
+
+    # Carapace (Completions)
+    # Prevents error if carapace isn't installed
+    if type -q carapace
+        set -x CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
+        mkdir -p ~/.config/fish/completions
+        carapace --list | awk '{print \$1}' | xargs -I{} touch ~/.config/fish/completions/{}.fish # workaround
+        carapace _carapace | source
+    end
+end
+
+# 4. Aliases & Abbreviations
 
 # Navigation
-alias ll = ls -l
-alias la = ls -a
-alias lla = ls -la
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Eza (Better ls)
+alias ls='eza --icons --group-directories-first'
+alias ll='eza -l --icons --group-directories-first'
+alias la='eza -la --icons --group-directories-first'
+alias tree='eza --tree --icons'
+
+# Tools
+alias cat='bat'
+alias grep='rg'
+alias find='fd'
+alias top='htop'
+
+# Package Management (Arch)
+# 'abbr' is better than alias in Fish (expands when you type space)
+abbr -a pac 'sudo pacman'
+abbr -a paci 'sudo pacman -S'
+abbr -a pacr 'sudo pacman -Rns'
+abbr -a pacu 'sudo pacman -Syu'
+abbr -a pacs 'pacman -Ss'
+abbr -a pacq 'pacman -Qi'
+abbr -a unlock 'sudo rm /var/lib/pacman/db.lck'
+
+# System
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias df='df -h'
+alias free='free -h'
+
+# Editor
+alias hx='helix'
+alias vim='helix'
+alias nano='helix'
+EOF
+
+# Fix Ownership
+chown -R "$REAL_USER:$REAL_USER" "$FISH_CONFIG_DIR"
+
+# ==============================================================================
+# 4. NUSHELL CONFIGURATION (Modern v0.90+)
+# ==============================================================================
+echo "[-] Configuring Nushell..."
+NU_CONFIG_DIR="$USER_HOME/.config/nushell"
+mkdir -p "$NU_CONFIG_DIR"
+
+# --- env.nu ---
+cat <<EOF > "$NU_CONFIG_DIR/env.nu"
+# Env Config for Spidy
+
+\$env.STARSHIP_SHELL = "nu"
+
+def create_left_prompt [] {
+    starship prompt --cmd-duration \$env.CMD_DURATION_MS $'--status=(\$env.LAST_EXIT_CODE)'
+}
+
+\$env.PROMPT_COMMAND = { || create_left_prompt }
+\$env.PROMPT_COMMAND_RIGHT = ""
+
+\$env.PROMPT_INDICATOR = { || "" }
+\$env.PROMPT_INDICATOR_VI_INSERT = { || ": " }
+\$env.PROMPT_INDICATOR_VI_NORMAL = { || "> " }
+\$env.PROMPT_MULTILINE_INDICATOR = { || "::: " }
+
+# Environment Variables
+\$env.EDITOR = "hx"
+\$env.VISUAL = "hx"
+\$env.PAGER = "bat"
+
+# Path
+\$env.PATH = (\$env.PATH | split row (char esep) | prepend [
+    ($USER_HOME | path join ".cargo" "bin")
+    ($USER_HOME | path join ".local" "bin")
+])
+
+# Directories
+\$env.XDG_CONFIG_HOME = ($USER_HOME | path join ".config")
+EOF
+
+# --- config.nu ---
+cat <<EOF > "$NU_CONFIG_DIR/config.nu"
+# Config for Spidy
+
+\$env.config = {
+    show_banner: false
+    ls: { use_ls_colors: true }
+    rm: { always_trash: false }
+
+    # Completions
+    completions: {
+        case_sensitive: false
+        quick: true
+        partial: true
+        algorithm: "fuzzy"
+        external: {
+            enable: true
+            max_results: 100
+            completer: {|spans|
+                carapace \$spans.0 nushell \$spans | from json
+            }
+        }
+    }
+}
+
+# --- Aliases ---
+alias ll = eza -l --icons --group-directories-first
+alias la = eza -la --icons --group-directories-first
+alias ls = eza --icons --group-directories-first
+alias tree = eza --tree --icons
+
+alias cat = bat
+alias grep = rg
+alias find = fd
+alias top = htop
+
 alias .. = cd ..
 alias ... = cd ../..
 alias .... = cd ../../..
 
-# Git
-alias gs = git status
-alias ga = git add
-alias gc = git commit
-alias gp = git push
-alias gl = git log --oneline
-alias gd = git diff
-alias gds = git diff --staged
-alias gb = git branch
-alias gco = git checkout
-alias gcb = git checkout -b
-alias gm = git merge
-alias gr = git rebase
-alias gst = git stash
-alias gsp = git stash pop
-
-# System
-alias df = df -h
-alias du = du -h
-alias free = free -h
-alias ps = ps aux
-alias top = htop
-alias cat = bat
-alias grep = rg
-alias find = fd
-alias ls = eza --icons
-alias tree = eza --tree --icons
-
-# Nix (if you have it)
-alias nix-shell = nix-shell --command nu
-alias nix-develop = nix develop --command nu
-
-# Package management
+# Pacman
 alias pac = sudo pacman
 alias paci = sudo pacman -S
 alias pacr = sudo pacman -Rns
 alias pacu = sudo pacman -Syu
 alias pacs = pacman -Ss
 alias pacq = pacman -Qi
-alias pacl = pacman -Ql
 
-# File operations
 alias cp = cp -i
 alias mv = mv -i
 alias rm = rm -i
-alias mkdir = mkdir -p
 
-# Network
-alias ping = ping -c 4
-alias wget = wget -c
-alias curl = curl -L
-
-# Development
 alias hx = helix
-alias fm = yazi
-alias lg = lazygit
+alias vim = helix
+alias nano = helix
 
-# ==============================================================================
-# SETTINGS
-# ==============================================================================
+# --- Initializations ---
+# We verify if tools exist before initializing to prevent errors
 
-# Completion
-\$env.config = {
-  show_banner: false
-  edit_mode: vi
-  completion_mode: circular
-  history: {
-    max_size: 10000
-    sync_on_enter: true
-    file_format: "plaintext"
-  }
-  pager: {
-    page: (which less | get path | first)
-  }
-  table: {
-    mode: rounded
-    index_mode: always
-    show_empty: true
-    padding: { left: 1, right: 1 }
-    trim: {
-      methodology: wrapping
-      wrapping_try_keep_words: true
-      truncating_suffix: "..."
-    }
-    header_on_separator: false
-  }
-  explore: {
-    status_bar_background: { fg: "#1e1e2e", bg: "#cdd6f4" }
-    command_bar_text: { fg: "#cdd6f4" }
-    split_line: "#cdd6f4"
-    status: {
-      error: { fg: "#1e1e2e", bg: "#eba0ac" }
-      warn: { fg: "#1e1e2e", bg: "#f9e2af" }
-      info: { fg: "#1e1e2e", bg: "#89b4fa" }
-    }
-    selected: { bg: "#cdd6f4", fg: "#1e1e2e" }
-    labels: { bg: "#6c7086", fg: "#cdd6f4" }
-    separator: "#cdd6f4"
-  }
+# Zoxide
+if (which zoxide | is-empty) == false {
+    zoxide init nushell | save -f ~/.zoxide.nu
+    source ~/.zoxide.nu
 }
-
-# ==============================================================================
-# HOOKS
-# ==============================================================================
-
-# Directory change hook (zoxide)
-def --env __zoxide_hook [] {
-    zoxide add (pwd | path expand)
-}
-
-\$env.config = (\$env.config | upsert hooks {
-  pre_prompt: [{ \$__zoxide_hook }]
-})
-EOF
-
-# Write env.nu
-cat <<EOF > "$NU_CONFIG_DIR/env.nu"
-# ==============================================================================
-# Nushell Environment (Migrated from NixOS)
-# ==============================================================================
-
-# Editor
-\$env.EDITOR = "hx"
-\$env.VISUAL = "hx"
-
-# Pager
-\$env.PAGER = "bat"
-
-# Language
-\$env.LANG = "en_US.UTF-8"
-\$env.LC_ALL = "en_US.UTF-8"
-
-# XDG Base Directory
-\$env.XDG_CONFIG_HOME = (\$env.HOME | path join ".config")
-\$env.XDG_DATA_HOME = (\$env.HOME | path join ".local" "share")
-\$env.XDG_CACHE_HOME = (\$env.HOME | path join ".cache")
-
-# Path
-\$env.PATH = (\$env.PATH | split row (char esep) | prepend [
-  (\$env.HOME | path join ".cargo" "bin")
-  (\$env.HOME | path join ".local" "bin")
-  "/usr/local/bin"
-  "/usr/bin"
-  "/bin"
-])
 
 # Starship
-\$env.STARSHIP_CONFIG = (\$env.XDG_CONFIG_HOME | path join "starship" "starship.toml")
-
-# FZF
-\$env.FZF_DEFAULT_COMMAND = "fd --type f --hidden --follow --exclude .git"
-\$env.FZF_DEFAULT_OPTS = "--height 40% --layout=reverse --border"
-
-# Bat
-\$env.BAT_THEME = "Catppuccin Mocha"
-
-# Helix
-\$env.HELIX_RUNTIME = "/usr/lib/helix/runtime"
-
-# Go
-\$env.GOPATH = (\$env.HOME | path join "go")
-\$env.GOROOT = "/usr/lib/go"
-
-# Rust
-\$env.RUSTUP_HOME = (\$env.HOME | path join ".rustup")
-\$env.CARGO_HOME = (\$env.HOME | path join ".cargo")
-
-# Python
-\$env.PYTHONPATH = (\$env.HOME | path join ".local" "lib" "python3" "site-packages")
-
-# Node
-\$env.NPM_CONFIG_USERCONFIG = (\$env.XDG_CONFIG_HOME | path join "npm" "npmrc")
-
-# Deno
-\$env.DENO_INSTALL_ROOT = (\$env.HOME | path join ".deno")
-
-# Bun
-\$env.BUN_INSTALL = (\$env.HOME | path join ".bun")
-
-# Wine
-\$env.WINEPREFIX = (\$env.HOME | path join ".wine")
-
-# Steam
-\$env.STEAM_EXTRA_COMPAT_TOOLS_PATHS = (\$env.HOME | path join ".steam" "root" "compatibilitytools.d")
-
-# Gamescope
-\$env.GAMESCOPE_DISABLE_UPSCALING = "1"
+if (which starship | is-empty) == false {
+    mkdir ~/.cache/starship
+    starship init nu | save -f ~/.cache/starship/init.nu
+    source ~/.cache/starship/init.nu
+}
 EOF
 
-# ==============================================================================
-# 2. STARSHIP CONFIGURATION
-# ==============================================================================
-echo "Configuring Starship..."
+# Fix Ownership
+chown -R "$REAL_USER:$REAL_USER" "$NU_CONFIG_DIR"
+# Create cache dir for Nu if missing so the script doesn't error on first run
+mkdir -p "$USER_HOME/.cache/starship"
+chown -R "$REAL_USER:$REAL_USER" "$USER_HOME/.cache"
 
-STARSHIP_CONFIG_DIR="$HOME/.config/starship"
-mkdir -p "$STARSHIP_CONFIG_DIR"
-
-cat <<EOF > "$STARSHIP_CONFIG_DIR/starship.toml"
-# ==============================================================================
-# Starship Configuration (Migrated from NixOS)
-# ==============================================================================
-
-# General
-format = """
-[](color_orange)\
-\$os\
-\$username\
-[](bg:color_yellow fg:color_orange)\
-\$directory\
-[](fg:color_yellow bg:color_aqua)\
-\$git_branch\
-\$git_status\
-[](fg:color_aqua bg:color_blue)\
-\$c\
-\$rust\
-\$golang\
-\$nodejs\
-\$php\
-\$java\
-\$kotlin\
-\$haskell\
-\$python\
-\$docker_context\
-[](fg:color_blue bg:color_bg3)\
-\$time\
-[ ](fg:color_bg3)\
-\$line_break\$character"""
-
-palette = "catppuccin_mocha"
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
-
-[os]
-disabled = false
-style = "bg:color_orange fg:color_fg0"
-
-[os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-SUSE = "󰠠"
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = "󰀵"
-Manjaro = "󱘊"
-Linux = "󰌽"
-Fedora = "󰣛"
-Arch = "󰣇"
-Alpine = "󰰰"
-Gentoo = "󰣨"
-CentOS = "󱄚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
-
-[username]
-show_always = true
-style_user = "bg:color_orange fg:color_fg0"
-style_root = "bg:color_orange fg:color_fg0"
-format = '[ $user ](\$style)'
-
-[directory]
-style = "fg:color_bg1 bg:color_yellow"
-format = "[ $path ](\$style)"
-truncation_length = 3
-truncation_symbol = "…/"
-
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
-
-[git_branch]
-symbol = ""
-style = "bg:color_aqua fg:color_bg0"
-format = '[[ $symbol $branch ](fg:color_bg0 bg:color_aqua)](\$style)'
-
-[git_status]
-style = "bg:color_aqua fg:color_bg0"
-format = '[[($all_status$ahead_behind )](fg:color_bg0 bg:color_aqua)](\$style)'
-
-[c]
-symbol = " "
-style = "bg:color_blue fg:color_bg0"
-format = '[[ $symbol( $version) ](fg:color_bg0 bg:color_blue)](\$style)'
-
-[rust]
-symbol = ""
-style = "bg:color_blue fg:color_bg0"
-format = '[[ $symbol( $version) ](fg:color_bg0 bg:color_blue)](\$style)'
-
-[golang]
-symbol = ""
-style = "bg:color_blue fg:color_bg0"
-format = '[[ $symbol( $version) ](fg:color_bg0 bg:color_blue)](\$style)'
-
-[nodejs]
-symbol = ""
-style = "bg:color_blue fg:color_bg0"
-format = '[[ $symbol( $version) ](fg:color_bg0 bg:color_blue)](\$style)'
-
-[python]
-symbol = ""
-style = "bg:color_blue fg:color_bg0"
-format = '[[ $symbol( $version) ](fg:color_bg0 bg:color_blue)](\$style)'
-
-[docker_context]
-symbol = "󰡨"
-style = "bg:color_blue fg:color_bg0"
-format = '[[ $symbol( $context) ](fg:color_bg0 bg:color_blue)](\$style)'
-
-[time]
-disabled = false
-time_format = "%R"
-style = "bg:color_bg3 fg:color_blue"
-format = '[[ ♥ $time ](fg:color_bg1 bg:color_bg3)](\$style)'
-
-[line_break]
-disabled = false
-
-[character]
-disabled = false
-success_symbol = '[❯](bold fg:color_green)'
-error_symbol = '[❯](bold fg:color_red)'
-vimcmd_symbol = '[❮](bold fg:color_green)'
-vimcmd_replace_one_symbol = '[❮](bold fg:color_purple)'
-vimcmd_replace_symbol = '[❮](bold fg:color_purple)'
-vimcmd_visual_symbol = '[❮](bold fg:color_yellow)'
-EOF
-
-# Check if nushell is in /etc/shells
-if ! grep -q "/usr/bin/nu" /etc/shells; then
-    echo "/usr/bin/nu" | sudo tee -a /etc/shells
-fi
+echo "=== ✅ Shell Setup Complete ==="
+echo "To switch defaults, run one of these as your normal user:"
+echo "  chsh -s /usr/bin/fish"
+echo "  chsh -s /usr/bin/nu"

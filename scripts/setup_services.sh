@@ -1,24 +1,14 @@
 #!/bin/bash
 
-echo "=== Setting up System Services ==="
+echo "=== ⚙️ Setting up System Services (Spidy Profile) ==="
 
 # ==============================================================================
-# 1. NETWORKING (NetworkManager & DNS)
+# 1. NETWORK MANAGER (Boot Speed Tweak Only)
+# Note: DNS and Firewall logic removed (Handled by optimize_net.sh)
 # ==============================================================================
-echo "Configuring NetworkManager..."
+echo "[-] Configuring NetworkManager Boot Behavior..."
 
-# Create a config for custom DNS (Cloudflare/Quad9)
-# Matches networking.nameservers
-sudo mkdir -p /etc/NetworkManager/conf.d
-cat <<EOF | sudo tee /etc/NetworkManager/conf.d/dns.conf
-[main]
-dns=default
-
-[global-dns-domain-*]
-servers=9.9.9.11,149.112.112.11,1.1.1.1
-EOF
-
-# Make NetworkManager Wait Online faster (matches systemd override)
+# Make NetworkManager Wait Online faster (Prevents boot hang waiting for connection)
 sudo mkdir -p /etc/systemd/system/NetworkManager-wait-online.service.d
 cat <<EOF | sudo tee /etc/systemd/system/NetworkManager-wait-online.service.d/override.conf
 [Service]
@@ -27,51 +17,9 @@ ExecStart=/usr/bin/nm-online -q
 EOF
 
 # ==============================================================================
-# 2. FIREWALL (nftables)
-# Matches networking.firewall
+# 2. POLKIT RULES (Permissions)
 # ==============================================================================
-echo "Configuring nftables..."
-cat <<EOF | sudo tee /etc/nftables.conf
-#!/usr/sbin/nft -f
-
-flush ruleset
-
-table inet filter {
-    chain input {
-        type filter hook input priority 0; policy drop;
-
-        # Accept loopback
-        iifname "lo" accept
-
-        # Accept established/related
-        ct state established,related accept
-
-        # Trusted Interfaces (virbr0, docker0, podman0)
-        iifname { "virbr0", "docker0", "podman0" } accept
-
-        # ICMP (Ping)
-        ip protocol icmp accept
-        ip6 nexthdr icmpv6 accept
-
-        # SSH, HTTP, HTTPS, WebProxy, Custom Ports
-        tcp dport { 22, 80, 443, 8080, 59010, 59011 } accept
-        udp dport { 59010, 59011 } accept
-    }
-    chain forward {
-        type filter hook forward priority 0; policy drop;
-    }
-    chain output {
-        type filter hook output priority 0; policy accept;
-    }
-}
-EOF
-
-# ==============================================================================
-# 3. POLKIT RULES
-# Matches security.polkit.extraConfig
-# ==============================================================================
-echo "Configuring Polkit Rules..."
-# Note: Arch Polkit rules are JavaScript files in /etc/polkit-1/rules.d/
+echo "[-] Configuring Polkit Rules..."
 
 cat <<EOF | sudo tee /etc/polkit-1/rules.d/49-wheel-permissions.rules
 /* Allow wheel group to manage systemd units without password */
@@ -92,51 +40,60 @@ polkit.addRule(function(action, subject) {
 EOF
 
 # ==============================================================================
-# 4. PAM LIMITS (Gaming/Wine)
-# Matches security.pam.loginLimits
+# 3. PAM LIMITS (Gaming/Wine Performance)
 # ==============================================================================
-echo "Configuring PAM Limits..."
+echo "[-] Configuring PAM Limits..."
 cat <<EOF | sudo tee /etc/security/limits.d/99-gaming.conf
 * soft nofile 524288
 * hard nofile 1048576
 EOF
 
 # ==============================================================================
-# 5. SSH CONFIGURATION
-# Matches services.openssh
+# 4. SSH CONFIGURATION
 # ==============================================================================
-echo "Configuring SSH..."
-# We use sed to edit the existing config file safely
+echo "[-] Configuring SSH..."
 SSHD_CONFIG="/etc/ssh/sshd_config"
 
 if [ -f "$SSHD_CONFIG" ]; then
+    # Disable Root Login for security
     sudo sed -i 's/^#PermitRootLogin.*/PermitRootLogin no/' "$SSHD_CONFIG"
+    # Enable Password Auth (Change to 'no' if you use keys only)
     sudo sed -i 's/^#PasswordAuthentication.*/PasswordAuthentication yes/' "$SSHD_CONFIG"
+    # Disable X11 Forwarding (Performance/Security)
     sudo sed -i 's/^#X11Forwarding.*/X11Forwarding no/' "$SSHD_CONFIG"
-    # Ensure Pubkey is on (usually default yes)
+else
+    echo "Warning: sshd_config not found. Is openssh installed?"
 fi
 
 # ==============================================================================
-# 6. FLATPAK SETUP
+# 5. FLATPAK SETUP
 # ==============================================================================
-echo "Configuring Flatpak..."
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+echo "[-] Configuring Flatpak..."
+if command -v flatpak &> /dev/null; then
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+else
+    echo "Flatpak not installed. Skipping..."
+fi
 
 # ==============================================================================
-# 7. EARLYOOM CONFIGURATION
-# Matches services.earlyoom
+# 6. EARLYOOM CONFIGURATION (Prevent Freezes)
 # ==============================================================================
-echo "Configuring EarlyOOM..."
-# Arch uses /etc/default/earlyoom
+echo "[-] Configuring EarlyOOM..."
+# Installs earlyoom if missing
+sudo pacman -S --needed --noconfirm earlyoom
+
 cat <<EOF | sudo tee /etc/default/earlyoom
+# Prefer killing browsers/electron apps. Avoid killing Steam/Wayland/Games.
 EARLYOOM_ARGS="-m 5 -s 5 --prefer '(^|/)(java|chromium|firefox|zen|chrome|electron|code)$' --avoid '(^|/)(steam|gamescope|Xwayland|kwin_wayland|Hyprland|niri)$'"
 EOF
 
 # ==============================================================================
-# 8. GEOCLUE CONFIGURATION
-# Matches services.geoclue2
+# 7. GEOCLUE CONFIGURATION (Night Light/Maps)
 # ==============================================================================
-echo "Configuring Geoclue..."
+echo "[-] Configuring Geoclue..."
+# Ensure directory exists
+sudo mkdir -p /etc/geoclue
+
 cat <<EOF | sudo tee /etc/geoclue/geoclue.conf
 [Agent]
 Whitelist=gammastep
@@ -154,30 +111,29 @@ SubmissionNick=geoclue
 EOF
 
 # ==============================================================================
-# 9. ENABLE SERVICES
+# 8. ENABLE SERVICES
 # ==============================================================================
-echo "Enabling System Services..."
+echo "[-] Enabling System Services..."
 
-# Networking
-sudo systemctl enable --now NetworkManager
-sudo systemctl enable --now nftables
+# Networking (Wait-online fix needs reload)
+sudo systemctl daemon-reload
 
-# Security/Bus
-sudo systemctl enable --now apparmor
+# Security & Message Bus
 sudo systemctl enable --now dbus-broker.service
 sudo systemctl --global enable dbus-broker.service
+sudo systemctl enable --now apparmor
 
-# Hardware/Power
+# Hardware & Power
 sudo systemctl enable --now upower
 sudo systemctl enable --now fwupd
 sudo systemctl enable --now earlyoom
 sudo systemctl enable --now fstrim.timer
 sudo systemctl enable --now lvm2-monitor
 
-# SSH
+# Remote Access
 sudo systemctl enable --now sshd
 
-# Geolocation
+# Location Services
 sudo systemctl enable --now geoclue
 
-echo "System Services setup complete."
+echo "=== ✅ Services Optimization Complete ==="

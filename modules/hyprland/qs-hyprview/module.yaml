@@ -2,7 +2,7 @@ description: "QS Hyprview - Beautiful workspace overview for Hyprland using Quic
 
 conflicts: []
 
-post_install_hook: "../../../scripts/install-qs-hyprview.sh"
+post_install_hook: "scripts/install-qs-hyprview.sh"
 
 package_files:
   - qs-hyprview.yaml

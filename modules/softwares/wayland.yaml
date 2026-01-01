@@ -37,7 +37,6 @@ packages:
   
   # File management
   - nemo # File manager for Cinnamon (Nautilus fork) (Cinnamon file manager)
-  
   # ============================================================================
   # AUDIO TOOLS
   # ============================================================================

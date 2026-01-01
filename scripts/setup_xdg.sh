@@ -1,185 +1,145 @@
 #!/bin/bash
 
-echo "=== Configuring XDG Defaults & Directories (Customized for Don) ==="
-
 # ==============================================================================
-# 0. CONFIGURATION (Auto-detected from your package list)
+# CONFIGURATION
 # ==============================================================================
-# Browser: Zen is your primary, Helium/Chromium as backups
 BROWSER="zen.desktop"
-
-# Images: IMV is installed and excellent for tiling WMs
-IMG_VIEWER="imv.desktop"
-
-# Video/Audio: MPV is installed and handles everything
-VID_PLAYER="mpv.desktop"
-AUD_PLAYER="mpv.desktop"
-
-# Editor: Kate is installed
-EDITOR="org.kde.kate.desktop"
-
-# File Manager: Nemo is your main FM
 FILE_MGR="nemo.desktop"
+EDITOR="org.kde.kate.desktop"
+IMG_VIEWER="imv.desktop"
+MEDIA_PLAYER="mpv.desktop"
 
-# PDF: No dedicated reader found (Papers/Okular), defaulting to Zen
-PDF_VIEWER="zen.desktop"
+# Terminal Selection (ghostty, kitty, alacritty)
+MY_TERM="ghostty"
+TERM_ARG="-e" # Use -e for ghostty/kitty/alacritty
 
-# ==============================================================================
-# 1. XDG USER DIRECTORIES
-# Matches xdg.userDirs
-# ==============================================================================
-echo "Updating User Directories..."
-
-# 1. Ensure basic folders exist
-xdg-user-dirs-update
-
-# 2. Configure Screenshots Directory
-# Niri config saves to: ~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png
-USER_DIRS="$HOME/.config/user-dirs.dirs"
+# Directories
 SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
+NEMO_ACTION_DIR="$HOME/.local/share/nemo/actions"
+BIN_DIR="$HOME/.local/bin"
 
-# Create the physical folder
-mkdir -p "$SCREENSHOT_DIR"
-
-# Update config if not already set
-if [ -f "$USER_DIRS" ]; then
-    if ! grep -q "XDG_SCREENSHOTS_DIR" "$USER_DIRS"; then
-        echo "Adding XDG_SCREENSHOTS_DIR..."
-        echo "XDG_SCREENSHOTS_DIR=\"$SCREENSHOT_DIR\"" >> "$USER_DIRS"
-    fi
-fi
+echo "=== 🛠️ Configuring XDG & Nemo (Safe Mode) ==="
 
 # ==============================================================================
-# 2. DEFAULT APPLICATIONS (MIMEAPPS.LIST)
-# Matches xdg.mimeApps.defaultApplications
+# 1. MIME TYPES (With Backup)
 # ==============================================================================
-echo "Generating mimeapps.list..."
-
+echo "[-] Configuring Default Apps..."
 MIME_FILE="$HOME/.config/mimeapps.list"
 
-# Backup existing file if it exists
+# ⚠️ SAFETY CHECK: Backup existing file
 if [ -f "$MIME_FILE" ]; then
-    echo "Backing up existing mimeapps.list to mimeapps.list.bak..."
+    echo "    ! Existing mimeapps.list found. Backing up to mimeapps.list.bak"
     cp "$MIME_FILE" "$MIME_FILE.bak"
 fi
 
-# Generate new config
 cat <<EOF > "$MIME_FILE"
 [Default Applications]
-# --- Web Browsing ---
+# Web
 text/html=$BROWSER
 x-scheme-handler/http=$BROWSER
 x-scheme-handler/https=$BROWSER
-x-scheme-handler/ftp=$BROWSER
 x-scheme-handler/about=$BROWSER
 x-scheme-handler/unknown=$BROWSER
-application/x-extension-htm=$BROWSER
-application/x-extension-html=$BROWSER
-application/x-extension-shtml=$BROWSER
-application/xhtml+xml=$BROWSER
-application/x-extension-xhtml=$BROWSER
-application/x-extension-xht=$BROWSER
 
-# --- Images (IMV) ---
+# File Management
+inode/directory=$FILE_MGR
+application/zip=$FILE_MGR
+application/x-7z-compressed=$FILE_MGR
+application/x-tar=$FILE_MGR
+application/gzip=$FILE_MGR
+
+# Text & Code
+text/plain=$EDITOR
+text/markdown=$EDITOR
+application/json=$EDITOR
+application/xml=$EDITOR
+text/x-python=$EDITOR
+text/x-shellscript=$EDITOR
+text/x-c++=$EDITOR
+text/x-rust=$EDITOR
+
+# Images
 image/jpeg=$IMG_VIEWER
 image/png=$IMG_VIEWER
 image/gif=$IMG_VIEWER
 image/webp=$IMG_VIEWER
-image/tiff=$IMG_VIEWER
-image/x-icon=$IMG_VIEWER
 image/svg+xml=$IMG_VIEWER
-image/avif=$IMG_VIEWER
-image/heic=$IMG_VIEWER
-image/heif=$IMG_VIEWER
-image/bmp=$IMG_VIEWER
 
-# --- Video (MPV) ---
-video/mp4=$VID_PLAYER
-video/x-matroska=$VID_PLAYER
-video/webm=$VID_PLAYER
-video/quicktime=$VID_PLAYER
-video/x-msvideo=$VID_PLAYER
-video/x-flv=$VID_PLAYER
-video/x-ms-wmv=$VID_PLAYER
-video/mpeg=$VID_PLAYER
-video/3gpp=$VID_PLAYER
-video/mp2t=$VID_PLAYER
+# Media
+video/mp4=$MEDIA_PLAYER
+video/x-matroska=$MEDIA_PLAYER
+video/webm=$MEDIA_PLAYER
+audio/mpeg=$MEDIA_PLAYER
+audio/flac=$MEDIA_PLAYER
+audio/x-wav=$MEDIA_PLAYER
 
-# --- Audio (MPV) ---
-audio/mpeg=$AUD_PLAYER
-audio/flac=$AUD_PLAYER
-audio/x-wav=$AUD_PLAYER
-audio/aac=$AUD_PLAYER
-audio/ogg=$AUD_PLAYER
-audio/opus=$AUD_PLAYER
-audio/mp4=$AUD_PLAYER
-audio/x-m4a=$AUD_PLAYER
-audio/x-aiff=$AUD_PLAYER
-audio/x-ape=$AUD_PLAYER
-
-# --- Text / Code (Kate) ---
-text/plain=$EDITOR
-text/markdown=$EDITOR
-text/x-python=$EDITOR
-text/x-shellscript=$EDITOR
-text/css=$EDITOR
-text/x-c=$EDITOR
-text/x-c++=$EDITOR
-text/x-rust=$EDITOR
-application/json=$EDITOR
-application/xml=$EDITOR
-application/javascript=$EDITOR
-application/x-shellscript=$EDITOR
-# Fallback for generic text
-text/data=$EDITOR
-
-# --- Archives / Files (Nemo) ---
-application/zip=$FILE_MGR
-application/x-7z-compressed=$FILE_MGR
-application/x-rar-compressed=$FILE_MGR
-application/x-tar=$FILE_MGR
-application/gzip=$FILE_MGR
-inode/directory=$FILE_MGR
-
-# --- PDF (Zen Browser) ---
-application/pdf=$PDF_VIEWER
-
-# --- Misc ---
-x-scheme-handler/chrome=zen.desktop
-x-scheme-handler/mailto=proton-mail.desktop
+# PDF
+application/pdf=$BROWSER
 EOF
 
 # ==============================================================================
-# 3. TERMINAL EMULATOR WRAPPER
-# Matches xdg-terminal-exec
+# 2. FIX NEMO: TERMINAL (GSettings)
 # ==============================================================================
-echo "Configuring xdg-terminal-exec..."
+echo "[-] Configuring Nemo Terminal..."
 
-BIN_DIR="$HOME/.local/bin"
-WRAPPER="$BIN_DIR/xdg-terminal-exec"
-
+# Create the wrapper script (Safe to overwrite as it's a generated binary)
 mkdir -p "$BIN_DIR"
-
-# Prioritizes Ghostty, then Kitty (Matches your installed packages)
-cat <<EOF > "$WRAPPER"
+cat <<EOF > "$BIN_DIR/xdg-terminal-exec"
 #!/bin/sh
-# Generated by dcli setup_xdg.sh
-# Priority: Ghostty -> Kitty -> Alacritty -> Gnome Terminal
-
-if command -v ghostty >/dev/null 2>&1; then
-    exec ghostty "\$@"
+if command -v $MY_TERM >/dev/null 2>&1; then
+    exec $MY_TERM "\$@"
 elif command -v kitty >/dev/null 2>&1; then
     exec kitty "\$@"
-elif command -v alacritty >/dev/null 2>&1; then
-    exec alacritty "\$@"
 else
-    # Fallback
-    echo "No preferred terminal found, trying x-terminal-emulator..." >&2
     exec x-terminal-emulator "\$@"
 fi
 EOF
+chmod +x "$BIN_DIR/xdg-terminal-exec"
 
-chmod +x "$WRAPPER"
+# Apply to Nemo settings
+if command -v gsettings >/dev/null 2>&1; then
+    CURRENT_TERM=$(gsettings get org.cinnamon.desktop.default-applications.terminal exec)
+    echo "    Current Nemo terminal: $CURRENT_TERM"
+    
+    # Only apply if different or forced
+    gsettings set org.cinnamon.desktop.default-applications.terminal exec "$MY_TERM"
+    gsettings set org.cinnamon.desktop.default-applications.terminal exec-arg "$TERM_ARG"
+    echo "    -> Set Nemo to use '$MY_TERM'"
+fi
 
-echo "XDG configuration applied successfully."
-echo "Default Apps: Zen, Nemo, Kate, MPV, IMV."
+# ==============================================================================
+# 3. FIX NEMO: OPEN AS ROOT
+# ==============================================================================
+echo "[-] Creating 'Open as Root' Action..."
+mkdir -p "$NEMO_ACTION_DIR"
+
+# This file doesn't usually conflict with dotfiles, but we overwrite to ensure it works
+cat <<EOF > "$NEMO_ACTION_DIR/open_as_root.nemo_action"
+[Nemo Action]
+Name=Open as Root
+Comment=Open the current folder as root
+Icon=dialog-password
+Selection=Any
+Extensions=dir;
+# Fix for Wayland Root GUI
+Exec=pkexec env DISPLAY=\$DISPLAY XAUTHORITY=\$XAUTHORITY nemo %F
+EOF
+
+# ==============================================================================
+# 4. DIRECTORIES (Non-Destructive)
+# ==============================================================================
+echo "[-] Checking Directories..."
+xdg-user-dirs-update
+mkdir -p "$SCREENSHOT_DIR"
+
+USER_DIRS="$HOME/.config/user-dirs.dirs"
+if [ -f "$USER_DIRS" ]; then
+    if ! grep -q "XDG_SCREENSHOTS_DIR" "$USER_DIRS"; then
+        echo "XDG_SCREENSHOTS_DIR=\"$SCREENSHOT_DIR\"" >> "$USER_DIRS"
+        echo "    -> Added Screenshots directory to config."
+    fi
+fi
+
+echo "=== ✅ Setup Complete (Backups created) ==="
+echo "If something broke, restore from ~/.config/mimeapps.list.bak"
+echo "Restart Nemo with: nemo -q"

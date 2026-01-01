@@ -16,7 +16,7 @@ packages:
   
   # AUR helpers and package management
   - paru # Feature-packed AUR helper with advanced features and security
-  - yay-bin # Yet Another Yogurt - Pacman wrapper and AUR helper written in Go (pre-compiled binary)
+  - yay # Yet Another Yogurt - Pacman wrapper and AUR helper written in Go
   
   # System utilities
   - irqbalance # IRQ balancing daemon for SMP systems to optimize interrupt distribution

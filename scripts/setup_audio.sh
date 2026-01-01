@@ -27,9 +27,9 @@ context.properties = {
     # Supported Rates
     default.clock.allowed-rates = [ 48000 44100 ]
     # Low Latency Settings
-    default.clock.quantum = 64
+    default.clock.quantum = 128
     default.clock.min-quantum = 64
-    default.clock.max-quantum = 512
+    default.clock.max-quantum = 1024
 }
 EOF
 

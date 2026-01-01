@@ -55,6 +55,7 @@ bash "$SCRIPT_DIR/setup_virt.sh"
 bash "$SCRIPT_DIR/apply_system_config.sh"
 bash "$SCRIPT_DIR/setup_services.sh"
 bash "$SCRIPT_DIR/setup_wayland_config.sh"
+bash "$SCRIPT_DIR/setup_network.sh"
 
 # ==============================================================================
 # PHASE 3: KERNEL & BOOTLOADER
@@ -78,9 +79,6 @@ run_as_user() {
 
 # XDG Dirs (Documents, Downloads, etc.)
 run_as_user "$SCRIPT_DIR/setup_xdg.sh"
-
-# Browser Profiles
-run_as_user "$SCRIPT_DIR/browser_config.sh"
 
 # Terminal Configs
 run_as_user "$SCRIPT_DIR/setup_terminal.sh"

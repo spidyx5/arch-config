@@ -6,32 +6,51 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-# Detect the actual user who ran sudo (to avoid adding 'root' to groups)
+# Detect the actual user who ran sudo
 REAL_USER=${SUDO_USER:-$USER}
 
-echo "=== Configuring Hardware, Power & Time ==="
+echo "=== ⚙️ Configuring Hardware, Power & RAM (Spidy Profile) ==="
 
 # ==============================================================================
-# 1. ENVIRONMENT VARIABLES (Drivers)
+# 1. ENVIRONMENT VARIABLES (Drivers & RAM Optimization)
 # ==============================================================================
-echo "Setting Environment Variables..."
+echo "[-] Configuring Environment Variables..."
+
+# 1. Intel Media Driver (Your Tweak)
+# Checks if it exists to avoid duplicates
 if ! grep -q "LIBVA_DRIVER_NAME=iHD" /etc/environment; then
     echo "LIBVA_DRIVER_NAME=iHD" | tee -a /etc/environment
-    echo " -> Added iHD driver. Ensure 'intel-media-driver' is installed via pacman."
+    echo " -> Added iHD driver variable."
+fi
+
+# 2. MALLOC_ARENA_MAX (Improvement for Low RAM)
+# This forces glibc to be aggressive about returning memory to the OS.
+# Essential for <16GB RAM systems running Browsers/Electron apps.
+if ! grep -q "MALLOC_ARENA_MAX=2" /etc/environment; then
+    echo "MALLOC_ARENA_MAX=2" | tee -a /etc/environment
+    echo " -> Added MALLOC_ARENA_MAX=2 (RAM Saver)."
+fi
+
+# Ensure the actual driver is installed
+if pacman -Qi intel-media-driver &> /dev/null; then
+    echo " -> intel-media-driver is already installed."
+else
+    echo " -> Installing intel-media-driver (required for iHD)..."
+    pacman -S --noconfirm intel-media-driver
 fi
 
 # ==============================================================================
 # 2. TIME SETTINGS
 # ==============================================================================
-echo "Setting RTC to Local Time ..."
+echo "[-] Setting RTC to Local Time..."
 timedatectl set-local-rtc 1
 
 # ==============================================================================
 # 3. POWER MANAGEMENT (Sleep & Logind)
 # ==============================================================================
-echo "Configuring Sleep & Logind..."
+echo "[-] Configuring Sleep & Logind..."
 
-# Sleep Config
+# Sleep Config (Your Tweak)
 cat <<EOF | tee /etc/systemd/sleep.conf
 [Sleep]
 AllowSuspend=yes
@@ -41,8 +60,8 @@ AllowSuspendThenHibernate=no
 AllowHybridSleep=yes
 EOF
 
-# Logind Config
-# Using a drop-in file
+# Logind Config (Your Tweak)
+# Ensures power button turns off PC, Lid closes suspends.
 mkdir -p /etc/systemd/logind.conf.d
 cat <<EOF | tee /etc/systemd/logind.conf.d/99-spidy-actions.conf
 [Login]
@@ -55,33 +74,36 @@ IdleAction=ignore
 IdleActionSec=30min
 EOF
 
-echo " -> Logind settings updated. They will apply on next reboot."
+echo " -> Logind settings updated."
 
 # ==============================================================================
-# 4. BRIGHTNESS
+# 4. USER PERMISSIONS
 # ==============================================================================
-echo "Configuring Brightness Permissions for user: $REAL_USER"
+echo "[-] Configuring Brightness Permissions for user: $REAL_USER"
 usermod -aG video "$REAL_USER"
 
 # ==============================================================================
 # 5. HARDWARE TUNING
 # ==============================================================================
-echo "Enabling Hardware Tuning Services..."
+echo "[-] Configuring Hardware Services..."
 
-# Check if packages exist before enabling
+# Thermald: CRITICAL for Intel CPUs to prevent overheating/throttling.
 if pacman -Qi thermald &> /dev/null; then
     systemctl enable --now thermald
     echo " -> Thermald enabled."
 else
-    echo " -> WARNING: 'thermald' package not found. Skipping."
+    echo " -> Installing Thermald..."
+    pacman -S --noconfirm thermald
+    systemctl enable --now thermald
 fi
 
-if pacman -Qi tuned &> /dev/null; then
-    systemctl enable --now tuned
-    tuned-adm profile throughput-performance
-    echo " -> Tuned enabled and set to throughput-performance."
-else
-    echo " -> WARNING: 'tuned' package not found. Skipping."
+# Tuned: DISABLED for Low RAM Profile.
+# Your previous sysctl script already tunes the kernel directly.
+# Running the 'tuned' daemon on top wastes ~50MB RAM for no gain.
+if systemctl is-active --quiet tuned; then
+    echo " -> Disabling 'tuned' daemon to save RAM (sysctl handles this now)."
+    systemctl disable --now tuned
 fi
 
-echo "=== Configuration Complete. Please Reboot. ==="
+echo "=== ✅ Hardware Optimization Complete ==="
+echo "Please reboot for Environment Variables (MALLOC/Drivers) to take effect."
