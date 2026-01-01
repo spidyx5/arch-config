@@ -2,42 +2,79 @@ description: Utilities packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # Network-related packages
-  - powerdns-recursor # Resolving DNS server
-  - nftables # Netfilter tables userspace tools
-  - opensnitch # A GNU/Linux application firewall
-  - openvpn # An easy-to-use, robust and highly configurable VPN (Virtual Private Network)
-  - firewalld # Firewall daemon with D-Bus interface
-  - wireshark-qt # Network traffic and protocol analyzer/sniffer - Qt GUI
-  # Bluetooth and audio
-  - alsa-utils # Advanced Linux Sound Architecture - Utilities
-  - blueman # GTK+ Bluetooth Manager
-  - bluez # Daemons for the bluetooth protocol stack
-  - bluez-tools # A set of tools to manage Bluetooth devices for Linux
-  - bluez-utils # Development and debugging utilities for the bluetooth protocol stack
-  - pipewire # Low-latency audio/video router and processor
-  - pipewire-alsa # Low-latency audio/video router and processor - ALSA configuration
-  - pipewire-audio # Low-latency audio/video router and processor - Audio support
-  - pipewire-jack # Low-latency audio/video router and processor - JACK replacement
-  - pipewire-pulse # Low-latency audio/video router and processor - PulseAudio replacement
-  - wireplumber # Session / policy manager implementation for PipeWire
-  - alsa-firmware # Firmware binaries for loader programs in alsa-tools and hotplug firmware loader
-  - alsa-plugins # Additional ALSA plugins
-  - networkmanager # Network connection manager and user applications
-  - networkmanager-openvpn # NetworkManager VPN plugin for OpenVPN (with GUI)
-  # Sound-related packages
-  - python-indexed-zstd # A bridge for libzstd-seek to python
-  - easyeffects # Audio Effects for Pipewire applications
-  - pavucontrol # PulseAudio Volume Control
-  - pwvucontrol # Pipewire volume control for GNOME
-  - qpwgraph # PipeWire Graph Qt GUI Interface
-  - iwd # Internet Wireless Daemon
-  - btdu-bin # Sampling disk usage profiler for btrfs
-  # Btrfs utilities
-  - btrfs-compress # btrfs tool that makes it possible to change +c flags recursively on existing files
-  - btrfs-desktop-notification # Notifies you on the desktop when booting into a read-only system or when BTRFS warning/error messages appear in the dmesg log.
-  - btrfs-du # Easily print BTRFS subvolume/snapshot disk usage
-  - btrfs-list # Get a nice tree-style view of your btrfs subvolumes/snapshots, including their size, a la 'zfs list'
-  - btrfs-heatmap # Visualize the layout of data on your btrfs filesystem over time
-  - btrfs-assistant # An application for managing BTRFS subvolumes and Snapper snapshots
-  - python-pyclip # Cross-platform clipboard utilities supporting both binary and text data
+  # ============================================================================
+  # NETWORK-RELATED PACKAGES
+  # ============================================================================
+  
+  # DNS and network services
+  - powerdns-recursor # Resolving DNS server (PowerDNS recursive DNS server)
+  - nftables # Netfilter tables userspace tools (Linux packet filtering framework)
+  - opensnitch # A GNU/Linux application firewall (application-level firewall)
+  - openvpn # An easy-to-use, robust and highly configurable VPN (Virtual Private Network) (VPN client/server)
+  - firewalld # Firewall daemon with D-Bus interface (dynamic firewall manager)
+  - wireshark-qt # Network traffic and protocol analyzer/sniffer - Qt GUI (network protocol analyzer)
+  
+  # ============================================================================
+  # BLUETOOTH AND AUDIO
+  # ============================================================================
+  
+  # Audio system utilities
+  - alsa-utils # Advanced Linux Sound Architecture - Utilities (ALSA command-line tools)
+  - alsa-firmware # Firmware binaries for loader programs in alsa-tools and hotplug firmware loader (ALSA firmware)
+  - alsa-plugins # Additional ALSA plugins (ALSA audio plugins)
+  
+  # Bluetooth stack
+  - blueman # GTK+ Bluetooth Manager (Bluetooth device manager)
+  - bluez # Daemons for the bluetooth protocol stack (Bluetooth protocol stack)
+  - bluez-tools # A set of tools to manage Bluetooth devices for Linux (Bluetooth management tools)
+  - bluez-utils # Development and debugging utilities for the bluetooth protocol stack (Bluetooth utilities)
+  
+  # Audio routing and processing
+  - pipewire # Low-latency audio/video router and processor (audio/video processing)
+  - pipewire-alsa # Low-latency audio/video router and processor - ALSA configuration (PipeWire ALSA integration)
+  - pipewire-audio # Low-latency audio/video router and processor - Audio support (PipeWire audio)
+  - pipewire-jack # Low-latency audio/video router and processor - JACK replacement (PipeWire JACK support)
+  - pipewire-pulse # Low-latency audio/video router and processor - PulseAudio replacement (PipeWire PulseAudio)
+  - wireplumber # Session / policy manager implementation for PipeWire (PipeWire session manager)
+  
+  # ============================================================================
+  # SOUND-RELATED PACKAGES
+  # ============================================================================
+  
+  # Audio effects and control
+  - python-indexed-zstd # A bridge for libzstd-seek to python (Zstandard compression library)
+  - easyeffects # Audio Effects for Pipewire applications (audio effects processor)
+  - pavucontrol # PulseAudio Volume Control (PulseAudio mixer)
+  - pwvucontrol # Pipewire volume control for GNOME (PipeWire volume control)
+  - qpwgraph # PipeWire Graph Qt GUI Interface (PipeWire graph editor)
+  
+  # Wireless and storage utilities
+  - iwd # Internet Wireless Daemon (wireless daemon)
+  - btdu-bin # Sampling disk usage profiler for btrfs (BTRFS disk usage tool)
+  
+  # ============================================================================
+  # BTRFS UTILITIES
+  # ============================================================================
+  
+  # BTRFS management and monitoring
+  - btrfs-compress # btrfs tool that makes it possible to change +c flags recursively on existing files (BTRFS compression)
+  - btrfs-desktop-notification # Notifies you on the desktop when booting into a read-only system or when BTRFS warning/error messages appear in the dmesg log. (BTRFS notifications)
+  - btrfs-du # Easily print BTRFS subvolume/snapshot disk usage (BTRFS disk usage)
+  - btrfs-list # Get a nice tree-style view of your btrfs subvolumes/snapshots, including their size, a la 'zfs list' (BTRFS listing)
+  - btrfs-heatmap # Visualize the layout of data on your btrfs filesystem over time (BTRFS visualization)
+  - btrfs-assistant # An application for managing BTRFS subvolumes and Snapper snapshots (BTRFS GUI manager)
+  
+  # ============================================================================
+  # NETWORK MANAGEMENT
+  # ============================================================================
+  
+  # Network connectivity
+  - networkmanager # Network connection manager and user applications (network connection manager)
+  - networkmanager-openvpn # NetworkManager VPN plugin for OpenVPN (with GUI) (OpenVPN integration)
+  
+  # ============================================================================
+  # CLIPBOARD UTILITIES
+  # ============================================================================
+  
+  # Clipboard management
+  - python-pyclip # Cross-platform clipboard utilities supporting both binary and text data (clipboard utilities)

@@ -2,52 +2,93 @@ description: System hardware packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # Kernel packages
-  - linux-cachyos # The Linux EEVDF + LTO + AutoFDO + Propeller Cachy Sauce Kernel by CachyOS with other patches and improvements. kernel and modules
-  - linux-cachyos-headers # Headers and scripts for building modules for the Linux EEVDF + LTO + AutoFDO + Propeller Cachy Sauce Kernel by CachyOS with other patches and improvements. kernel
-  - linux-xanmod-edge-x64v3 # The Linux kernel and modules with Xanmod patches
-  - linux-xanmod-edge-x64v3-headers # Headers and scripts for building modules for the Linux Xanmod - Rolling Release [EDGE] kernel
-  # Audio system packages
-  - noise-suppression-for-voice # A real-time noise suppression plugin for voice
-  - rnnoise # A noise suppression library based on a recurrent neural network
-  - rtkit # Realtime Policy and Watchdog Daemon
-  - mkinitcpio # Modular initramfs image creation utility
-  - mkinitcpio-busybox # Base initramfs tools
-  - mkinitcpio-firmware # Optional firmware for the default linux kernel to get rid of the annoying 'WARNING: Possibly missing firmware for module:' messages
-  - busybox # Utilities for rescue and embedded systems
-  - cachyos-ananicy-rules # CachyOS - ananicy-rules
-  - earlyoom # Early OOM Daemon for Linux
-  - fwupd # Simple daemon to allow session software to update firmware
-  - blueprint-compiler # Markup language and compiler for GTK 4 user interfaces
-  # Hardware monitoring and tools
-  - lm_sensors # Collection of user space tools for general SMBus access and hardware monitoring
-  - cpupower # Linux kernel tool to examine and tune power saving related features of your processor
-  - efitools # Tools for manipulating UEFI secure boot platforms
-  - haveged # Entropy harvesting daemon using CPU timings
-  - hdparm # A shell utility for manipulating Linux IDE drive/driver parameters
-  - hwdetect # Hardware detection script with loading modules and mkinitcpio.conf
-  - lsscsi # A tool that lists devices connected via SCSI and its transports
-  - power-profiles-daemon # Makes power profiles handling available over D-Bus
-  - smartmontools # Control and monitor S.M.A.R.T. enabled ATA and SCSI Hard Drives
-  - sof-firmware # Sound Open Firmware
-  # Network hardware packages
-  - dhclient # A standalone DHCP client from the dhcp package
-  - dnsutils # DNS utilities
-  - ethtool # Utility for controlling network drivers and hardware
-  - modemmanager # Mobile broadband modem management service
-  - usb_modeswitch # Activating switchable USB devices on Linux.
-  - wireless-regdb # Central Regulatory Domain Database
-  - wpa_supplicant # A utility providing key negotiation for WPA wireless networks
-  - xl2tpd # an open source implementation of the L2TP maintained by Xelerance Corporation
-  # Virtual camera and I2C tools
-  - i2c-tools # Heterogeneous set of I2C tools for Linux that used to be part of lm-sensors
-  - v4l2loopback-dkms # v4l2-loopback device – module sources
-  # Additional hardware support
-  - lib32-libstdc++5 # Legacy GNU Standard C++ library version 3 (32 bit)
-  - libstdc++5 # GNU Standard C++ library version 3
-  - pciutils # PCI bus configuration space access library and tools
-  - libusb # Library that provides generic access to USB devices
-  # Utility packages
-  - sg3_utils # Generic SCSI utilities
-  - usbutils # A collection of USB tools to query connected USB devices
-  - v4l2loopback-utils # v4l2-loopback device – utilities only
+  # ============================================================================
+  # KERNEL PACKAGES
+  # ============================================================================
+  
+  # Custom Linux kernels
+  - linux-cachyos # The Linux EEVDF + LTO + AutoFDO + Propeller Cachy Sauce Kernel by CachyOS with other patches and improvements. kernel and modules (CachyOS optimized kernel)
+  - linux-cachyos-headers # Headers and scripts for building modules for the Linux EEVDF + LTO + AutoFDO + Propeller Cachy Sauce Kernel by CachyOS with other patches and improvements. kernel (CachyOS kernel headers)
+  - linux-xanmod-edge-x64v3 # The Linux kernel and modules with Xanmod patches (Xanmod edge kernel)
+  - linux-xanmod-edge-x64v3-headers # Headers and scripts for building modules for the Linux Xanmod - Rolling Release [EDGE] kernel (Xanmod kernel headers)
+  
+  # ============================================================================
+  # AUDIO SYSTEM PACKAGES
+  # ============================================================================
+  
+  # Audio processing and real-time
+  - noise-suppression-for-voice # A real-time noise suppression plugin for voice (voice noise reduction)
+  - rnnoise # A noise suppression library based on a recurrent neural network (AI noise suppression)
+  - rtkit # Realtime Policy and Watchdog Daemon (real-time scheduling)
+  - sof-firmware # Sound Open Firmware (Sound Open Firmware)
+  
+  # ============================================================================
+  # INITRAMFS AND SYSTEM TOOLS
+  # ============================================================================
+  
+  # System initialization
+  - mkinitcpio # Modular initramfs image creation utility (initramfs builder)
+  - mkinitcpio-busybox # Base initramfs tools (busybox for initramfs)
+  - mkinitcpio-firmware # Optional firmware for the default linux kernel to get rid of the annoying 'WARNING: Possibly missing firmware for module:' messages (firmware for initramfs)
+  - busybox # Utilities for rescue and embedded systems (minimal Unix utilities)
+  - earlyoom # Early OOM Daemon for Linux (out-of-memory protection)
+  - fwupd # Simple daemon to allow session software to update firmware (firmware updater)
+  - blueprint-compiler # Markup language and compiler for GTK 4 user interfaces (GTK UI compiler)
+  
+  # System utilities
+  - cachyos-ananicy-rules # CachyOS - ananicy-rules (process priority rules)
+  
+  # ============================================================================
+  # HARDWARE MONITORING AND TOOLS
+  # ============================================================================
+  
+  # System monitoring
+  - lm_sensors # Collection of user space tools for general SMBus access and hardware monitoring (hardware sensors)
+  - cpupower # Linux kernel tool to examine and tune power saving related features of your processor (CPU power management)
+  - efitools # Tools for manipulating UEFI secure boot platforms (UEFI tools)
+  - haveged # Entropy harvesting daemon using CPU timings (random number generator)
+  - hdparm # A shell utility for manipulating Linux IDE drive/driver parameters (IDE/SATA drive utility)
+  - hwdetect # Hardware detection script with loading modules and mkinitcpio.conf (hardware detection)
+  - lsscsi # A tool that lists devices connected via SCSI and its transports (SCSI device listing)
+  - power-profiles-daemon # Makes power profiles handling available over D-Bus (power management daemon)
+  - smartmontools # Control and monitor S.M.A.R.T. enabled ATA and SCSI Hard Drives (disk health monitoring)
+  
+  # ============================================================================
+  # NETWORK HARDWARE PACKAGES
+  # ============================================================================
+  
+  # Network configuration and management
+  - dhclient # A standalone DHCP client from the dhcp package (DHCP client)
+  - ethtool # Utility for controlling network drivers and hardware (network interface tool)
+  - modemmanager # Mobile broadband modem management service (modem management)
+  - usb_modeswitch # Activating switchable USB devices on Linux. (USB mode switching)
+  - wireless-regdb # Central Regulatory Domain Database (wireless regulatory database)
+  - wpa_supplicant # A utility providing key negotiation for WPA wireless networks (WPA supplicant)
+  - xl2tpd # An open source implementation of the L2TP maintained by Xelerance Corporation (L2TP daemon)
+  
+  # ============================================================================
+  # VIRTUAL CAMERA AND I2C TOOLS
+  # ============================================================================
+  
+  # Video and hardware interfaces
+  - i2c-tools # Heterogeneous set of I2C tools for Linux that used to be part of lm-sensors (I2C bus tools)
+  - v4l2loopback-dkms # v4l2-loopback device – module sources (virtual video device)
+  - v4l2loopback-utils # v4l2-loopback device – utilities only (virtual video utilities)
+  
+  # ============================================================================
+  # ADDITIONAL HARDWARE SUPPORT
+  # ============================================================================
+  
+  # Legacy and hardware libraries
+  - lib32-libstdc++5 # Legacy GNU Standard C++ library version 3 (32 bit) (32-bit C++ library)
+  - libstdc++5 # GNU Standard C++ library version 3 (C++ library)
+  - pciutils # PCI bus configuration space access library and tools (PCI utilities)
+  - libusb # Library that provides generic access to USB devices (USB library)
+  
+  # ============================================================================
+  # UTILITY PACKAGES
+  # ============================================================================
+  
+  # SCSI and USB utilities
+  - sg3_utils # Generic SCSI utilities (SCSI tools)
+  - usbutils # A collection of USB tools to query connected USB devices (USB utilities)

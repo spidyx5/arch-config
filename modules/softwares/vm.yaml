@@ -2,25 +2,41 @@ description: Virtualization packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # Virtualization tools
-  - virt-viewer # A lightweight interface for interacting with the graphical display of virtualized guest OS.
-  - looking-glass-git # A client application for accessing the LookingGlass IVSHMEM device of a VM
-  - edk2-ovmf # Firmware for Virtual Machines (x86_64, i686)
-  - swtpm # Libtpms-based TPM emulator with socket, character device, and Linux CUSE interface
-  - libguestfs # Access and modify virtual machine disk images
-  - freerdp # Free implementation of the Remote Desktop Protocol (RDP)
-  # SPICE protocol
-  - spice # SPICE server
-  - spice-gtk # GTK+ client library for SPICE
-  - spice-protocol # Headers for SPICE protocol
-  - virglrenderer # A virtual 3D GPU library, that allows the guest operating system to use the host GPU to accelerate 3D rendering
-  - spice-vdagent # Spice agent for Linux guests
-  # QEMU and KVM
-  - qemu-desktop # A QEMU setup for desktop environments
-  - virt-manager-git # Desktop user interface for managing virtual machines
-  - virt-install-git # Command line tool for creating new KVM , Xen, or Linux container guests using the libvirt hypervisor
-  - dnsmasq # Lightweight, easy to configure DNS forwarder and DHCP server
-  - vde2 # Virtual Distributed Ethernet for emulators like qemu
-  - bridge-utils # Utilities for configuring the Linux ethernet bridge
-  - virtiofsd # Vhost-user virtio-fs device backend written in Rust
-  - scream-git # A Scream audio receiver using Pulseaudio, ALSA, JACK or stdout as audio output (git version)
+  # ============================================================================
+  # VIRTUALIZATION TOOLS
+  # ============================================================================
+  
+  # Virtual machine display and management
+  - virt-viewer # A lightweight interface for interacting with the graphical display of virtualized guest OS. (VM display client)
+  - looking-glass-git # A client application for accessing the LookingGlass IVSHMEM device of a VM (high-performance VM display)
+  - edk2-ovmf # Firmware for Virtual Machines (x86_64, i686) (UEFI firmware for VMs)
+  - swtpm # Libtpms-based TPM emulator with socket, character device, and Linux CUSE interface (virtual TPM)
+  - libguestfs # Access and modify virtual machine disk images (VM disk management)
+  - freerdp # Free implementation of the Remote Desktop Protocol (RDP) (RDP client)
+  
+  # ============================================================================
+  # SPICE PROTOCOL
+  # ============================================================================
+  
+  # SPICE virtualization protocol
+  - spice # SPICE server (remote desktop protocol for VMs)
+  - spice-gtk # GTK+ client library for SPICE (SPICE client library)
+  - spice-protocol # Headers for SPICE protocol (SPICE protocol definitions)
+  - virglrenderer # A virtual 3D GPU library, that allows the guest operating system to use the host GPU to accelerate 3D rendering (virtual 3D graphics)
+  - spice-vdagent # Spice agent for Linux guests (SPICE guest agent)
+  
+  # ============================================================================
+  # QEMU AND KVM
+  # ============================================================================
+  
+  # Virtualization platform
+  - qemu-desktop # A QEMU setup for desktop environments (QEMU virtualization)
+  - virt-manager-git # Desktop user interface for managing virtual machines (VM management GUI)
+  - virt-install-git # Command line tool for creating new KVM , Xen, or Linux container guests using the libvirt hypervisor (VM creation tool)
+  
+  # Network and storage virtualization
+  - dnsmasq # Lightweight, easy to configure DNS forwarder and DHCP server (DNS/DHCP server)
+  - vde2 # Virtual Distributed Ethernet for emulators like qemu (virtual networking)
+  - bridge-utils # Utilities for configuring the Linux ethernet bridge (network bridging)
+  - virtiofsd # Vhost-user virtio-fs device backend written in Rust (virtual filesystem)
+  - scream-git # A Scream audio receiver using Pulseaudio, ALSA, JACK or stdout as audio output (git version) (virtual audio streaming)

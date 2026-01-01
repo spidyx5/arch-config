@@ -2,46 +2,109 @@ description: Wayland packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # Core Wayland packages
-  - wayland # A computer display server protocol
-  - wayland-protocols # Specifications of extended Wayland protocols
-  - wayland-utils # Wayland tools to display information about current compositor
-  # Wayland utilities
-  - wl-clipboard # Command-line copy/paste utilities for Wayland
-  - wlsunset # Day/night gamma adjustments for Wayland compositors
-  - kanshi # Dynamic output configuration for Wayland WMs
-  - wdisplays # GUI display configurator for wlroots compositors
-  - wev # A tool for debugging wayland events on a Wayland window, analagous to the X11 tool xev
-  - wlr-randr # Utility to manage outputs of a Wayland compositor
-  - wtype # xdotool type for wayland
-  # Screenshot tool
-  - swappy # A Wayland native snapshot editing tool
-  # File managers
-  - nemo # File manager for Cinnamon (Nautilus fork)
-  # Audio tools
-  - python-pywal16 # Generate and change color-schemes on the fly (fork that uses 16 colors)
-  # Color temperature
-  - gammastep # Adjust the color temperature of your screen according to your surroundings.
-  # Fonts
-  - inter-font # A typeface specially designed for user interfaces
-  - noto-fonts # Google Noto TTF fonts
-  - terminus-font # Monospace bitmap font (for X11 and console)
-  - matugen-bin # A material you color generation tool with templates
-  # System tools
-  - cachyos-hooks # CachyOS libalpm hooks
-  - cachyos-settings # CachyOS - Settings
-  # Location services
-  - geoclue # Modular geoinformation service built on the D-Bus messaging system
-  # Network management
-  # XWayland
-  - xorg-xwayland # run X clients under wayland
-  # XDG utilities
-  - xdg-user-dirs # Manage user directories like ~/Desktop and ~/Music
-  - xdg-utils # Command line tools that assist applications with a variety of desktop integration tasks
-  # Account service
-  - accountsservice # D-Bus interface for user account query and manipulation
-  # Multimedia support
-  - gst-libav # Multimedia graph framework - libav plugin
-  - gst-plugin-pipewire # Multimedia graph framework - pipewire plugin
-  - gst-plugins-bad # Multimedia graph framework - bad plugins
-  - gst-plugins-ugly # Multimedia graph framework - ugly plugins
+  # ============================================================================
+  # CORE WAYLAND PACKAGES
+  # ============================================================================
+  
+  # Wayland display server and protocols
+  - wayland # A computer display server protocol (Wayland display server protocol)
+  - wayland-protocols # Specifications of extended Wayland protocols (Wayland protocol extensions)
+  - wayland-utils # Wayland tools to display information about current compositor (Wayland utilities)
+  
+  # ============================================================================
+  # WAYLAND UTILITIES
+  # ============================================================================
+  
+  # Clipboard and display management
+  - wl-clipboard # Command-line copy/paste utilities for Wayland (Wayland clipboard tools)
+  - wlsunset # Day/night gamma adjustments for Wayland compositors (screen color temperature)
+  - kanshi # Dynamic output configuration for Wayland WMs (display configuration)
+  - wdisplays # GUI display configurator for wlroots compositors (display management GUI)
+  - wev # A tool for debugging wayland events on a Wayland window, analagous to the X11 tool xev (Wayland event debugger)
+  - wlr-randr # Utility to manage outputs of a Wayland compositor (display configuration tool)
+  - wtype # xdotool type for wayland (keyboard input simulation)
+  
+  # ============================================================================
+  # SCREENSHOT TOOL
+  # ============================================================================
+  
+  # Screenshot functionality
+  - swappy # A Wayland native snapshot editing tool (Wayland screenshot editor)
+  
+  # ============================================================================
+  # FILE MANAGERS
+  # ============================================================================
+  
+  # File management
+  - nemo # File manager for Cinnamon (Nautilus fork) (Cinnamon file manager)
+  
+  # ============================================================================
+  # AUDIO TOOLS
+  # ============================================================================
+  
+  # Audio and color management
+  - python-pywal16 # Generate and change color-schemes on the fly (fork that uses 16 colors) (color scheme generator)
+  
+  # ============================================================================
+  # COLOR TEMPERATURE
+  # ============================================================================
+  
+  # Screen color adjustment
+  - gammastep # Adjust the color temperature of your screen according to your surroundings. (screen color temperature)
+  
+  # ============================================================================
+  # FONTS
+  # ============================================================================
+  
+  # Font packages
+  - inter-font # A typeface specially designed for user interfaces (Inter UI font)
+  - noto-fonts # Google Noto TTF fonts (Google Noto fonts)
+  - terminus-font # Monospace bitmap font (for X11 and console) (Terminus font)
+  - matugen-bin # A material you color generation tool with templates (Material You color generator)
+  
+  # ============================================================================
+  # SYSTEM TOOLS
+  # ============================================================================
+  
+  # System configuration
+  - cachyos-hooks # CachyOS libalpm hooks (package manager hooks)
+  - cachyos-settings # CachyOS - Settings (CachyOS configuration)
+  
+  # ============================================================================
+  # LOCATION SERVICES
+  # ============================================================================
+  
+  # Geolocation
+  - geoclue # Modular geoinformation service built on the D-Bus messaging system (geolocation service)
+  
+  # ============================================================================
+  # XWAYLAND
+  # ============================================================================
+  
+  # X11 compatibility
+  - xorg-xwayland # Run X clients under wayland (X11 compatibility layer)
+  
+  # ============================================================================
+  # XDG UTILITIES
+  # ============================================================================
+  
+  # Desktop integration
+  - xdg-user-dirs # Manage user directories like ~/Desktop and ~/Music (user directory management)
+  - xdg-utils # Command line tools that assist applications with a variety of desktop integration tasks (desktop integration tools)
+  
+  # ============================================================================
+  # ACCOUNT SERVICE
+  # ============================================================================
+  
+  # User account management
+  - accountsservice # D-Bus interface for user account query and manipulation (user account service)
+  
+  # ============================================================================
+  # MULTIMEDIA SUPPORT
+  # ============================================================================
+  
+  # GStreamer multimedia framework
+  - gst-libav # Multimedia graph framework - libav plugin (GStreamer libav plugin)
+  - gst-plugin-pipewire # Multimedia graph framework - pipewire plugin (GStreamer PipeWire plugin)
+  - gst-plugins-bad # Multimedia graph framework - bad plugins (GStreamer bad plugins)
+  - gst-plugins-ugly # Multimedia graph framework - ugly plugins (GStreamer ugly plugins)

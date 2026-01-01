@@ -2,45 +2,90 @@ description: Build dependency packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # Build systems
-  - binutils # A set of programs to assemble and manipulate binary and object files
-  - cmake # A cross-platform open-source make system
-  - meson # High productivity build system
-  - samurai # ninja-compatible build tool written in C
-  - ninja # Small build system with a focus on speed
-  # Development tools
-  - cpio # A tool to copy files into or out of a cpio or tar archive
-  - skim # Fuzzy Finder in Rust!
-  - go # Core compiler tools for the Go programming language
-  - jdk # Oracle Java Development Kit
-  - cni-plugins # Some standard networking plugins, maintained by the CNI team
-  - mods-bin # AI on the command line
-  - cargo # Rust package manager
+  # ============================================================================
+  # BUILD SYSTEMS
+  # ============================================================================
+  
+  # Core build tools and utilities
+  - binutils # A set of programs to assemble and manipulate binary and object files (GNU binary utilities)
+  - cmake # A cross-platform open-source make system (cross-platform build system)
+  - meson # High productivity build system (modern build system with Python-like syntax)
+  - samurai # ninja-compatible build tool written in C (lightweight ninja implementation)
+  - ninja # Small build system with a focus on speed (fast build system)
+  
+  # ============================================================================
+  # DEVELOPMENT TOOLS
+  # ============================================================================
+  
+  # Archive and file manipulation
+  - cpio # A tool to copy files into or out of a cpio or tar archive (archive utility)
+  - python-pip # Python package installer (Python package management)
+  - skim # Fuzzy Finder in Rust! (fast fuzzy finder)
+  
+  # Programming language toolchains
+  - go # Core compiler tools for the Go programming language (Go language tools)
+  - jdk # Oracle Java Development Kit (Oracle's Java development tools)
   - bun-bin # All-in-one JavaScript runtime built for speed, with bundler, transpiler, test runner, and package manager. Includes bunx, shell completions and support for baseline CPUs
-  - wget # Network utility to retrieve files from the web
-  - perl-file-mimeinfo # Determine file type, includes mimeopen and mimetype
-  # LLVM/Clang toolchain
-  - llvm # Compiler infrastructure
-  - clang # C language family frontend for LLVM
-  - mold # A Modern Linker
-  - lld # Linker from the LLVM project
-  - llvm-bolt # a post-link optimizer developed to speed up large applications
-  - jdk-openjdk # OpenJDK Java 25 development kit
-  # Rust toolchain
-  - rustup # The Rust toolchain installer
-  # Runtime environments
-  - python # The Python programming language
+  - wget # Network utility to retrieve files from the web (HTTP/HTTPS downloader)
+  - perl-file-mimeinfo # Determine file type, includes mimeopen and mimetype (file type detection)
+  
+  # Container and networking
+  - cni-plugins # Some standard networking plugins, maintained by the CNI team (Container Network Interface plugins)
+  - mods-bin # AI on the command line (AI-powered command line tools)
+  
+  # ============================================================================
+  # LLVM/CLANG TOOLCHAIN
+  # ============================================================================
+  
+  # Compiler infrastructure
+  - llvm # Compiler infrastructure (LLVM compiler framework)
+  - clang # C language family frontend for LLVM (C/C++/Objective-C compiler)
+  - mold # A Modern Linker (fast linker for C/C++ projects)
+  - lld # Linker from the LLVM project (LLVM linker)
+  - llvm-bolt # A post-link optimizer developed to speed up large applications (binary optimization)
+  - jdk-openjdk # OpenJDK Java 25 development kit (open source Java development kit)
+  
+  # ============================================================================
+  # RUST TOOLCHAIN
+  # ============================================================================
+  
+  # Rust development
+  - rustup # The Rust toolchain installer (Rust version manager)
+  
+  # ============================================================================
+  # RUNTIME ENVIRONMENTS
+  # ============================================================================
+  
+  # Programming language runtimes
+  - python # The Python programming language (Python interpreter)
   - python-installer # Low-level library for installing a Python package from a wheel distribution
-  - python-build # A simple, correct Python build frontend
-  - nodejs # Evented I/O for V8 javascript ("Current" release)
+  - python-build # A simple, correct Python build frontend (Python package building)
+  - nodejs # Evented I/O for V8 javascript ("Current" release) (JavaScript runtime)
+  
+  # Python libraries and utilities
   - python-zstandard # Python bindings to the Zstandard (zstd) compression library
   - python-netifaces-plus # Fork of al45tair/netifaces, portable module to access network interface information.
-  - python-apscheduler # In-process task scheduler with Cron-like capabilities
-  - python-anyqt # PyQt/PySide compatibility layer (PyQt4/PyQt5/PyQt6/PySide/PySide2)
-  # Build caching
-  - sccache # Shared compilation cache
-  - ccache # Compiler cache that speeds up recompilation by caching previous compilations
-  # GPU tools
-  - zluda-git # A drop-in replacement for CUDA on non-NVIDIA GPUs (git version)
-  - flang # ground-up implementation of a Fortran front end written in modern C++
-  # Container tools
+  - python-apscheduler # In-process task scheduler with Cron-like capabilities (task scheduling)
+  - python-anyqt # PyQt/PySide compatibility layer (PyQt4/PyQt5/PyQt6/PySide/PySide2) (Qt bindings)
+  
+  # ============================================================================
+  # BUILD CACHING
+  # ============================================================================
+  
+  # Compilation acceleration
+  - sccache # Shared compilation cache (distributed compiler cache)
+  - ccache # Compiler cache that speeds up recompilation by caching previous compilations (local compiler cache)
+  
+  # ============================================================================
+  # GPU TOOLS
+  # ============================================================================
+  
+  # GPU programming and acceleration
+  - zluda-git # A drop-in replacement for CUDA on non-NVIDIA GPUs (git version) (GPU acceleration for AMD/Intel)
+  - flang # Ground-up implementation of a Fortran front end written in modern C++ (Fortran compiler)
+  
+  # ============================================================================
+  # CONTAINER TOOLS
+  # ============================================================================
+  
+  # Containerization support

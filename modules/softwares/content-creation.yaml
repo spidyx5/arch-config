@@ -5,46 +5,87 @@ description: Content Creation Packages
 
 # List of packages in this module
 packages:
-  # OBS Studio and plugins
-  - obs-studio # Free, open source software for live streaming and recording
-  - obs-backgroundremoval # Background removal plugin for OBS studio
-  - obs-3d-effect # Plugin for OBS Studio adding 3D effect filter
-  - obs-vkcapture # OBS Linux Vulkan/OpenGL game capture
-  - obs-vaapi # OBS Studio VAAPI support via GStreamer
-  - obs-advanced-masks # Advanced Masking Plugin for OBS
+  # ============================================================================
+  # OBS STUDIO AND STREAMING
+  # ============================================================================
+  
+  # Core OBS Studio
+  - obs-studio # Free, open source software for live streaming and recording (professional streaming/recording software)
+  
+  # OBS Studio plugins and enhancements
+  - obs-backgroundremoval # Background removal plugin for OBS studio (virtual background effects)
+  - obs-3d-effect # Plugin for OBS Studio adding 3D effect filter (3D transformations and effects)
+  - obs-vkcapture # OBS Linux Vulkan/OpenGL game capture (high-performance game capture)
+  - obs-vaapi # OBS Studio VAAPI support via GStreamer (hardware-accelerated video encoding)
+  - obs-advanced-masks # Advanced Masking Plugin for OBS (complex masking and chroma keying)
   - obs-composite-blur # Comprehensive blur plugin for OBS that provides several different blur algorithms, and proper compositing
   - obs-vertical-canvas-bin # A plugin for OBS Studio that allows you to simultaneously launch two streams with different side resolutions and different source layout.
-  - obs-wayland-hotkeys-git # OBS Studio plugin that implements the global shortcuts portal
-  - obs-shaderfilter-git # enables custom shaders for OBS sources
+  - obs-wayland-hotkeys-git # OBS Studio plugin that implements the global shortcuts portal (Wayland hotkey support)
+  - obs-shaderfilter-git # Enables custom shaders for OBS sources (GPU-accelerated visual effects)
   - obs-source-dock # Plugin for OBS Studio allowing you to create a Dock for a source, which lets you interact, see audio levels, change volume and control media
-  - obs-noise # Advanced Masking Plugin for OBS
-  - obs-text-pthread # This plugin aims to show beautiful texts on OBS Studio
+  - obs-noise # Advanced Masking Plugin for OBS (noise reduction and audio filtering)
+  - obs-text-pthread # This plugin aims to show beautiful texts on OBS Studio (advanced text rendering)
   - obs-plugin-browser # Official OBS Studio browser plugin, packaged to work with the official Arch package.
-  - obs-move-transition # Plugin for OBS Studio to move sources to a new position during scene transition
-  - obs-source-switcher # Plugin for OBS Studio to add a source that switches between a list of sources
-  - obs-pipewire-audio-capture-bin # Audio device and application capture for OBS Studio using PipeWire
-  - obs-plugin-input-overlay-bin # obs-studio plugin to show keyboard, gamepad and mouse input on stream.
-  - catppuccin-obs-theme-git # Soothing pastel theme for OBS Studio
-  # Art and digital painting
-  - krita-git # Edit and paint images
-  - krita-plugin-pythonplugindevelopertools-git # Python plugin for Krita that assists with making python plugins for Krita
-  - kseexpr-qt6-git # An embeddable expression evaluation engine (Krita fork)
-  # Audio Production
-  - reaper # A complete digital audio production application for computers
-  - sws # A collection of features that seamlessly integrate into REAPER
-  - reapack # Package manager for the Reaper DAW
-  - tenacity # An easy-to-use multi-track audio editor and recorder, forked from Audacity
-  # 3D modeling and animation
-  - blender # A fully integrated 3D graphics creation suite
+  - obs-move-transition # Plugin for OBS Studio to move sources to a new position during scene transition (animated transitions)
+  - obs-source-switcher # Plugin for OBS Studio to add a source that switches between a list of sources (automatic source switching)
+  - obs-pipewire-audio-capture-bin # Audio device and application capture for OBS Studio using PipeWire (modern audio capture)
+  - obs-plugin-input-overlay-bin # obs-studio plugin to show keyboard, gamepad and mouse input on stream (input visualization)
+  - catppuccin-obs-theme-git # Soothing pastel theme for OBS Studio (custom UI theming)
+  
+  # ============================================================================
+  # ART AND DIGITAL PAINTING
+  # ============================================================================
+  
+  # Digital painting and illustration
+  - krita-git # Edit and paint images (professional digital painting and illustration software)
+  - krita-plugin-pythonplugindevelopertools-git # Python plugin for Krita that assists with making python plugins for Krita (plugin development tools)
+  - kseexpr-qt6-git # An embeddable expression evaluation engine (Krita fork) (expression evaluation for animations)
+  
+  # ============================================================================
+  # AUDIO PRODUCTION
+  # ============================================================================
+  
+  # Digital Audio Workstation (DAW)
+  - reaper # A complete digital audio production application for computers (professional DAW software)
+  - sws # A collection of features that seamlessly integrate into REAPER (REAPER extensions and enhancements)
+  - reapack # Package manager for the Reaper DAW (plugin and extension manager for REAPER)
+  - tenacity # An easy-to-use multi-track audio editor and recorder, forked from Audacity (audio editing and recording)
+  
+  # ============================================================================
+  # 3D MODELING AND ANIMATION
+  # ============================================================================
+  
+  # 3D creation suite
+  - blender # A fully integrated 3D graphics creation suite (3D modeling, animation, rendering, compositing)
   - blender-launcher-v2-bin # Blender Launcher is a standalone software client that provides management for stable, daily and experimental builds of Blender 3D. It is a free open source project available for 64-bit Windows and Linux (GLIBC 2.31 and higher) operating systems.
-  # Note-taking & Knowledge Management
-  - obsidian # A powerful knowledge base that works on top of a local folder of plain text Markdown files
-  # Video editing
-  - davinci-ffmpeg-encoder-plugin # FFmpeg Encoder Plugin for DaVinci Resolve Studio
-  - davinci-convert # A video converter for Davinci Resolve using FFmpeg
-  # Tablet and input devices
-  - opentabletdriver-git # A cross-platform open source tablet driver
-  #- audacity-openvino-bin
+  
+  # ============================================================================
+  # NOTE-TAKING & KNOWLEDGE MANAGEMENT
+  # ============================================================================
+  
+  # Knowledge base and note-taking
+  - obsidian # A powerful knowledge base that works on top of a local folder of plain text Markdown files (linked note-taking application)
+  
+  # ============================================================================
+  # VIDEO EDITING
+  # ============================================================================
+  
+  # Video editing tools
+  - davinci-ffmpeg-encoder-plugin # FFmpeg Encoder Plugin for DaVinci Resolve Studio (video encoding plugin)
+  - davinci-convert # A video converter for Davinci Resolve using FFmpeg (video format conversion)
+  
+  # ============================================================================
+  # TABLET AND INPUT DEVICES
+  # ============================================================================
+  
+  # Graphics tablet support
+  - opentabletdriver-git # A cross-platform open source tablet driver (graphics tablet input support)
+  
+  # ============================================================================
+  # DISABLED PACKAGES
+  # ============================================================================
+  
+  # - audacity-openvino-bin # (Commented out - OpenVINO-accelerated Audacity)
 
 # Modules that conflict with this one
 conflicts: []

@@ -2,29 +2,50 @@ description: Gaming packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # Gaming platforms
-  - steam # Valve's digital software delivery system
-  - heroic-games-launcher-git # Native GOG, Epic Games and Amazon games launcher for Linux
-  # Gaming tools
-  - gamescope # SteamOS session compositing window manager
-  - mangohud # A Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more.
-  - protonplus # A simple Wine and Proton-based compatiblity tools manager for GNOME
-  - mangojuice # A convenient alternative to GOverlay for configuring MangoHud
-  - bottles # Easily manage wine and proton prefix
-  - sunshine # Self-hosted game stream host for Moonlight
-  - tailscale # A mesh VPN that makes it easy to connect your devices, wherever they are.
-  # Controller support
-  - joyutils # jscal, jstest, and jsattach utilities for the Linux joystick driver
-  - antimicrox # Graphical program used to map keyboard buttons & mouse controls to a gamepad
-  - jstest-gtk-git # A simple GTK2-based joystick tester and calibrator
-  # Android gaming
-  - waydroid # A container-based approach to boot a full Android system on a regular Linux system
-  - waydroid-launcher-git # For better launching Waydroid. Sources from Bazzite.
-  - waydroidsu # CLI Magisk manager and installer for Waydroid written in Rust
-  - waydroid-script-git # Python Script to add OpenGapps, Magisk, libhoudini translation library and libndk translation library to waydroid
-  - waydroid-helper-git # A GUI application for Waydroid configuration and extension installation
-  - game-devices-udev # udev rules for game controllers
-  - sc-controller # Steam Controller configuration
-  - xboxdrv # Xbox controller driver
-  - piper # Gaming mouse configuration
-  - xpadneo-dkms # Xbox One controller driver
+  # ============================================================================
+  # GAMING PLATFORMS
+  # ============================================================================
+  
+  # Game distribution platforms
+  - steam # Valve's digital software delivery system (Steam game platform)
+  - heroic-games-launcher-git # Native GOG, Epic Games and Amazon games launcher for Linux (multi-platform game launcher)
+  
+  # ============================================================================
+  # GAMING TOOLS
+  # ============================================================================
+  
+  # Game streaming and compatibility
+  - gamescope # SteamOS session compositing window manager (game streaming compositor)
+  - mangohud # A Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more. (performance overlay)
+  - protonplus # A simple Wine and Proton-based compatiblity tools manager for GNOME (Wine/Proton manager)
+  - mangojuice # A convenient alternative to GOverlay for configuring MangoHud (MangoHud configuration)
+  - bottles # Easily manage wine and proton prefix (Wine prefix manager)
+  - sunshine # Self-hosted game stream host for Moonlight (game streaming server)
+  - tailscale # A mesh VPN that makes it easy to connect your devices, wherever they are. (mesh VPN for gaming)
+  
+  # ============================================================================
+  # CONTROLLER SUPPORT
+  # ============================================================================
+  
+  # Input device utilities
+  - joyutils # jscal, jstest, and jsattach utilities for the Linux joystick driver (joystick calibration tools)
+  - antimicrox # Graphical program used to map keyboard buttons & mouse controls to a gamepad (controller mapping)
+  - jstest-gtk-git # A simple GTK2-based joystick tester and calibrator (joystick testing tool)
+  
+  # ============================================================================
+  # ANDROID GAMING
+  # ============================================================================
+  
+  # Android container and management
+  - waydroid # A container-based approach to boot a full Android system on a regular Linux system (Android container)
+  - waydroid-launcher-git # For better launching Waydroid. Sources from Bazzite. (Waydroid launcher)
+  - waydroidsu # CLI Magisk manager and installer for Waydroid written in Rust (Magisk management)
+  - waydroid-script-git # Python Script to add OpenGapps, Magisk, libhoudini translation library and libndk translation library to waydroid (Waydroid setup script)
+  - waydroid-helper-git # A GUI application for Waydroid configuration and extension installation (Waydroid configuration)
+  
+  # Controller and device support
+  - game-devices-udev # udev rules for game controllers (controller udev rules)
+  - sc-controller # Steam Controller configuration (Steam controller support)
+  - xboxdrv # Xbox controller driver (Xbox controller support)
+  - piper # Gaming mouse configuration (gaming mouse configuration)
+  - xpadneo-dkms # Xbox One controller driver (Xbox One driver)
