@@ -2,7 +2,7 @@ description: "Main Module to source other yaml files for Packages"
 
 # Optional: Modules that conflict with this one
 conflicts:
-#validate_packages: true
+validate_packages: true
 
 # Optional: Post-install hook script (relative to module directory)
 post_install_hook: "../../scripts/master-setup.sh"
@@ -13,5 +13,9 @@ package_files:
   - base.yaml
   - content-creation.yaml
   - desktop.yaml
+  - depedency.yaml
   - development.yaml
- 
+  - gaming.yaml
+  - system.yaml
+  - wayland.yaml
+  - vm.yaml

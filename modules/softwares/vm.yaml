@@ -1,0 +1,28 @@
+description: Virtualization packages
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+  # Virtualization tools
+  - virt-viewer
+  - looking-glass-git
+  - edk2-ovmf
+  - swtpm
+  - libguestfs
+  - freerdp
+  
+  # SPICE protocol
+  - spice
+  - spice-gtk
+  - spice-protocol
+  - virglrenderer
+  - spice-vdagent
+  
+  # QEMU and KVM
+  - qemu-desktop
+  - virt-manager-git
+  - virt-install-git
+  - dnsmasq
+  - vde2
+  - bridge-utils
+  - virtiofsd
+  - scream-git

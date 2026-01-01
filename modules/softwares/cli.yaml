@@ -1,0 +1,76 @@
+description: CLI packages
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+  # Core CLI utilities
+  - bat
+  - brightnessctl
+  - curl
+  - eza
+  - fd
+  - imv
+  - jaq
+  - nvtop
+  - ripgrep
+  - cmatrix
+  - figlet
+  - cool-retro-term
+  - lolcat
+  
+  - perl-file-mimeinfo
+  - shared-mime-info
+  - tealdeer
+  - ueberzugpp
+  - ghostty
+  - ghostty-shell-integration
+  - fastfetch
+  - rmpc
+  - compsize
+  - disorderfs
+  - duperemove
+  
+  # Network & security
+  - apparmor
+  - lynis
+  - nmap
+  - openssh
+  - tpm2-tools
+  # Miscellaneous
+  - gettext
+  - keyd
+  - seatd
+  - feh
+  
+  # System monitoring & management
+   
+  # System shells
+  - bash
+  - fish
+  - nushell
+  - zsh
+  # Browsers & Web
+  - chromium-widevine
+  # Extended System & AUR
+  - archlinux-userland-fs-cmp
+  - aurscan-git
+  - bees-git
+  - bpftune-git
+  - dmidecode
+
+  - zoxide
+  - yazi
+  - fresh-editor-bin
+  - fuzzel-rbw
+  - pipes.sh
+  - qwen-code
+  - tree-sitter-cli
+  - cava
+  - libsixel
+  - gemini-cli
+  - flatpak
+  - starship
+  - yt-dlp
+  - cbonsai
+  - libgen-cli-bin
+
+  

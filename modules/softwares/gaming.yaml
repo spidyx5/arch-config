@@ -1,0 +1,33 @@
+description: Gaming packages
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+  # Gaming platforms
+  - steam
+  - heroic-games-launcher-git
+  
+  # Gaming tools
+  - gamescope
+  - mangohud
+  - protonplus
+  - mangojuice
+  - bottles
+  - sunshine
+  - tailscale
+  
+  # Controller support
+  - joyutils
+  - antimicrox
+  - jstest-gtk-git
+   
+  # Android gaming
+  - waydroid
+  - waydroid-launcher-git
+  - waydroidsu
+  - waydroid-script-git  
+  - waydroid-helper-git
+  - game-devices-udev # udev rules for game controllers
+  - sc-controller # Steam Controller configuration
+  - xboxdrv # Xbox controller driver
+  - piper # Gaming mouse configuration
+  - xpadneo-dkms # Xbox One controller driver

@@ -1,0 +1,53 @@
+description: Build dependency packages
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+  # Build systems
+  - binutils
+  - cmake
+  - meson
+  - samurai
+  - ninja
+   
+  # Version control
+  
+  # Development tools
+  - cpio
+  - skim
+  - go
+  
+  - cni-plugins
+  - mods-bin
+  - cargo
+  - bun-bin
+  - wget
+   
+  # LLVM/Clang toolchain
+  - llvm
+  - clang
+  - mold
+  - lld
+  - llvm-bolt
+   
+  # Rust toolchain
+  - rustup
+   
+  # Runtime environments
+  - python
+  - python-installer
+  - python-build
+  - nodejs
+  - python-zstandard
+  - python-netifaces-plus
+  - python-apscheduler
+  - python-anyqt
+   
+  # Build caching
+  - sccache
+  - ccache
+   
+  # GPU tools
+  - zluda-git
+  - flang
+   
+  # Container tools

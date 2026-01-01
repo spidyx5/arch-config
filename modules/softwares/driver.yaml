@@ -1,0 +1,47 @@
+description: Driver packages
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+  # Firmware packages
+  - intel-ucode
+  - linux-firmware
+  - linux-firmware-intel
+  - xone-dkms
+  - xone-dongle-firmware
+
+  # Intel graphics and compute packages
+  - intel-compute-runtime
+  - intel-graphics-compiler
+  - intel-gpu-tools
+  - intel-media-driver
+
+  # VA-API packages
+  - lib32-libva
+  - lib32-libva-intel-driver
+  - libva
+  - libva-intel-driver
+  - libva-utils
+
+  # VPL packages
+  - libvpl
+  - libvpl-tools
+  - vpl-gpu-rt
+
+  # OpenCL packages
+  - ocl-icd
+  - opencl-headers
+
+  # OpenGL packages
+  - libgl
+
+  # Mesa packages
+  - lib32-mesa-tkg-git
+  - mesa-tkg-git
+
+  # Vulkan packages
+  - vulkan-headers
+  - vulkan-icd-loader
+  - vulkan-tools
+  - vulkan-utility-libraries
+  - vkbasalt
+  - vkd3d

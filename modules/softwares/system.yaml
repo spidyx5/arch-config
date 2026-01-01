@@ -2,64 +2,26 @@ description: System hardware packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # Firmware packages
-  - intel-ucode
-  - linux-firmware
-  - linux-firmware-intel
-  - xone-dkms
-  - xone-dongle-firmware
   # Kernel packages
   - linux-cachyos
   - linux-cachyos-headers
   - linux-xanmod-edge-x64v3
   - linux-xanmod-edge-x64v3-headers
   # Audio system packages
-  - alsa-utils
-  - blueman
-  - bluez
-  - bluez-tools
-  - bluez-utils
-  - cava
-  - libsixel
   - noise-suppression-for-voice
-  - pipewire
-  - pipewire-alsa
-  - pipewire-audio
-  - pipewire-jack
-  - pipewire-pulse
   - rnnoise
   - rtkit
-  - wireplumber
-  # Graphics/Vulkan packages
-  - lib32-mesa-tkg-git
-  - libusb
-  - mesa-tkg-git
-  - vulkan-headers
-  - vulkan-icd-loader
-  - vulkan-tools
-  - vkbasalt
-  - vkd3d
-  # Intel graphics
-  - intel-compute-runtime
-  - intel-graphics-compiler
-  - intel-gpu-tools
-  - intel-media-driver
-  - lib32-libva
-  - lib32-libva-intel-driver
-  - libva
-  - libva-intel-driver
-  - libva-utils
-  - libvpl
-  - libvpl-tools
-  - ocl-icd
-  - opencl-headers
-  - vpl-gpu-rt
-  # XWayland
-  - xorg-xwayland
+  - mkinitcpio
+  - mkinitcpio-busybox
+  - mkinitcpio-firmware
+  - busybox
+  - cachyos-ananicy-rules
+  - earlyoom
+  - fwupd
+  - blueprint-compiler
+
   # Hardware monitoring and tools
   - lm_sensors
-  - alsa-firmware
-  - alsa-plugins
   - cpupower
   - efitools
   - haveged
@@ -67,28 +29,27 @@ packages:
   - hwdetect
   - lsscsi
   - power-profiles-daemon
-  - sg3_utils
   - smartmontools
   - sof-firmware
   # Network hardware packages
   - dhclient
   - dnsutils
   - ethtool
-  - iwd
   - modemmanager
   - usb_modeswitch
   - wireless-regdb
   - wpa_supplicant
   - xl2tpd
   # Virtual camera and I2C tools
-  - booster
   - i2c-tools
   - v4l2loopback-dkms
-  - v4l2loopback-utils
   # Additional hardware support
   - lib32-libstdc++5
   - libstdc++5
-  - libgl
-  - libusb
   - pciutils
+  - libusb
+
+  # Utility packages
+  - sg3_utils
   - usbutils
+  - v4l2loopback-utils  

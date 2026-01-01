@@ -1,0 +1,42 @@
+description: Utilities packages
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+  # Network-related packages
+  - powerdns-recursor
+  - nftables
+  - opensnitch
+  - openvpn
+  - firewalld
+  - wireshark-qt
+  - alsa-utils
+  - blueman
+  - bluez
+  - bluez-tools
+  - bluez-utils
+  - pipewire
+  - pipewire-alsa
+  - pipewire-audio
+  - pipewire-jack
+  - pipewire-pulse
+  - wireplumber
+  - alsa-firmware
+  - alsa-plugins
+  - networkmanager
+  - networkmanager-openvpn
+ 
+  # Sound-related packages
+  - python-indexed-zstd
+  - easyeffects
+  - pavucontrol
+  - pwvucontrol
+  - qpwgraph
+  - iwd
+  - btdu-bin
+  - btrfs-compress
+  - btrfs-desktop-notification
+  - btrfs-du
+  - btrfs-list
+  - btrfs-heatmap
+  - btrfs-assistant
+  - python-pyclip

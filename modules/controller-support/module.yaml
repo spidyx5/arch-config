@@ -6,4 +6,3 @@ post_install_hook: "scripts/install-controller-udev-rules.sh"
 hooks_behavior: once
 
 package_files:
-  - controller-support.yaml

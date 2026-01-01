@@ -20,10 +20,10 @@ packages:
   - obs-text-pthread
   - obs-plugin-browser
   - obs-move-transition
-  - catppuccin-obs-theme-git
   - obs-source-switcher
   - obs-pipewire-audio-capture-bin
   - obs-plugin-input-overlay-bin
+  - catppuccin-obs-theme-git
   # Art
   - krita-git
   - krita-plugin-pythonplugindevelopertools-git

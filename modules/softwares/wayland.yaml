@@ -1,0 +1,61 @@
+description: Wayland packages
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+  # Core Wayland packages
+  - wayland
+  - wayland-protocols
+  - wayland-utils
+  
+  # Wayland utilities
+  - wl-clipboard
+  - wlsunset
+  - kanshi
+  - wdisplays
+  - wev
+  - wlr-randr
+  - wtype
+  
+  # Screenshot tool
+  - swappy
+  
+  # File managers
+  - nemo
+  
+  # Audio tools
+  - python-pywal16
+  
+  # Color temperature
+  - gammastep
+  
+  # Fonts
+  - inter-font
+  - noto-fonts
+  - terminus-font
+  
+  - matugen-bin
+  
+  # System tools
+  - cachyos-hooks
+  - cachyos-settings
+  
+  # Location services
+  - geoclue
+  
+  # Network management
+  
+  # XWayland
+  - xorg-xwayland
+  
+  # XDG utilities
+  - xdg-user-dirs
+  - xdg-utils
+  
+  # Account service
+  - accountsservice
+  
+  # Multimedia support
+  - gst-libav
+  - gst-plugin-pipewire
+  - gst-plugins-bad
+  - gst-plugins-ugly
