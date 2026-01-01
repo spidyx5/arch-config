@@ -90,6 +90,7 @@ packages:
   - evtest # Input device event monitor and query tool for debugging input devices
   - avfs # Virtual filesystem that allows browsing compressed files and archives transparently
   
+
 exclude:
   - nano # Text editor (excluded in favor of other editors)
   - linux-lts # Long-term support kernel (excluded in favor of mainline)

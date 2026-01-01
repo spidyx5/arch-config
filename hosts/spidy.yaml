@@ -6,11 +6,6 @@ enabled_modules:
 - controller-support
 - cli-tools/webapp-tool
 - niri
-#-hyprland
-#-kde
-#-mango
-#-login-managers/sddm-enable
-#-login-managers/sysc-greet
 - helix-catppuccin-mocha
 packages: []
 exclude: []
@@ -24,7 +19,28 @@ config_backups:
   max_backups: 5
 services:
   enabled:
-
+  - NetworkManager
+  - NetworkManager-dispatcher
+  - NetworkManager-wait-online
+  - ananicy-cpp
+  - apparmor
+  - bluetooth
+  - bpftune
+  - earlyoom
+  - getty@
+  - greetd
+  - iwd
+  - keyd
+  - libvirtd
+  - nftables
+  - proton.VPN
+  - sshd
+  - systemd-network-generator
+  - systemd-networkd-wait-online
+  - thermald
+  - tuned
+  - upower
+  - waydroid-container
   disabled:
   - iptables
   - ufw
