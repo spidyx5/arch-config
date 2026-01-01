@@ -110,3 +110,4 @@ EOF
 echo "[+] Success! Configuration written to:"
 echo "    ${CONF_DROPIN}"
 echo ""
+#depends=('electron-latest')

@@ -36,7 +36,7 @@ packages:
   # Media players
   - smplayer # Media player with built-in codecs that can play virtually all video and audio formats (feature-rich media player)
   - mpv # A free, open source, and cross-platform media player (minimalist media player)
-  - dopamine-official # The audio player that keeps it simple (music player)
+  - dopamine-git # The audio player that keeps it simple (music player)
   
   # Music streaming
   - spotify # A proprietary music streaming service (music streaming platform)
