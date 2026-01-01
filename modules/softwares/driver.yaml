@@ -2,10 +2,7 @@ description: Driver packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # ============================================================================
-  # FIRMWARE PACKAGES
-  # ============================================================================
-  
+
   # CPU and system firmware
   - intel-ucode # Microcode update files for Intel CPUs (Intel CPU microcode updates)
   - linux-firmware # Firmware files for Linux - Default set (essential hardware firmware)
@@ -14,21 +11,14 @@ packages:
   # Gaming controller firmware
   - xone-dkms # Modern Linux driver for Xbox One and Xbox Series X|S controllers (Xbox controller driver)
   - xone-dongle-firmware # Xbox Wireless Controller Adapter firmware (Xbox wireless adapter firmware)
-  
-  # ============================================================================
-  # INTEL GRAPHICS AND COMPUTE PACKAGES
-  # ============================================================================
-  
+
   # Intel compute and graphics runtime
   - intel-compute-runtime # Intel(R) Graphics Compute Runtime for oneAPI Level Zero and OpenCL(TM) Driver (Intel GPU compute)
   - intel-graphics-compiler # Intel Graphics Compiler for OpenCL (Intel graphics shader compiler)
   - intel-gpu-tools # Tools for development and testing of the Intel DRM driver (Intel GPU debugging tools)
   - intel-media-driver # Intel Media Driver for VAAPI — Broadwell+ iGPUs (Intel video acceleration)
   
-  # ============================================================================
-  # VA-API PACKAGES
-  # ============================================================================
-  
+
   # Video acceleration API
   - lib32-libva # Video Acceleration (VA) API for Linux (32-bit) (32-bit video acceleration)
   - lib32-libva-intel-driver # VA-API implementation for Intel G45 and HD Graphics family (32-bit) (32-bit Intel VA-API)
@@ -36,19 +26,12 @@ packages:
   - libva-intel-driver # VA-API implementation for Intel G45 and HD Graphics family (Intel video acceleration)
   - libva-utils # Intel VA-API Media Applications and Scripts for libva (VA-API utilities)
   
-  # ============================================================================
-  # VPL PACKAGES
-  # ============================================================================
-  
+
   # Intel Video Processing Library
   - libvpl # Intel Video Processing Library (Intel video processing)
   - libvpl-tools # Tools for Intel Video Processing Library (VPL utilities)
   - vpl-gpu-rt # Intel VPL runtime implementation for Intel GPUs (Tiger Lake and newer) (VPL runtime)
-  
-  # ============================================================================
-  # OPENCL PACKAGES
-  # ============================================================================
-  
+
   # OpenCL compute framework
   - ocl-icd # OpenCL ICD Bindings (OpenCL Installable Client Driver)
   - opencl-headers # OpenCL (Open Computing Language) header files (OpenCL development headers)
@@ -58,7 +41,6 @@ packages:
   # ============================================================================
   
   # OpenGL graphics library
-  - libgl # OpenGL library (OpenGL graphics library)
   - libglvnd #
   # ============================================================================
   # MESA PACKAGES
@@ -68,10 +50,7 @@ packages:
   - lib32-mesa-tkg-git # An open-source implementation of the OpenGL specification, git version (32-bit Mesa)
   - mesa-tkg-git # An open-source implementation of the OpenGL specification, git version (Mesa graphics drivers)
   
-  # ============================================================================
-  # VULKAN PACKAGES
-  # ============================================================================
-  
+
   # Vulkan graphics API
   - vulkan-headers # Vulkan header files and API registry (Vulkan development headers)
   - vulkan-icd-loader # Vulkan Installable Client Driver (ICD) Loader (Vulkan driver loader)

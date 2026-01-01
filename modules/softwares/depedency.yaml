@@ -2,10 +2,7 @@ description: Build dependency packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # ============================================================================
-  # BUILD SYSTEMS
-  # ============================================================================
-  
+
   # Core build tools and utilities
   - binutils # A set of programs to assemble and manipulate binary and object files (GNU binary utilities)
   - cmake # A cross-platform open-source make system (cross-platform build system)
@@ -13,10 +10,7 @@ packages:
   - samurai # ninja-compatible build tool written in C (lightweight ninja implementation)
   - ninja # Small build system with a focus on speed (fast build system)
   
-  # ============================================================================
-  # DEVELOPMENT TOOLS
-  # ============================================================================
-  
+
   # Archive and file manipulation
   - cpio # A tool to copy files into or out of a cpio or tar archive (archive utility)
   - python-pip # Python package installer (Python package management)
@@ -33,10 +27,7 @@ packages:
   - cni-plugins # Some standard networking plugins, maintained by the CNI team (Container Network Interface plugins)
   - mods-bin # AI on the command line (AI-powered command line tools)
   
-  # ============================================================================
-  # LLVM/CLANG TOOLCHAIN
-  # ============================================================================
-  
+
   # Compiler infrastructure
   - llvm # Compiler infrastructure (LLVM compiler framework)
   - clang # C language family frontend for LLVM (C/C++/Objective-C compiler)
@@ -45,17 +36,11 @@ packages:
   - llvm-bolt # A post-link optimizer developed to speed up large applications (binary optimization)
   - jdk-openjdk # OpenJDK Java 25 development kit (open source Java development kit)
   
-  # ============================================================================
-  # RUST TOOLCHAIN
-  # ============================================================================
-  
+
   # Rust development
   - rustup # The Rust toolchain installer (Rust version manager)
   
-  # ============================================================================
-  # RUNTIME ENVIRONMENTS
-  # ============================================================================
-  
+
   # Programming language runtimes
   - python # The Python programming language (Python interpreter)
   - python-installer # Low-level library for installing a Python package from a wheel distribution
@@ -68,24 +53,13 @@ packages:
   - python-apscheduler # In-process task scheduler with Cron-like capabilities (task scheduling)
   - python-anyqt # PyQt/PySide compatibility layer (PyQt4/PyQt5/PyQt6/PySide/PySide2) (Qt bindings)
   
-  # ============================================================================
-  # BUILD CACHING
-  # ============================================================================
-  
+ 
   # Compilation acceleration
   - sccache # Shared compilation cache (distributed compiler cache)
   - ccache # Compiler cache that speeds up recompilation by caching previous compilations (local compiler cache)
   
-  # ============================================================================
-  # GPU TOOLS
-  # ============================================================================
-  
+
   # GPU programming and acceleration
   #- zluda-git # A drop-in replacement for CUDA on non-NVIDIA GPUs (git version) (GPU acceleration for AMD/Intel)
   #- flang # Ground-up implementation of a Fortran front end written in modern C++ (Fortran compiler)
   
-  # ============================================================================
-  # CONTAINER TOOLS
-  # ============================================================================
-  
-  # Containerization support

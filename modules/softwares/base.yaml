@@ -2,30 +2,16 @@ description: Base system packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # ============================================================================
-  # ESSENTIAL BASE SYSTEM
-  # ============================================================================
-  
+
   # Core system foundation
   - base # Minimal package set to define a basic Arch Linux installation (kernel, core utilities, package manager)
   - base-devel # Basic tools to build Arch Linux packages (make, autoconf, automake, etc.)
-  
-  # ============================================================================
-  # PACKAGE MANAGEMENT TOOLS
-  # ============================================================================
-  
-  # AUR helpers and package management
-  - paru # Feature-packed AUR helper with advanced features and security
-  - yay # Yet Another Yogurt - Pacman wrapper and AUR helper written in Go
+
   
   # System utilities
   - irqbalance # IRQ balancing daemon for SMP systems to optimize interrupt distribution
   - snapper # Tool for managing BTRFS and LVM snapshots with rollback capabilities
-  
-  # ============================================================================
-  # PACKAGE MANAGEMENT UTILITIES
-  # ============================================================================
-  
+
   # Pacman enhancement tools
   - pacman-contrib # Contributed scripts and tools for pacman systems (pacman-color, checkupdates, etc.)
   - pkgfile # Tool to search for files in official repository packages (find which package provides a file)
@@ -33,10 +19,7 @@ packages:
   - reflector # Python module and script to retrieve and filter the latest Pacman mirror list for optimal download speeds
   - extra-cmake-modules # Extra modules and scripts for CMake build system
   
-  # ============================================================================
-  # MULTIMEDIA SUPPORT
-  # ============================================================================
-  
+
   # File format and media libraries
   - ffmpegthumbnailer # Lightweight video thumbnailer that can be used by file managers
   - libgsf # Extensible I/O abstraction library for dealing with structured file formats (Office documents, archives)
@@ -44,10 +27,7 @@ packages:
   - poppler-glib # Poppler glib bindings for PDF rendering and manipulation
   - vlc-plugins-all # Free and open source cross-platform multimedia player and framework - all plugins included
   
-  # ============================================================================
-  # BOOTLOADER AND FILESYSTEM TOOLS
-  # ============================================================================
-  
+
   # Bootloader
   - limine # Advanced, portable, multiprotocol bootloader with modern features
   - limine-mkinitcpio-hook # Install kernel for the Limine bootloader (integration with Arch's initramfs system)
@@ -61,10 +41,7 @@ packages:
   - gvfs # Virtual filesystem implementation for GIO providing network and archive access
   - libappimage # Reference implementation of the AppImage specification for portable applications
   
-  # ============================================================================
-  # SYSTEM PERFORMANCE AND POWER MANAGEMENT
-  # ============================================================================
-  
+
   # CPU scheduling and thermal management
   - scx-scheds # sched_ext schedulers and tools for advanced CPU scheduling (BPF-based)
   - thermald # The Linux Thermal Daemon program from 01.org for thermal management
@@ -74,19 +51,13 @@ packages:
   - fyi # A command line utility and notify-send alternative to send desktop notifications (desktop notification tool)
   - notify-send.sh # notify-send drop-in replacement with more features (enhanced notification tool)
   
-  # ============================================================================
-  # CACHYOS SPECIFIC TOOLS
-  # ============================================================================
-  
+
   # CachyOS utilities
   - cachyos-hello # Welcome screen for CachyOS providing system information and setup guidance
   - cachyos-kernel-manager # Simple kernel manager for CachyOS with easy kernel switching
   - cachyos-packageinstaller # Simple Software Application Package Installer for CachyOS which helps setting up & installing applications
   
-  # ============================================================================
-  # COMPRESSION AND ARCHIVING TOOLS
-  # ============================================================================
-  
+
   # Archive utilities
   - unzip # For extracting and viewing files in .zip archives
   - dosfstools # DOS filesystem utilities for FAT16/FAT32 filesystems

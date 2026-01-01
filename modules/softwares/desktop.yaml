@@ -4,46 +4,30 @@
 description: Desktop packages
 
 packages:
-  # ============================================================================
-  # FILE SHARING
-  # ============================================================================
-  
+
   # Local file transfer
   - localsend # An open source cross-platform alternative to AirDrop (secure local file sharing)
-  
-  # ============================================================================
-  # WEB BROWSERS
-  # ============================================================================
-  
+
   # Privacy-focused browsers
   - zen-browser-bin # Performance oriented Firefox-based web browser (privacy-focused Firefox fork)
   - helium-browser-bin # Private, fast, and honest web browser based on Chromium (privacy browser)
   - qutebrowser # A keyboard-driven, vim-like browser based on Python and Qt (vim-inspired browser)
   - python-adblock # Brave's adblock library in Python (ad blocking functionality)
   
-  # ============================================================================
-  # SECURITY & PASSWORD MANAGEMENT
-  # ============================================================================
-  
+
   # Password management and security
   - bitwarden # A secure and free password manager for all of your devices (password vault)
   - proton-vpn-gtk-app # ProtonVPN GTK app, Maintained by Community (VPN client)
   - protonmail-bridge # Integrate ProtonMail paid account with any program that supports IMAP and SMTP (Qt desktop application) (email integration)
   - proton-authenticator-bin # 2FA app from Proton to securely sync and backup 2FA codes (two-factor authentication)
   
-  # ============================================================================
-  # UTILITIES & DOWNLOADERS
-  # ============================================================================
-  
+
   # File sharing and downloads
   - qbittorrent # An advanced BitTorrent client programmed in C++, based on Qt toolkit and libtorrent-rasterbar (torrent client)
   - proton-mail-bin # Proton official desktop application for Proton Mail and Proton Calendar (secure email client)
   - parabolic # Download web video and audio (media downloader)
   
-  # ============================================================================
-  # MULTIMEDIA & CONTENT
-  # ============================================================================
-  
+
   # E-book management and reading
   - calibre # Ebook management application (ebook library management)
   - foliate # A simple and modern GTK eBook reader (ebook reader)
@@ -57,25 +41,16 @@ packages:
   # Music streaming
   - spotify # A proprietary music streaming service (music streaming platform)
   
-  # ============================================================================
-  # FLATPAK MANAGEMENT
-  # ============================================================================
-  
+
   # Flatpak application management
   - flatseal # A permissions manager for Flatpak (Flatpak permission control)
   - flatpak # Linux application sandboxing and distribution framework (formerly xdg-app) (containerized applications)
   
-  # ============================================================================
-  # APP STORE
-  # ============================================================================
-  
+
   # Application distribution
   - cosmic-store # Cosmic App Store (COSMIC application store)
   
-  # ============================================================================
-  # GAMING OVERLAYS AND TOOLS
-  # ============================================================================
-  
+
   # Application launchers and integration
   - appimagelauncher-git # A Helper application for running and integrating AppImages (AppImage management)
   
@@ -87,20 +62,14 @@ packages:
   # Communication and gaming
   - equibop-bin # A custom Discord desktop app with Equicord pre-installed (binary release) (enhanced Discord client)
   
-  # ============================================================================
-  # SECURITY TOOLS
-  # ============================================================================
-  
+
   # Antivirus and security
   - clamav-gui # Graphical user interface for clamav and freshclam with an integrated service menu for Konqueror/Dolphin to scan files directly from your file manager (antivirus GUI)
   - clamav # Command-line virus scanner (antivirus engine)
   - clamav-unofficial-sigs # Unofficial virus signature updates for ClamAV (virus definitions)
   - download-guardian # User-level lightweight service that watches ~/Downloads and prompts to scan new files/folders with Download Guardian (powered by ClamAV)
     
-  # ============================================================================
-  # TEXT EDITOR
-  # ============================================================================
-  
+
   # Text editing
   - kate # Advanced text editor (Kate text editor)
 

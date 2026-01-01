@@ -14,10 +14,7 @@ packages:
   - firewalld # Firewall daemon with D-Bus interface (dynamic firewall manager)
   - wireshark-qt # Network traffic and protocol analyzer/sniffer - Qt GUI (network protocol analyzer)
   
-  # ============================================================================
-  # BLUETOOTH AND AUDIO
-  # ============================================================================
-  
+
   # Audio system utilities
   - alsa-tools # Advanced tools for certain sound cards (ALSA advanced tools)
   - alsa-utils # Advanced Linux Sound Architecture - Utilities (ALSA command-line tools)
@@ -37,26 +34,19 @@ packages:
   - pipewire-jack # Low-latency audio/video router and processor - JACK replacement (PipeWire JACK support)
   - pipewire-pulse # Low-latency audio/video router and processor - PulseAudio replacement (PipeWire PulseAudio)
   - wireplumber # Session / policy manager implementation for PipeWire (PipeWire session manager)
-  - jack-utils # The JACK low-latency audio server (JACK audio server)
-  # ============================================================================
-  # SOUND-RELATED PACKAGES
-  # ============================================================================
-  
+
   # Audio effects and control
   - python-indexed-zstd # A bridge for libzstd-seek to python (Zstandard compression library)
   - easyeffects # Audio Effects for Pipewire applications (audio effects processor)
   - pavucontrol # PulseAudio Volume Control (PulseAudio mixer)
   - pwvucontrol # Pipewire volume control for GNOME (PipeWire volume control)
   - qpwgraph # PipeWire Graph Qt GUI Interface (PipeWire graph editor)
-  
+  - zstd-git
   # Wireless and storage utilities
   - iwd # Internet Wireless Daemon (wireless daemon)
   - btdu-bin # Sampling disk usage profiler for btrfs (BTRFS disk usage tool)
   
-  # ============================================================================
-  # BTRFS UTILITIES
-  # ============================================================================
-  
+
   # BTRFS management and monitoring
   - btrfs-compress # btrfs tool that makes it possible to change +c flags recursively on existing files (BTRFS compression)
   - btrfs-desktop-notification # Notifies you on the desktop when booting into a read-only system or when BTRFS warning/error messages appear in the dmesg log. (BTRFS notifications)
@@ -65,17 +55,12 @@ packages:
   - btrfs-heatmap # Visualize the layout of data on your btrfs filesystem over time (BTRFS visualization)
   - btrfs-assistant # An application for managing BTRFS subvolumes and Snapper snapshots (BTRFS GUI manager)
   
-  # ============================================================================
-  # NETWORK MANAGEMENT
-  # ============================================================================
-  
+
   # Network connectivity
   - networkmanager # Network connection manager and user applications (network connection manager)
   - networkmanager-openvpn # NetworkManager VPN plugin for OpenVPN (with GUI) (OpenVPN integration)
   
-  # ============================================================================
-  # CLIPBOARD UTILITIES
-  # ============================================================================
-  
+
   # Clipboard management
   - python-pyclip # Cross-platform clipboard utilities supporting both binary and text data (clipboard utilities)
+  - win11-clipboard-history-bin # Windows 11-style Clipboard History Manager for Linux

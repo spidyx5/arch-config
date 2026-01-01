@@ -5,10 +5,7 @@ description: Content Creation Packages
 
 # List of packages in this module
 packages:
-  # ============================================================================
-  # OBS STUDIO AND STREAMING
-  # ============================================================================
-  
+
   # Core OBS Studio
   - obs-studio # Free, open source software for live streaming and recording (professional streaming/recording software)
   
@@ -32,59 +29,37 @@ packages:
   - obs-plugin-input-overlay-bin # obs-studio plugin to show keyboard, gamepad and mouse input on stream (input visualization)
   - catppuccin-obs-theme-git # Soothing pastel theme for OBS Studio (custom UI theming)
   
-  # ============================================================================
-  # ART AND DIGITAL PAINTING
-  # ============================================================================
-  
+
   # Digital painting and illustration
   - krita-git # Edit and paint images (professional digital painting and illustration software)
   - krita-plugin-pythonplugindevelopertools-git # Python plugin for Krita that assists with making python plugins for Krita (plugin development tools)
   - kseexpr-qt6-git # An embeddable expression evaluation engine (Krita fork) (expression evaluation for animations)
   
-  # ============================================================================
-  # AUDIO PRODUCTION
-  # ============================================================================
-  
+
   # Digital Audio Workstation (DAW)
   - reaper # A complete digital audio production application for computers (professional DAW software)
   - sws # A collection of features that seamlessly integrate into REAPER (REAPER extensions and enhancements)
   - reapack # Package manager for the Reaper DAW (plugin and extension manager for REAPER)
   - tenacity # An easy-to-use multi-track audio editor and recorder, forked from Audacity (audio editing and recording)
   
-  # ============================================================================
-  # 3D MODELING AND ANIMATION
-  # ============================================================================
-  
+
   # 3D creation suite
   - blender # A fully integrated 3D graphics creation suite (3D modeling, animation, rendering, compositing)
   - blender-launcher-v2-bin # Blender Launcher is a standalone software client that provides management for stable, daily and experimental builds of Blender 3D. It is a free open source project available for 64-bit Windows and Linux (GLIBC 2.31 and higher) operating systems.
   
-  # ============================================================================
-  # NOTE-TAKING & KNOWLEDGE MANAGEMENT
-  # ============================================================================
-  
+
   # Knowledge base and note-taking
   - obsidian # A powerful knowledge base that works on top of a local folder of plain text Markdown files (linked note-taking application)
   
-  # ============================================================================
-  # VIDEO EDITING
-  # ============================================================================
-  
+
   # Video editing tools
   - davinci-ffmpeg-encoder-plugin # FFmpeg Encoder Plugin for DaVinci Resolve Studio (video encoding plugin)
   - davinci-convert # A video converter for Davinci Resolve using FFmpeg (video format conversion)
   
-  # ============================================================================
-  # TABLET AND INPUT DEVICES
-  # ============================================================================
-  
+
   # Graphics tablet support
   - opentabletdriver-git # A cross-platform open source tablet driver (graphics tablet input support)
-  
-  # ============================================================================
-  # DISABLED PACKAGES
-  # ============================================================================
-  
+
   # - audacity-openvino-bin # (Commented out - OpenVINO-accelerated Audacity)
 
 # Modules that conflict with this one

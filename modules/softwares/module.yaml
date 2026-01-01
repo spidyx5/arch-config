@@ -5,8 +5,20 @@ conflicts:
 validate_packages: true
 
 # Optional: Post-install hook script (relative to module directory)
-post_install_hook: "../../scripts/master-setup.sh"
+post_install_hook: 
 hooks_behavior: ask # or "always", "skip", "once" (default)
 
 # Optional: Explicit list of package files to load (empty = auto-discover)
 package_files:
+- base.yaml
+- cli.yaml
+- content-creation.yaml
+- depedency.yaml
+- desktop.yaml
+- development.yaml
+- driver.yaml
+- gaming.yaml
+- system.yaml
+- utilites.yaml
+- vm.yaml
+- wayland.yaml

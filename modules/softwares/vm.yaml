@@ -2,10 +2,7 @@ description: Virtualization packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # ============================================================================
-  # VIRTUALIZATION TOOLS
-  # ============================================================================
-  
+
   # Virtual machine display and management
   - virt-viewer # A lightweight interface for interacting with the graphical display of virtualized guest OS. (VM display client)
   - looking-glass-git # A client application for accessing the LookingGlass IVSHMEM device of a VM (high-performance VM display)
@@ -14,10 +11,7 @@ packages:
   - libguestfs # Access and modify virtual machine disk images (VM disk management)
   - freerdp # Free implementation of the Remote Desktop Protocol (RDP) (RDP client)
   
-  # ============================================================================
-  # SPICE PROTOCOL
-  # ============================================================================
-  
+
   # SPICE virtualization protocol
   - spice # SPICE server (remote desktop protocol for VMs)
   - spice-gtk # GTK+ client library for SPICE (SPICE client library)
@@ -25,10 +19,7 @@ packages:
   - virglrenderer # A virtual 3D GPU library, that allows the guest operating system to use the host GPU to accelerate 3D rendering (virtual 3D graphics)
   - spice-vdagent # Spice agent for Linux guests (SPICE guest agent)
   
-  # ============================================================================
-  # QEMU AND KVM
-  # ============================================================================
-  
+
   # Virtualization platform
   - qemu-desktop # A QEMU setup for desktop environments (QEMU virtualization)
   - virt-manager-git # Desktop user interface for managing virtual machines (VM management GUI)
