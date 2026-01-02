@@ -1,10 +1,4 @@
 description: "Main Module to source other yaml files for Packages"
-
-# Optional: Modules that conflict with this one
-conflicts:
-validate_packages: true
-
-# Optional: Post-install hook script (relative to module directory)
 post_install_hook: 
 hooks_behavior: ask # or "always", "skip", "once" (default)
 

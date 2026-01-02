@@ -46,4 +46,4 @@ services:
   - iptables
   - ufw
 editor: helix
-aur_helper: yay
+aur_helper: paru

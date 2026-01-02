@@ -1,5 +1,6 @@
 description: "Development"
-
+post_install_hook: ""
+hooks_behavior: skip
 packages:
 
   # Visual Studio Code alternatives

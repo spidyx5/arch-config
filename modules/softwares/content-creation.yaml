@@ -1,8 +1,6 @@
-# Content Creation
-# Apps for content creation
-
 description: Content Creation Packages
-
+post_install_hook: ""
+hooks_behavior: skip
 # List of packages in this module
 packages:
 

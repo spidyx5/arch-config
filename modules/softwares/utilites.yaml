@@ -2,10 +2,7 @@ description: Utilities packages
 post_install_hook: ""
 hooks_behavior: skip
 packages:
-  # ============================================================================
-  # NETWORK-RELATED PACKAGES
-  # ============================================================================
-  
+
   # DNS and network services
   - powerdns-recursor # Resolving DNS server (PowerDNS recursive DNS server)
   - nftables # Netfilter tables userspace tools (Linux packet filtering framework)
