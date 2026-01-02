@@ -1,11 +1,11 @@
-# System packages merged from host (auto-generated, host-specific)
-#config.yaml
+# Host-specific configuration (each machine has its own)
+config.yaml
 
 # Auto-generated state files
-system-packages-spidy.yaml
+system-packages.yaml
 state/installed.yaml
 state/hooks-executed.yaml
-modules/declared-packages.yaml
+system-packages-spidy.yaml
 
 # Backup files
 *.backup.*

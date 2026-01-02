@@ -1,0 +1,13 @@
+# Zen Browser Catppuccin Mocha Theme
+# Applies the Catppuccin Mocha theme to Zen Browser
+
+description: Catppuccin Mocha theme for Zen Browser
+
+# No packages to install - theme only
+packages: []
+
+conflicts: []
+
+# Script to install the theme files
+post_install_hook: "scripts/install-zen-catppuccin.sh"
+hooks_behavior: once

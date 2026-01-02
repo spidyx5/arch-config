@@ -25,10 +25,6 @@ packages:
   - kwalletmanager # KDE wallet manager
   - kde-gtk-config # GTK configuration for KDE
   - xdg-desktop-portal-kde # Desktop portal for KDE
-  - qt5-wayland # Qt5 Wayland support
-  - qt6-wayland # Qt6 Wayland support
   - kvantum # Advanced Qt theme engine
-  - qt5ct # Qt5 configuration tool
-  - qt6ct # Qt6 configuration tool
 
 conflicts: []

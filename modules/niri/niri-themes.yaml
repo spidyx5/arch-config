@@ -4,6 +4,7 @@
 description: Niri theme and visual packages
 
 packages:
-  # Niri-specific packages only
-
+  - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
+  - tela-icon-theme-purple-git # Icon theme
+  - bibata-cursor-theme-bin # Mouse cursor theme
 conflicts: []

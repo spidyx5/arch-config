@@ -5,6 +5,8 @@
 description: Hyprland Wayland compositor with DankMaterialShell
 
 packages:
-  # Hyprland-specific packages only
-# Conflicts with other window managers
+  - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
+  - tela-icon-theme-purple-git # Tela purple icon theme
+  - bibata-cursor-theme-bin # Bibata Modern Ice cursor theme
+  - kvantum-theme-catppuccin-git
 conflicts: []
