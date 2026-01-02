@@ -3,7 +3,7 @@ description: Spidy host configuration
 import: []
 enabled_modules:
 - softwares
-- controller-support
+#- controller-support
 - cli-tools/webapp-tool
 - niri
 - helix-catppuccin-mocha
