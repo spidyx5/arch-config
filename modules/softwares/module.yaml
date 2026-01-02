@@ -1,6 +1,7 @@
 description: "Main Module to source other yaml files for Packages"
 post_install_hook: 
 hooks_behavior: ask # or "always", "skip", "once" (default)
+#validate_packages: true
 
 # Optional: Explicit list of package files to load (empty = auto-discover)
 package_files:

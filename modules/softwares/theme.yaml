@@ -47,3 +47,4 @@ packages:
   - pywal-spicetify # Generate and change color-schemes on the fly (fork that uses 16 colors) with Spicetify integration
   - spicetify-cli # Command-line tool to customize Spotify client
   - spicetify-marketplace-bin # Spicetify app that integrates a marketplace for extensions, themes and snippets
+  - spicetify-custom-apps-and-extensions-git # Spicetify custom apps and extensions (git version)

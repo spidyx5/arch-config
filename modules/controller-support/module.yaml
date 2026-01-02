@@ -3,6 +3,4 @@ description: "Game controller drivers and tools for various gaming controllers"
 conflicts:
 
 post_install_hook: "install-controller-udev-rules.sh"
-hooks_behavior: once
-
-package_files:
+hooks_behavior: 

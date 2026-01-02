@@ -3,7 +3,7 @@ description: Spidy host configuration
 import: []
 enabled_modules:
 - softwares
-#- controller-support
+- controller-support
 - cli-tools/webapp-tool
 - niri
 - helix-catppuccin-mocha
@@ -27,23 +27,24 @@ services:
   - bluetooth
   - bpftune
   - earlyoom
-  - getty@
   - greetd
-  - iwd
   - keyd
   - libvirtd
   - nftables
   - pdns-recursor
   - proton.VPN
   - systemd-network-generator
-  - systemd-networkd-wait-online
   - thermald
   - tuned
   - upower
   - virtlogd
   - waydroid-container
   disabled:
-  - iptables
-  - ufw
+  - sshd
+  - iwd
+  - systemd-networkd-wait-online
+  - getty@
+
+
 editor: helix
 aur_helper: paru

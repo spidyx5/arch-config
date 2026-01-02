@@ -59,8 +59,3 @@ packages:
 
   # - audacity-openvino-bin # (Commented out - OpenVINO-accelerated Audacity)
 
-# Modules that conflict with this one
-conflicts: []
-
-# Script to run after installing packages (optional)
-post_install_hook: ""

@@ -29,8 +29,6 @@ packages:
   # Source code management
   - git # The fast distributed version control system (version control system)
 
-conflicts: []
-
   # Additional development tools from system-packages-spidy.yaml
   - biome # Formatter, linter, and more for Javascript, Typescript, JSON, and CSS
   - carapace-bin # A command line completion engine for Bash, Zsh, and Fish

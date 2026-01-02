@@ -65,6 +65,7 @@ packages:
   - avfs # Virtual filesystem that allows browsing compressed files and archives transparently
   
   - ntfsprogs-plus # NTFS filesystem utilities
+  - iptables-nft # iptables using nftables backend
 
   # Additional system utilities from system-packages-spidy.yaml
   - ananicy-cpp # Ananicy Cpp is a full rewrite of Ananicy in C++, featuring lower CPU and RAM usage

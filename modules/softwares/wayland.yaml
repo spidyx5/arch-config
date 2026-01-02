@@ -55,8 +55,6 @@ packages:
   - gst-plugins-bad # Multimedia graph framework - bad plugins (GStreamer bad plugins)
   - gst-plugins-ugly # Multimedia graph framework - ugly plugins (GStreamer ugly plugins)
 
-  - xdg-desktop-portal-impl
-
   # Additional Wayland packages from system-packages-spidy.yaml
   - xwayland-run-git # Utilities to run headless X/Wayland clients
   - xwayland-satellite-git # XWayland satellite for Wayland compositors

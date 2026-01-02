@@ -67,3 +67,16 @@ packages:
   - jack_utils # Useful command line programs for JACK
   - peazip # Cross-platform file and archive manager (Qt6)
   - zarchive-git # A tool for creating and managing compressed archives (git version)
+
+
+  # Network security and privacy
+  - spoofdpi # A simple and fast anti-censorship tool written in Go
+  - stevenblack # Hosts file for blocking ads and tracking domains
+
+  # SSH and remote access
+  - openssh # SSH protocol implementation for remote login, command execution and file transfer
+
+  # Container networking
+  - crun # A fast and lightweight fully featured OCI runtime and C library for running containers
+  - netavark # Container network stack
+  - aardvark-dns # Authoritative dns server for A/AAAA container records
