@@ -127,10 +127,18 @@ chown "$REAL_USER:$REAL_USER" "$CONF_DIR/microsoft-edge-stable-flags.conf"
 echo "[-] Configuring General Electron Flags..."
 
 cat <<EOF > "$CONF_DIR/electron-flags.conf"
---ozone-platform-hint=auto
---enable-features=WaylandWindowDecorations
+# Force Wayland (preferred over hint=auto for performance/stability)
+--ozone-platform=wayland
+
+# Merge all features into ONE line.
+# Added: VaapiVideoDecodeLinuxGL (Video Decode), VaapiVideoEncoder (Screen Share), CanvasOopRasterization
+--enable-features=UseOzonePlatform,WaylandWindowDecorations,VaapiVideoDecodeLinuxGL,VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization
+
+# Performance: GPU Rasterization and Memory Tweaks
 --enable-gpu-rasterization
 --enable-zero-copy
+--enable-native-gpu-memory-buffers
+--ignore-gpu-blocklist
 EOF
 
 # Fix Permissions
