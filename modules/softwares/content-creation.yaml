@@ -27,7 +27,6 @@ packages:
   - obs-source-switcher # Plugin for OBS Studio to add a source that switches between a list of sources (automatic source switching)
   - obs-pipewire-audio-capture-bin # Audio device and application capture for OBS Studio using PipeWire (modern audio capture)
   - obs-plugin-input-overlay-bin # obs-studio plugin to show keyboard, gamepad and mouse input on stream (input visualization)
-  - catppuccin-obs-theme-git # Soothing pastel theme for OBS Studio (custom UI theming)
   
 
   # Digital painting and illustration

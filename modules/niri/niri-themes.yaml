@@ -4,28 +4,6 @@
 description: Niri theme and visual packages
 
 packages:
-  - qt5ct # Qt5 configuration tool
-  - qt6ct # Qt6 configuration tool
-  - gtk3 # GTK 3 libraries
-  - gtk4 # GTK 4 libraries
-  - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
-  - tela-icon-theme-purple-git # Icon theme
-  - bibata-cursor-theme-bin # Mouse cursor theme
-  - matugen-bin # Material color generation
-  - python-anyqt # Python Qt bindings
-  - qt6-quick3d # Qt6 3D graphics
-  - qt6-5compat # Qt6 compatibility with Qt5
-  - qt5-graphicaleffects # Qt5 graphical effects
-  - qt6-webengine # Qt6 web engine
-  - kimageformats # Image format support
-  - python-pyqt6-webengine # Python PyQt6 web engine
-  - qt6-imageformats # Qt6 image formats
-  - qt6-multimedia # Qt6 multimedia support
-  - qt6-wayland # Qt6 Wayland support
-  - qt5-wayland
-  - qt6-svg # Qt6 SVG support
-  - qt6-shadertools # Qt6 shader tools
-  - litehtml # HTML rendering
-  - qt6-declarative # Qt6 declarative UI
+  # Niri-specific packages only
 
 conflicts: []

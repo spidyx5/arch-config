@@ -1,0 +1,9 @@
+description: "Catppuccin Mocha theme for Helix editor"
+
+conflicts:
+
+post_install_hook: "install-helix-theme.sh"
+hooks_behavior: once
+
+package_files:
+  - helix-catppuccin-mocha.yaml

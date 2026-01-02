@@ -4,8 +4,9 @@
         "customLaunchPrefixEnabled": false,
         "enableClipPreview": true,
         "enableClipboardHistory": false,
-        "iconMode": "tabler",
-        "pinnedExecs": [],
+        "iconMode": "system",
+        "pinnedExecs": [
+        ],
         "position": "top_center",
         "showCategories": false,
         "sortByMostUsed": true,
@@ -16,25 +17,28 @@
     "audio": {
         "cavaFrameRate": 30,
         "externalMixer": "pwvucontrol || pavucontrol",
-        "mprisBlacklist": [],
+        "mprisBlacklist": [
+        ],
         "preferredPlayer": "",
         "visualizerType": "linear",
         "volumeOverdrive": false,
         "volumeStep": 5
     },
     "bar": {
+        "backgroundOpacity": 0.93,
         "capsuleOpacity": 1,
         "density": "comfortable",
         "exclusive": true,
         "floating": true,
         "marginHorizontal": 0.87,
         "marginVertical": 0.37,
-        "monitors": [],
+        "monitors": [
+        ],
         "outerCorners": true,
         "position": "top",
         "showCapsule": false,
         "showOutline": false,
-        "transparent": false,
+        "useSeparateOpacity": false,
         "widgets": {
             "center": [
                 {
@@ -42,11 +46,13 @@
                     "colorizeIcons": false,
                     "enableScrollWheel": true,
                     "followFocusedScreen": false,
+                    "groupedBorderOpacity": 1,
                     "hideUnoccupied": false,
                     "id": "Workspace",
                     "labelMode": "index",
                     "showApplications": false,
-                    "showLabelsOnlyWhenOccupied": true
+                    "showLabelsOnlyWhenOccupied": true,
+                    "unfocusedIconsOpacity": 1
                 }
             ],
             "left": [
@@ -60,15 +66,17 @@
                     "useDistroLogo": false
                 },
                 {
+                    "compactMode": true,
                     "diskPath": "/",
                     "id": "SystemMonitor",
-                    "showCpuTemp": true,
+                    "showCpuTemp": false,
                     "showCpuUsage": true,
                     "showDiskUsage": false,
                     "showGpuTemp": false,
-                    "showMemoryAsPercent": false,
+                    "showMemoryAsPercent": true,
                     "showMemoryUsage": true,
                     "showNetworkStats": true,
+                    "useMonospaceFont": true,
                     "usePrimaryColor": false
                 },
                 {
@@ -96,10 +104,17 @@
             ],
             "right": [
                 {
+                    "defaultSettings": {
+                        "currentIconName": "world-download",
+                        "hideOnZero": false,
+                        "updateIntervalMinutes": 30,
+                        "updateTerminalCommand": "foot -e"
+                    },
                     "id": "plugin:update-count"
                 },
                 {
-                    "blacklist": [],
+                    "blacklist": [
+                    ],
                     "colorizeIcons": false,
                     "drawerEnabled": true,
                     "hidePassive": false,
@@ -122,6 +137,7 @@
                     "formatHorizontal": "h:mm AP ddd, MMM dd",
                     "formatVertical": "HH mm - dd MM",
                     "id": "Clock",
+                    "tooltipFormat": "HH:mm ddd, MMM dd",
                     "useCustomFont": false,
                     "usePrimaryColor": true
                 }
@@ -224,36 +240,32 @@
         }
     },
     "desktopWidgets": {
-        "enabled": false,
+        "enabled": true,
         "gridSnap": false,
         "monitorWidgets": [
             {
                 "name": "DP-2",
                 "widgets": [
                     {
-                        "clockStyle": "analog",
+                        "clockStyle": "minimal",
                         "customFont": "",
-                        "format": "HH:mm\\nd MMMM yyyy",
+                        "format": "h:mm AP MMMM yyyy",
                         "id": "Clock",
+                        "roundedCorners": true,
                         "showBackground": true,
                         "useCustomFont": false,
-                        "usePrimaryColor": false,
-                        "x": 257.21875,
-                        "y": 217.4453125
+                        "usePrimaryColor": true,
+                        "x": 22,
+                        "y": 62
                     },
                     {
                         "hideMode": "visible",
                         "id": "MediaPlayer",
+                        "scale": 0.7662128204701978,
                         "showBackground": true,
                         "visualizerType": "linear",
-                        "x": 2073.65234375,
-                        "y": 309.00390625
-                    },
-                    {
-                        "id": "Weather",
-                        "showBackground": true,
-                        "x": 1158.22265625,
-                        "y": 46.70703125
+                        "x": 1568,
+                        "y": 60
                     }
                 ]
             }
@@ -269,6 +281,7 @@
         "floatingRatio": 0.68,
         "inactiveIndicators": false,
         "monitors": [
+            "DP-1",
             "DP-2"
         ],
         "onlySameOutput": false,
@@ -278,9 +291,7 @@
             "dev.zed.Zed",
             "zen",
             "discord",
-            "equibop",
-            "ghostty",
-            "helium-browser"
+            "org.telegram.desktop"
         ],
         "pinnedStatic": false,
         "size": 1.25
@@ -348,10 +359,16 @@
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
-        "monitors": [],
+        "monitors": [
+        ],
         "normalUrgencyDuration": 8,
         "overlayLayer": true,
         "respectExpireTimeout": false,
+        "saveToHistory": {
+            "critical": true,
+            "low": true,
+            "normal": true
+        },
         "sounds": {
             "criticalSoundFile": "",
             "enabled": false,
@@ -366,15 +383,18 @@
         "autoHideMs": 2000,
         "backgroundOpacity": 1,
         "enabled": true,
-        "enabledTypes": [],
+        "enabledTypes": [
+        ],
         "location": "top_right",
-        "monitors": [],
+        "monitors": [
+        ],
         "overlayLayer": true
     },
     "screenRecorder": {
         "audioCodec": "opus",
         "audioSource": "default_output",
         "colorRange": "limited",
+        "copyToClipboard": false,
         "directory": "/home/don/Videos",
         "frameRate": 60,
         "quality": "very_high",
@@ -425,15 +445,17 @@
                 "enabled": true
             }
         ],
-        "showHeader": true
+        "showHeader": true,
+        "showNumberLabels": true
     },
-    "settingsVersion": 32,
+    "settingsVersion": 35,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
         "cpuWarningThreshold": 80,
         "criticalColor": "",
         "diskCriticalThreshold": 90,
+        "diskPath": "/",
         "diskPollingInterval": 3000,
         "diskWarningThreshold": 80,
         "enableDgpuMonitoring": true,
@@ -480,7 +502,7 @@
     "ui": {
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
-        "fontDefault": "Roboto",
+        "fontDefault": "MesloLGL Nerd Font",
         "fontDefaultScale": 1,
         "fontFixed": "MesloLGM Nerd Font",
         "fontFixedScale": 1,
@@ -497,7 +519,8 @@
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
-        "monitorDirectories": [],
+        "monitorDirectories": [
+        ],
         "overviewEnabled": false,
         "panelPosition": "follow_bar",
         "randomEnabled": false,
@@ -508,6 +531,7 @@
         "transitionEdgeSmoothness": 0.05,
         "transitionType": "random",
         "useWallhaven": false,
+        "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
         "wallhavenPurity": "100",
@@ -516,6 +540,7 @@
         "wallhavenResolutionHeight": "",
         "wallhavenResolutionMode": "atleast",
         "wallhavenResolutionWidth": "",
-        "wallhavenSorting": "relevance"
+        "wallhavenSorting": "relevance",
+        "wallpaperChangeMode": "random"
     }
 }

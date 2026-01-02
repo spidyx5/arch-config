@@ -1,0 +1,44 @@
+description: Theme and appearance packages
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+
+  # Color management and scheme generation
+  - python-pywal16 # Generate and change color-schemes on the fly (fork that uses 16 colors) (color scheme generator)
+  - gammastep # Adjust the color temperature of your screen according to your surroundings. (screen color temperature)
+  - matugen-bin # A material you color generation tool with templates (Material You color generator)
+  
+  # Font packages
+  - inter-font # A typeface specially designed for user interfaces (Inter UI font)
+  - noto-fonts # Google Noto TTF fonts (Google Noto fonts)
+  - terminus-font # Monospace bitmap font (for X11 and console) (Terminus font)
+  
+  # Qt bindings and development
+  - python-anyqt # PyQt/PySide compatibility layer (PyQt4/PyQt5/PyQt6/PySide/PySide2) (Qt bindings)
+  
+  # Qt and GTK configuration tools (universal)
+  - qt5ct # Qt5 configuration tool
+  - qt6ct # Qt6 configuration tool
+  - gtk3 # GTK 3 libraries
+  - gtk4 # GTK 4 libraries
+  - qt6-wayland # Qt6 Wayland support
+  - qt5-wayland # Qt5 Wayland support
+  
+  # Application theming
+  - catppuccin-obs-theme-git # Soothing pastel theme for OBS Studio (custom UI theming)
+  - spicetify-themes-git # A community-driven collection of themes for spicetify (Spotify theming)
+  - spicetify-extensions-rxri-git # Add some spice with extensions to make spotify more enjoyable (Spotify extensions)
+  
+  # Qt development and graphics (universal)
+  - qt6-quick3d # Qt6 3D graphics
+  - qt6-5compat # Qt6 compatibility with Qt5
+  - qt5-graphicaleffects # Qt5 graphical effects
+  - qt6-webengine # Qt6 web engine
+  - kimageformats # Image format support
+  - python-pyqt6-webengine # Python PyQt6 web engine
+  - qt6-imageformats # Qt6 image formats
+  - qt6-multimedia # Qt6 multimedia support
+  - qt6-svg # Qt6 SVG support
+  - qt6-shadertools # Qt6 shader tools
+  - litehtml # HTML rendering
+  - qt6-declarative # Qt6 declarative UI

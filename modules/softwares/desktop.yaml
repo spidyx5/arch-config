@@ -54,11 +54,6 @@ packages:
   # Application launchers and integration
   - appimagelauncher-git # A Helper application for running and integrating AppImages (AppImage management)
   
-  # Music customization
-  - spicetify-themes-git # A community-driven collection of themes for spicetify (Spotify theming)
-  - spicetify-extensions-rxri-git # Add some spice with extensions to make spotify more enjoyable (Spotify extensions)
-  - spicetify-custom-apps-and-extensions-git # A community-driven collection of custom apps and extensions for spicetify (Spotify customization)
-  
   # Communication and gaming
   - equibop-bin # A custom Discord desktop app with Equicord pre-installed (binary release) (enhanced Discord client)
   

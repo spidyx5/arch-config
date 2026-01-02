@@ -22,3 +22,4 @@ package_files:
 - utilites.yaml
 - vm.yaml
 - wayland.yaml
+- theme.yaml

@@ -51,7 +51,6 @@ packages:
   - python-zstandard # Python bindings to the Zstandard (zstd) compression library
   - python-netifaces-plus # Fork of al45tair/netifaces, portable module to access network interface information.
   - python-apscheduler # In-process task scheduler with Cron-like capabilities (task scheduling)
-  - python-anyqt # PyQt/PySide compatibility layer (PyQt4/PyQt5/PyQt6/PySide/PySide2) (Qt bindings)
   
  
   # Compilation acceleration

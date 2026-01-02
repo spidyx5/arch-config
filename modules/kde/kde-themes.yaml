@@ -4,9 +4,9 @@
 description: KDE Plasma theming packages for Catppuccin Mocha Mauve
 
 packages:
-  - catppuccin-kde-git # Catppuccin KDE theme (includes Mocha Mauve variant)
   - catppuccin-gtk-theme-mocha # GTK theme for app consistency
   - tela-icon-theme-purple-git # Tela purple icon theme (dark variant)
+  - catppuccin-kde-git # Catppuccin KDE theme (includes Mocha Mauve variant)
   - catppuccin-cursors-mocha # Catppuccin Mocha cursor theme
   - kvantum # Advanced Qt theme engine for better theming
   - papirus-icon-theme # Fallback icon theme

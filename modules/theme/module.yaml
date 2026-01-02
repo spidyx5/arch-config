@@ -1,0 +1,5 @@
+description: "Theme and appearance packages"
+post_install_hook: ""
+hooks_behavior: skip
+package_files:
+packages: []
