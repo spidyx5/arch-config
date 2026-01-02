@@ -67,4 +67,5 @@ packages:
 
   # Text editing
   - kate # Advanced text editor (Kate text editor)
+  - octopi # A powerful Pacman frontend using Qt libs
 

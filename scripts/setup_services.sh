@@ -130,8 +130,6 @@ sudo systemctl enable --now earlyoom
 sudo systemctl enable --now fstrim.timer
 sudo systemctl enable --now lvm2-monitor
 
-# Remote Access
-sudo systemctl enable --now sshd
 
 # Location Services
 sudo systemctl enable --now geoclue

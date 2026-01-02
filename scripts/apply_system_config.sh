@@ -13,33 +13,33 @@ cat <<EOF | sudo tee /etc/sysctl.d/99-spidy-sys-tuning.conf
 
 # --- Memory Management (Low RAM Optimized) ---
 # 100 = Fair reclaiming of directory cache (prevents stutter)
-vm.vfs_cache_pressure=100
-vm.swappiness=60
+#vm.vfs_cache_pressure=100
+#vm.swappiness=60
 
 # Gaming Compatibility (Steam/Proton/ESYNC)
 vm.max_map_count=2147483642
 
 # Randomization (Security)
-vm.mmap_rnd_bits=32
-vm.mmap_rnd_compat_bits=16
-vm.unprivileged_userfaultfd=0
+#vm.mmap_rnd_bits=32
+#vm.mmap_rnd_compat_bits=16
+#vm.unprivileged_userfaultfd=0
 
 # --- Kernel Security ---
-kernel.sysrq=0
-kernel.dmesg_restrict=1
-kernel.nmi_watchdog=0
-kernel.core_uses_pid=1
-kernel.randomize_va_space=2
-kernel.kptr_restrict=1
+#kernel.sysrq=0
+#kernel.dmesg_restrict=1
+#kernel.nmi_watchdog=0
+#kernel.core_uses_pid=1
+#kernel.randomize_va_space=2
+#kernel.kptr_restrict=1
 user.max_user_namespaces=10000
 
 # --- Filesystem Security ---
-fs.protected_fifos=2
-fs.protected_regular=2
-fs.suid_dumpable=0
+#fs.protected_fifos=2
+#fs.protected_regular=2
+#fs.suid_dumpable=0
 
 # --- TTY Security ---
-dev.tty.ldisc_autoload=0
+#dev.tty.ldisc_autoload=0
 EOF
 
 # ==============================================================================
@@ -62,6 +62,7 @@ vfio_virqfd
 kvm-intel
 i915
 btrfs
+f2fs
 dm-snapshot
 dm-mod
 dm-thin-pool

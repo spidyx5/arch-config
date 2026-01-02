@@ -25,7 +25,6 @@ fi
 
 # 2. MALLOC_ARENA_MAX (Improvement for Low RAM)
 # This forces glibc to be aggressive about returning memory to the OS.
-# Essential for <16GB RAM systems running Browsers/Electron apps.
 if ! grep -q "MALLOC_ARENA_MAX=2" /etc/environment; then
     echo "MALLOC_ARENA_MAX=2" | tee -a /etc/environment
     echo " -> Added MALLOC_ARENA_MAX=2 (RAM Saver)."
@@ -39,14 +38,9 @@ else
     pacman -S --noconfirm intel-media-driver
 fi
 
-# ==============================================================================
-# 2. TIME SETTINGS
-# ==============================================================================
-echo "[-] Setting RTC to Local Time..."
-timedatectl set-local-rtc 1
 
 # ==============================================================================
-# 3. POWER MANAGEMENT (Sleep & Logind)
+# 2. POWER MANAGEMENT (Sleep & Logind)
 # ==============================================================================
 echo "[-] Configuring Sleep & Logind..."
 
@@ -87,7 +81,7 @@ usermod -aG video "$REAL_USER"
 # ==============================================================================
 echo "[-] Configuring Hardware Services..."
 
-# Thermald: CRITICAL for Intel CPUs to prevent overheating/throttling.
+# Thermald: CRITICAL to prevent overheating/throttling.
 if pacman -Qi thermald &> /dev/null; then
     systemctl enable --now thermald
     echo " -> Thermald enabled."
@@ -97,13 +91,6 @@ else
     systemctl enable --now thermald
 fi
 
-# Tuned: DISABLED for Low RAM Profile.
-# Your previous sysctl script already tunes the kernel directly.
-# Running the 'tuned' daemon on top wastes ~50MB RAM for no gain.
-if systemctl is-active --quiet tuned; then
-    echo " -> Disabling 'tuned' daemon to save RAM (sysctl handles this now)."
-    systemctl disable --now tuned
-fi
 
 echo "=== ✅ Hardware Optimization Complete ==="
 echo "Please reboot for Environment Variables (MALLOC/Drivers) to take effect."

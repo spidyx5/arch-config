@@ -42,3 +42,8 @@ packages:
   - qt6-shadertools # Qt6 shader tools
   - litehtml # HTML rendering
   - qt6-declarative # Qt6 declarative UI
+
+  # Additional theme packages from system-packages-spidy.yaml
+  - pywal-spicetify # Generate and change color-schemes on the fly (fork that uses 16 colors) with Spicetify integration
+  - spicetify-cli # Command-line tool to customize Spotify client
+  - spicetify-marketplace-bin # Spicetify app that integrates a marketplace for extensions, themes and snippets

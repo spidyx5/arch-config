@@ -132,7 +132,7 @@
   "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "auto",
-  "vpnLastConnected": "",
+  "vpnLastConnected": "abe11b2e-0c8d-4c64-a7cd-6ce6b8568563",
   "iconTheme": "Bibata-Modern-Amber",
   "launcherLogoMode": "compositor",
   "launcherLogoCustomPath": "/home/don/.config/arch-config/logo/blackdontrans.png",

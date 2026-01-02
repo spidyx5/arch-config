@@ -32,7 +32,7 @@ a color between surface and surface container so I think just giving this surfac
 @define-color card_fg_color #e6e0e9;
 @define-color overview_bg_color #211f24;
 @define-color overview_fg_color #e6e0e9;
-@define-color popover_bg_color #141218;
+@define-color popover_bg_color #211f24;
 @define-color popover_fg_color #e6e0e9;
 @define-color dialog_bg_color #141218;
 @define-color dialog_fg_color #e6e0e9;

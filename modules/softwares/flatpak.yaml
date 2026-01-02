@@ -1,0 +1,19 @@
+description: Flatpak packages
+post_install_hook: ""
+hooks_behavior: skip
+packages:
+  # Web applications
+  - name: dev.heppen.webapps
+    type: flatpak
+
+  # Core Flatpak platform
+  - name: org.freedesktop.Platform
+    type: flatpak
+  - name: org.freedesktop.Platform.GL.default
+    type: flatpak
+  - name: org.freedesktop.Platform.VAAPI.Intel
+    type: flatpak
+  - name: org.freedesktop.Platform.codecs-extra
+    type: flatpak
+  - name: org.freedesktop.Platform.openh264
+    type: flatpak

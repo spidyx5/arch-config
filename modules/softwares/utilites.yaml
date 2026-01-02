@@ -41,7 +41,6 @@ packages:
   - pavucontrol # PulseAudio Volume Control (PulseAudio mixer)
   - pwvucontrol # Pipewire volume control for GNOME (PipeWire volume control)
   - qpwgraph # PipeWire Graph Qt GUI Interface (PipeWire graph editor)
-  - zstd-git
   # Wireless and storage utilities
   - iwd # Internet Wireless Daemon (wireless daemon)
   - btdu-bin # Sampling disk usage profiler for btrfs (BTRFS disk usage tool)
@@ -64,3 +63,10 @@ packages:
   # Clipboard management
   - python-pyclip # Cross-platform clipboard utilities supporting both binary and text data (clipboard utilities)
   - win11-clipboard-history-bin # Windows 11-style Clipboard History Manager for Linux
+
+  # Additional utilities from system-packages-spidy.yaml
+  - bluez-hid2hci # Put HID proxying bluetooth HCI's into HCI mode
+  - bluez-libs # Deprecated libraries for the bluetooth protocol stack
+  - jack_utils # Useful command line programs for JACK
+  - peazip # Cross-platform file and archive manager (Qt6)
+  - zarchive-git # A tool for creating and managing compressed archives (git version)

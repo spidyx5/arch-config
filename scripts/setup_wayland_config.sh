@@ -2,7 +2,7 @@
 
 # Ensure sudo
 if [ "$EUID" -ne 0 ]; then
-  echo "❌ Please run as root
+  echo "❌ Please run as root (sudo)"
   exit
 fi
 
@@ -39,7 +39,7 @@ add_env_var "VAAPI_DISABLE_ENCODER_CHECKING" "VAAPI_DISABLE_ENCODER_CHECKING=1"
 
 # --- Wayland Core ---
 add_env_var "EGL_PLATFORM" "EGL_PLATFORM=wayland"
-# Vulkan renderer is generally faster and smoother for Arc GPUs on CachyOS
+
 add_env_var "WLR_RENDERER" "WLR_RENDERER=vulkan"
 
 # --- Toolkits (Qt / GTK / Java) ---
@@ -49,8 +49,8 @@ add_env_var "QT_WAYLAND_DISABLE_WINDOWDECORATION" "QT_WAYLAND_DISABLE_WINDOWDECO
 # NEW: Ensures Qt apps scale correctly if you change resolutions
 add_env_var "QT_AUTO_SCREEN_SCALE_FACTOR" "QT_AUTO_SCREEN_SCALE_FACTOR=1"
 
-add_env_var "SDL_VIDEODRIVER" "SDL_VIDEODRIVER=wayland"
-add_env_var "CLUTTER_BACKEND" "CLUTTER_BACKEND=wayland"
+add_env_var "SDL_VIDEODRIVER" "SDL_VIDEODRIVER=wayland,x11"
+add_env_var "CLUTTER_BACKEND" "CLUTTER_BACKEND=wayland,x11"
 add_env_var "GDK_BACKEND" "GDK_BACKEND=wayland,x11"
 # NEW: Forces apps (Firefox, etc) to use the modern KDE/Hyprland file picker
 add_env_var "GTK_USE_PORTAL" "GTK_USE_PORTAL=1"
@@ -60,7 +60,6 @@ add_env_var "ELM_ENGINE" "ELM_ENGINE=wayland_egl"
 
 # --- Java Fixes ---
 add_env_var "_JAVA_AWT_WM_NONREPARENTING" "_JAVA_AWT_WM_NONREPARENTING=1"
-# NEW: Fixes jagged/ugly fonts in Minecraft, IntelliJ, and other Java apps
 add_env_var "_JAVA_OPTIONS" "_JAVA_OPTIONS=\"-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true\""
 
 # --- Electron/Browsers Global Hints ---
@@ -78,12 +77,11 @@ CONF_DIR="$USER_HOME/.config"
 mkdir -p "$CONF_DIR"
 
 cat <<EOF > "$CONF_DIR/chromium-flags.conf"
+# === Spidy Chromium Optimization ===
 
 --ozone-platform=wayland
 --enable-wayland-ime
 
-# GPU Acceleration (Intel Arc Optimized)
-# We enable 'VaapiVideoEncoder' because Arc supports hardware AV1 encoding
 --enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder,VaapiVideoDecoder,CanvasOopRasterization,UseOzonePlatform,Vulkan
 --enable-gpu-rasterization
 --enable-zero-copy
@@ -106,6 +104,7 @@ chown "$REAL_USER:$REAL_USER" "$CONF_DIR/chromium-flags.conf"
 echo "[-] Configuring Edge Flags..."
 
 cat <<EOF > "$CONF_DIR/microsoft-edge-stable-flags.conf"
+# === Spidy Edge Optimization ===
 
 --ozone-platform=wayland
 --enable-wayland-ime
@@ -158,7 +157,6 @@ cat <<EOF > "$CONF_DIR/code-flags.conf"
 --ozone-platform=wayland
 --enable-wayland-ime
 
-# Hardware Acceleration (Intel Arc)
 --enable-features=UseOzonePlatform,WaylandWindowDecorations,VaapiVideoDecodeLinuxGL,VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization
 --enable-gpu-rasterization
 --enable-zero-copy
@@ -169,6 +167,4 @@ EOF
 # Fix Permissions
 chown "$REAL_USER:$REAL_USER" "$CONF_DIR/code-flags.conf"
 
-
-echo "=== ✅ Intel Arc Optimization Complete ==="
 echo "Please REBOOT your system for /etc/environment changes to take effect."

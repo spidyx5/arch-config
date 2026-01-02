@@ -2,7 +2,7 @@
 
 # Ensure sudo
 if [ "$EUID" -ne 0 ]; then
-  echo "Please run as root (sudo)"
+  echo "❌ Please run as root (sudo)"
   exit
 fi
 
@@ -20,12 +20,13 @@ WALLPAPER_DEST="/boot/wallpaper.png"
 
 # Limine Config
 LIMINE_CONF="/boot/limine.conf"
-LIMINE_DEFAULT="/etc/default/limine"
 
 
 NEW_PARAMS="nvme_core.default_ps_max_latency_us=0 \
-mitigations=off rootflags=noatime \
-nowatchdog threadirqs kernel.split_lock_mitigate=0 \
+mitigations=off \
+rootflags=noatime \
+nowatchdog \
+kernel.split_lock_mitigate=0 \
 init_on_alloc=0 init_on_free=0 \
 resume=/dev/mapper/mock-spring \
 zswap.enabled=1 \
@@ -34,9 +35,11 @@ vsyscall=none slab_nomerge page_alloc.shuffle=1 \
 lsm=landlock,lockdown,yama,integrity,apparmor,bpf \
 quiet splash plymouth.use-simpledrm \
 acpi_sleep_default=deep acpi_sleep=nonvs mem_sleep_default=deep \
-intel_pstate=passive intel_iommu=on \
-kvm-intel.nested=0 iommu=pt rd.systemd.show_status=false \
-udev.log_level=3"
+intel_iommu=on iommu=pt \
+kvm-intel.nested=0 \
+rd.systemd.show_status=false udev.log_level=3 \
+i915.enable_guc=3 \
+transparent_hugepage=always"
 
 echo "=========================================="
 echo "   🕷️ Spidy Limine Auto-Configurator"
@@ -45,14 +48,15 @@ echo "=========================================="
 # ==============================================================================
 # 2. WALLPAPER INSTALLATION
 # ==============================================================================
-echo "[*] Checking for wallpaper: $WALLPAPER_SRC"
+echo "[*] Checking for wallpaper..."
 
 if [ -f "$WALLPAPER_SRC" ]; then
-    echo "    -> Found. Installing to $WALLPAPER_DEST..."
     cp "$WALLPAPER_SRC" "$WALLPAPER_DEST"
+    # Ensure readable by bootloader
+    chmod 644 "$WALLPAPER_DEST"
+    echo "    -> Installed to $WALLPAPER_DEST"
 else
     echo "[!] WARNING: Wallpaper not found at source!"
-    echo "    Limine config will point to it, but it will be black screen."
 fi
 
 # ==============================================================================
@@ -70,15 +74,14 @@ CURRENT_ROOT="root=UUID=$ROOT_UUID"
 echo "    -> Root: $CURRENT_ROOT"
 
 # ==============================================================================
-# 4. DETECT MICROCODE (Intel/AMD)
+# 4. DETECT MICROCODE 
 # ==============================================================================
 UCODE_PATH=""
 if [ -f "/boot/intel-ucode.img" ]; then
     echo "    -> Detected Intel Microcode"
     UCODE_PATH="module_path: boot():/intel-ucode.img"
-elif [ -f "/boot/amd-ucode.img" ]; then
-    echo "    -> Detected AMD Microcode"
-    UCODE_PATH="module_path: boot():/amd-ucode.img"
+else
+    echo "    [!] WARNING: No Intel Microcode found in /boot"
 fi
 
 # ==============================================================================
@@ -136,7 +139,7 @@ EOF
 done
 
 if [ "$FOUND_KERNEL" -eq 0 ]; then
-    echo "[!] ERROR: No kernels found in /boot! Aborting safety check."
+    echo "[!] ERROR: No kernels found in /boot! Aborting."
     rm "$TEMP_CONF"
     exit 1
 fi
@@ -146,8 +149,8 @@ fi
 # ==============================================================================
 echo "[*] Writing final config to $LIMINE_CONF..."
 
-# Backup existing
-if [ -f "$LIMINE_CONF" ]; then
+# Backup existing if it's not a symlink
+if [ -f "$LIMINE_CONF" ] && [ ! -L "$LIMINE_CONF" ]; then
     cp "$LIMINE_CONF" "$LIMINE_CONF.bak"
 fi
 
@@ -155,4 +158,3 @@ mv "$TEMP_CONF" "$LIMINE_CONF"
 chmod 644 "$LIMINE_CONF"
 
 echo "=== ✅ Limine Updated Successfully ==="
-echo "Check /boot/limine.conf content to verify."

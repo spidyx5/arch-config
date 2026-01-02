@@ -30,7 +30,7 @@ packages:
 
   # Bootloader
   - limine # Advanced, portable, multiprotocol bootloader with modern features
-  - limine-mkinitcpio-hook # Install kernel for the Limine bootloader (integration with Arch's initramfs system)
+  - limine-entry-tool # Install kernel for the Limine bootloader (integration with Arch's initramfs system)
   
   # Filesystem utilities
   - btrfs-progs # Btrfs filesystem utilities for advanced copy-on-write filesystem
@@ -65,6 +65,35 @@ packages:
   - avfs # Virtual filesystem that allows browsing compressed files and archives transparently
   
   - ntfsprogs-plus # NTFS filesystem utilities
+
+  # Additional system utilities from system-packages-spidy.yaml
+  - ananicy-cpp # Ananicy Cpp is a full rewrite of Ananicy in C++, featuring lower CPU and RAM usage
+  - bash-completion # Programmable completion for the bash shell
+  - bind # A complete, highly portable implementation of the DNS protocol
+  - booster # Fast and secure initramfs generator
+  - btop # A monitor of system resources, bpytop ported to C++
+  - cachy-update # An update notifier & applier that assists you with important pre / post update tasks
+  - cachyos-keyring # CachyOS keyring
+  - cachyos-mirrorlist # CachyOS repository mirrorlist
+  - cachyos-v3-mirrorlist # CachyOS repository mirrorlist
+  - chaotic-keyring # Chaotic-AUR PGP keyring
+  - chaotic-mirrorlist # Chaotic-AUR mirrorlist to use with Pacman
+  - ffmpeg # Complete solution to record, convert and stream audio and video
+  - freetype2 # Font rasterization library
+  - fzf # Command-line fuzzy finder
+  - lvm2 # Logical Volume Manager 2 utilities
+  - noto-fonts-cjk # Google Noto CJK fonts
+  - noto-fonts-emoji # Google Noto Color Emoji font
+  - ntp # Network Time Protocol reference implementation
+  - opendoas # Run commands as super user or another user
+  - profile-sync-daemon # Symlinks and syncs browser profile dirs to RAM
+  - sdl2-compat # An SDL2 compatibility layer that uses SDL3 behind the scenes
+  - sdl3 # A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard (Version 3)
+  - slibtool # A drop-in replacement for libtool
+  - t2sz # A tool for creating and managing compressed archives
+  - unrar # The RAR uncompression program
+  - zip # Compressor/archiver for creating and modifying zipfiles
+  - zstd-git # Zstandard - Fast lossless compression algorithm (git version)
 exclude:
   - nano # Text editor (excluded in favor of other editors)
   - linux-lts # Long-term support kernel (excluded in favor of mainline)

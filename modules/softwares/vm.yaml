@@ -30,3 +30,6 @@ packages:
   - bridge-utils # Utilities for configuring the Linux ethernet bridge (network bridging)
   - virtiofsd # Vhost-user virtio-fs device backend written in Rust (virtual filesystem)
   - scream-git # A Scream audio receiver using Pulseaudio, ALSA, JACK or stdout as audio output (git version) (virtual audio streaming)
+  - libvirt-venus # Libvirt virtualization API (virtualization management)
+  - qemu-ovmf-secureboot-git # UEFI firmware for Virtual Machines with secure boot support (git version)
+  - virtio-win # Windows drivers for virtual machines (Windows VM drivers)

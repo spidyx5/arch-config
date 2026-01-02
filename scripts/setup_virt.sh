@@ -61,7 +61,7 @@ audio_driver = "pa"
 # We stick to dynamic ownership but allow specific device access.
 
 # 3. Device ACLs (Required for GPU/USB Passthrough)
-# Allows the VM to access the VFIO groups for your Intel Arc
+# Allows the VM to access the VFIO groups 
 cgroup_device_acl = [
     "/dev/null", "/dev/full", "/dev/zero",
     "/dev/random", "/dev/urandom",
@@ -139,7 +139,7 @@ pacman -S --needed --noconfirm waydroid
 systemctl enable --now waydroid-container
 
 # ==============================================================================
-# 5. PASSTHROUGH PREP (Intel Arc)
+# 5. PASSTHROUGH PREP 
 # ==============================================================================
 echo "[-] Setting up VFIO modules..."
 
@@ -159,7 +159,7 @@ echo ""
 echo "2. Initialize Waydroid (Downloads Android Image):"
 echo "   sudo waydroid init"
 echo ""
-echo "3. Waydroid Gaming (Essential for Intel):"
+echo "3. Waydroid Gaming :"
 echo "   Install libhoudini (ARM translation) or gaming won't work."
 echo "   Run: git clone https://github.com/waydroid-extras/waydroid-extras.git"
 echo "   Then: sudo python3 waydroid-extras/waydroid-extras.py -i libhoudini"

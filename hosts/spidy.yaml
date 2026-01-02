@@ -35,7 +35,6 @@ services:
   - nftables
   - pdns-recursor
   - proton.VPN
-  - sshd
   - systemd-network-generator
   - systemd-networkd-wait-online
   - thermald

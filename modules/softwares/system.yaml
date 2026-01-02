@@ -66,3 +66,10 @@ packages:
   # SCSI and USB utilities
   - sg3_utils # Generic SCSI utilities (SCSI tools)
   - usbutils # A collection of USB tools to query connected USB devices (USB utilities)
+
+  # Additional system packages from system-packages-spidy.yaml
+  - kernel-modules-hook-reflink # Hook for managing kernel modules with reflink support
+  - limine-snapper-sync # The tool syncs Limine snapshot entries with Snapper snapshots
+  - mkinitcpio-extras # Additional mkinitcpio hooks and utilities
+  - plymouth # Graphical boot splash screen
+  - sudo # Give certain users the ability to run some commands as root

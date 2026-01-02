@@ -37,3 +37,6 @@ packages:
   - xboxdrv # Xbox controller driver (Xbox controller support)
   - piper # Gaming mouse configuration (gaming mouse configuration)
   - xpadneo-dkms # Xbox One controller driver (Xbox One driver)
+
+  # Additional gaming packages from system-packages-spidy.yaml
+  - glu # Mesa OpenGL utility library
