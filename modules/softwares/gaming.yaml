@@ -7,7 +7,6 @@ packages:
   - steam # Valve's digital software delivery system (Steam game platform)
   - heroic-games-launcher-git # Native GOG, Epic Games and Amazon games launcher for Linux (multi-platform game launcher)
   
-
   # Game streaming and compatibility
   - gamescope # SteamOS session compositing window manager (game streaming compositor)
   - mangohud # A Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more. (performance overlay)
@@ -17,13 +16,11 @@ packages:
   - sunshine # Self-hosted game stream host for Moonlight (game streaming server)
   - tailscale # A mesh VPN that makes it easy to connect your devices, wherever they are. (mesh VPN for gaming)
   
-
   # Input device utilities
   - joyutils # jscal, jstest, and jsattach utilities for the Linux joystick driver (joystick calibration tools)
   - antimicrox # Graphical program used to map keyboard buttons & mouse controls to a gamepad (controller mapping)
   - jstest-gtk-git # A simple GTK2-based joystick tester and calibrator (joystick testing tool)
   
-
   # Android container and management
   - waydroid # A container-based approach to boot a full Android system on a regular Linux system (Android container)
   - waydroid-launcher-git # For better launching Waydroid. Sources from Bazzite. (Waydroid launcher)
@@ -37,6 +34,6 @@ packages:
   - xboxdrv # Xbox controller driver (Xbox controller support)
   - piper # Gaming mouse configuration (gaming mouse configuration)
   - xpadneo-dkms # Xbox One controller driver (Xbox One driver)
-
+  
   # Additional gaming packages from system-packages-spidy.yaml
   - glu # Mesa OpenGL utility library

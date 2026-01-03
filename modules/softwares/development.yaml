@@ -11,7 +11,6 @@ packages:
   # Application framework
   - electron # Meta package providing the latest available stable Electron build (cross-platform desktop app framework)
   
-
   # Container management interfaces
   - boxbuddy # A Graphical Interface for Distrobox (GUI for Distrobox)
   - distrobox # Use any linux distribution inside your terminal. (Linux distribution in containers)
@@ -25,10 +24,11 @@ packages:
   - podman-docker # Emulate Docker CLI using podman (Docker CLI compatibility)
   - podman-desktop # Manage Podman and other container engines from a single UI and tray. (container management GUI)
   - podman-compose # A script to run docker-compose.yml using podman (Docker Compose alternative)
-
+  
   # Source code management
   - git # The fast distributed version control system (version control system)
-
+  
   # Additional development tools from system-packages-spidy.yaml
   - biome # Formatter, linter, and more for Javascript, Typescript, JSON, and CSS
   - carapace-bin # A command line completion engine for Bash, Zsh, and Fish
+  - helix # A post-modern modal text editor

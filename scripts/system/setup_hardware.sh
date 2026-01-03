@@ -16,19 +16,25 @@ echo "=== ⚙️ Configuring Hardware, Power & RAM (Spidy Profile) ==="
 # ==============================================================================
 echo "[-] Configuring Environment Variables..."
 
+# Function to safely append if not exists or update if exists
+add_env_var() {
+    local var_name=$1
+    local var_line=$2
+    if grep -q "^$var_name=" /etc/environment; then
+        sed -i "s|^$var_name=.*|$var_line|" /etc/environment
+        echo "    * Updated: $var_name"
+    else
+        echo "$var_line" | tee -a /etc/environment > /dev/null
+        echo "    + Added: $var_name"
+    fi
+}
+
 # 1. Intel Media Driver (Your Tweak)
-# Checks if it exists to avoid duplicates
-if ! grep -q "LIBVA_DRIVER_NAME=iHD" /etc/environment; then
-    echo "LIBVA_DRIVER_NAME=iHD" | tee -a /etc/environment
-    echo " -> Added iHD driver variable."
-fi
+add_env_var "LIBVA_DRIVER_NAME" "LIBVA_DRIVER_NAME=iHD"
 
 # 2. MALLOC_ARENA_MAX (Improvement for Low RAM)
 # This forces glibc to be aggressive about returning memory to the OS.
-if ! grep -q "MALLOC_ARENA_MAX=2" /etc/environment; then
-    echo "MALLOC_ARENA_MAX=2" | tee -a /etc/environment
-    echo " -> Added MALLOC_ARENA_MAX=2 (RAM Saver)."
-fi
+add_env_var "MALLOC_ARENA_MAX" "MALLOC_ARENA_MAX=2"
 
 # Ensure the actual driver is installed
 if pacman -Qi intel-media-driver &> /dev/null; then

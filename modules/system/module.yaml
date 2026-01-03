@@ -1,0 +1,3 @@
+description: System configuration and optimization
+pre_install_hook: scripts/system/setup_system.sh
+hooks_behavior: ask
