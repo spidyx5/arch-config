@@ -1,6 +1,6 @@
 description: "Game controller drivers and tools for various gaming controllers"
 
-conflicts:
+conflicts: []
 
 post_install_hook: "install-controller-udev-rules.sh"
-hooks_behavior: 
+hooks_behavior: ask

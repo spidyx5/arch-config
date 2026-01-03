@@ -2,11 +2,16 @@ host: spidy
 description: "Spidy host configuration"
 import: []
 enabled_modules:
+- system
+- repo
+- install
+- program
 - softwares
 - controller-support
 - cli-tools/webapp-tool
 - niri
-- helix-catppuccin-mocha
+- login-managers/sysc-greet
+- theme/helix-catppuccin-mocha
 packages: []
 exclude: []
 additional_packages: []

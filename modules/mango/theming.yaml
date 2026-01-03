@@ -4,16 +4,6 @@
 description: MangoWC Theming Packages
 
 packages:
-  # Mango-specific packages only
-
-# Conflicts with other window managers
-conflicts: []
-# MangoWC window manager
-# Custom Wayland compositor configuration
-
-description: MangoWC Theming Packages
-
-packages:
   - bibata-cursor-theme-bin # Mouse cursor theme
   - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
   - tela-icon-theme-purple-git # Tela purple icon theme
