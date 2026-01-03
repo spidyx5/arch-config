@@ -95,6 +95,7 @@ packages:
   - unrar # The RAR uncompression program
   - zip # Compressor/archiver for creating and modifying zipfiles
   - zstd-git # Zstandard - Fast lossless compression algorithm (git version)
+
 exclude:
   - nano # Text editor (excluded in favor of other editors)
   - linux-lts # Long-term support kernel (excluded in favor of mainline)

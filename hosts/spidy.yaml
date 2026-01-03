@@ -10,7 +10,7 @@ enabled_modules:
 - controller-support
 - cli-tools/webapp-tool
 - niri
-- login-managers/sysc-greet
+- login-managers/sddm-enable
 - theme/helix-catppuccin-mocha
 packages: []
 exclude: []
@@ -32,7 +32,6 @@ services:
   - bluetooth
   - bpftune
   - earlyoom
-  - greetd
   - keyd
   - getty@tty1
   - libvirtd

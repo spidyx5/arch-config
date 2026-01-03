@@ -1,3 +1,4 @@
 description: Kernel installation and system updates
-post_install_hook: scripts/install_kernels.sh
+post_install_hook: ../../scripts/install/script.sh
 hooks_behavior: ask
+packages: []

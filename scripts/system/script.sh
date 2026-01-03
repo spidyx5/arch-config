@@ -10,21 +10,21 @@ sleep 2
 
 # Run individual setup scripts
 echo "[-] Applying system configuration..."
-sudo ./apply_system_config.sh
+sudo ../../scripts/system/apply_system_config.sh
 
 echo "[-] Setting up hardware..."
-sudo ./setup_hardware.sh
+sudo ../../scripts/system/setup_hardware.sh
 
 echo "[-] Setting up audio..."
-sudo ./setup_audio.sh
+sudo ../../scripts/system/setup_audio.sh
 
 echo "[-] Setting up network..."
-sudo ./setup_network.sh
+sudo ../../scripts/system/setup_network.sh
 
 echo "[-] Setting up services..."
-sudo ./setup_services.sh
+sudo ../../scripts/system/setup_services.sh
 
 echo "[-] Setting up Wayland configuration..."
-sudo ./setup_wayland_config.sh
+sudo ../../scripts/system/setup_wayland_config.sh
 
 echo "=== ✅ System Setup Complete ==="

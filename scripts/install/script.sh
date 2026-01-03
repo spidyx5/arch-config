@@ -10,6 +10,6 @@ sleep 2
 
 # Run kernel installation
 echo "[-] Installing custom kernels..."
-./install_kernels.sh
+../../scripts/install/install_kernels.sh
 
 echo "=== ✅ Installation Setup Complete ==="

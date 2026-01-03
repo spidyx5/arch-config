@@ -10,9 +10,9 @@ sleep 2
 
 # Run individual setup scripts
 echo "[-] Setting up Chaotic AUR repository..."
-sudo ./chaotic-repo.sh
+sudo ../../scripts/repo/chaotic-repo.sh
 
 echo "[-] Setting up CachyOS repository..."
-sudo ./cachy-repo.sh
+sudo ../../scripts/repo/cachy-repo.sh
 
 echo "=== ✅ Repository Setup Complete ==="

@@ -57,7 +57,8 @@ if status is-interactive
     
     # Helix
     alias hx='helix'
-    
+    alias tp='topgrade'
+    alias fr='fresh'
     # Safety first (Interactive)
     alias cp='cp -i'
     alias mv='mv -i'

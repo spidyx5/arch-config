@@ -1,3 +1,4 @@
 description: Repository configuration and setup
-pre_install_hook: scripts/repo/setup_repos.sh
+pre_install_hook: ../../scripts/repo/script.sh
 hooks_behavior: ask
+packages: []

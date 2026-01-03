@@ -10,15 +10,18 @@ sleep 2
 
 # Run individual setup scripts
 echo "[-] Setting up XDG applications..."
-./setup_xdg.sh
+../../scripts/program/setup_xdg.sh
 
 echo "[-] Setting up Keyd..."
-sudo ./setup_keyd.sh
+sudo ../../scripts/program/setup_keyd.sh
+
+echo "[-] Setting up doas..."
+sudo ../../scripts/program/doas.sh
 
 echo "[-] Setting up Virtualization..."
-sudo ./setup_virt.sh
+sudo ../../scripts/program/setup_virt.sh
 
 echo "[-] Setting up OpenTabletDriver..."
-./opentabletdriver_setup.sh
+sudo ../../scripts/program/opentabletdriver_setup.sh
 
 echo "=== ✅ Program Setup Complete ==="

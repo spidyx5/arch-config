@@ -1,3 +1,4 @@
 description: Program configuration and setup
-post_install_hook: scripts/program/setup_programs.sh
+post_install_hook: ../../scripts/program/script.sh
 hooks_behavior: ask
+packages: []

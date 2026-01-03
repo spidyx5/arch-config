@@ -21,13 +21,14 @@ packages:
   - waybar # Status bar
   - sway-audio-idle-inhibit-git # Prevent idle during audio
   - niri-settings-git
-  - greetd-dms-greeter-git
   - sunsetr-bin
   - wayvid
   - dms-shell-git
   - quickshell # DMS dependency
   - crystal-dock-bin # Application dock
   - niri-autoname-workspaces-git
+  - dsearch-bin # Fast filesystem search service
+
 conflicts: []
 exclude:
   
