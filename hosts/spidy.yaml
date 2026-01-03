@@ -1,5 +1,5 @@
 host: spidy
-description: Spidy host configuration
+description: "Spidy host configuration"
 import: []
 enabled_modules:
 - softwares
