@@ -41,6 +41,7 @@ packages:
 
   # X11 compatibility
   - xorg-xwayland # Run X clients under wayland (X11 compatibility layer)
+  - xorg-xhost # Server access control program for X (X11 access control)
 
   # Desktop integration
   - xdg-user-dirs # Manage user directories like ~/Desktop and ~/Music (user directory management)

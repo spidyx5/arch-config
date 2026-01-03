@@ -33,3 +33,8 @@ packages:
   - libvirt-venus # Libvirt virtualization API (virtualization management)
   - qemu-ovmf-secureboot-git # UEFI firmware for Virtual Machines with secure boot support (git version)
   - virtio-win # Windows drivers for virtual machines (Windows VM drivers)
+  
+  # Documentation and patch management
+  - python-sphinx # Python documentation generator (documentation tool)
+  - python-sphinx_rtd_theme # Read the Docs theme for Sphinx (Sphinx theme)
+  - quilt # Tool to manage series of patches (patch management tool)

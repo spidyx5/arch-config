@@ -29,6 +29,7 @@ services:
   - earlyoom
   - greetd
   - keyd
+  - getty@tty1
   - libvirtd
   - nftables
   - pdns-recursor
@@ -43,7 +44,6 @@ services:
   - sshd
   - iwd
   - systemd-networkd-wait-online
-  - getty@
 
 
 editor: helix

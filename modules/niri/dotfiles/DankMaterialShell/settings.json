@@ -1,6 +1,6 @@
 {
-  "currentThemeName": "purple",
-  "currentThemeCategory": "generic",
+  "currentThemeName": "dynamic",
+  "currentThemeCategory": "dynamic",
   "customThemeFile": "",
   "registryThemeVariants": {},
   "matugenScheme": "scheme-content",
@@ -17,7 +17,7 @@
   "showSeconds": false,
   "useFahrenheit": false,
   "nightModeEnabled": false,
-  "animationSpeed": 1,
+  "animationSpeed": 2,
   "customAnimationDuration": 500,
   "wallpaperFillMode": "Fill",
   "blurredWallpaperLayer": false,
@@ -127,8 +127,6 @@
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
   "niriOverviewOverlayEnabled": true,
-  "weatherLocation": "New York, NY",
-  "weatherCoordinates": "40.7128,-74.0060",
   "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "auto",
@@ -421,5 +419,5 @@
   "desktopWidgetPositions": {},
   "desktopWidgetGridSettings": {},
   "desktopWidgetInstances": [],
-  "configVersion": 4
+  "configVersion": 5
 }

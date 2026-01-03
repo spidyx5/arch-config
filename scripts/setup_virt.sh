@@ -68,7 +68,7 @@ cgroup_device_acl = [
     "/dev/ptmx", "/dev/kvm",
     "/dev/vfio/vfio", 
     "/dev/vfio/1", "/dev/vfio/2", "/dev/vfio/3", "/dev/vfio/4",
-    "/dev/dri/card0", "/dev/dri/renderD128"
+    "/dev/dri/card0", "/dev/dri/renderD129"
 ]
 
 # 4. NVMe Passthrough Fix
@@ -145,9 +145,9 @@ echo "[-] Setting up VFIO modules..."
 
 # Create modprobe config to load VFIO drivers early
 cat <<EOF > /etc/modules-load.d/vfio.conf
-vfio
-vfio_pci
-vfio_iommu_type1
+#vfio
+#vfio_pci
+#vfio_iommu_type1
 EOF
 
 echo "=== ✅ Virtualization Optimization Complete ==="
